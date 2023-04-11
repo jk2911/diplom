@@ -18,8 +18,6 @@ namespace API.Data
 
         public IRegion Region => new RegionRepository(_context);
 
-        public ISeason Season => new SeasonRepository(_context);
-
         public ITeam Team => new TeamRepository(_context);
 
         public IMatch Match => new MatchRepository(_context);

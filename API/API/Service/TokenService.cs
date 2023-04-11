@@ -12,7 +12,7 @@ namespace API.Service
         public async Task<string> CreateToken(User user)
         {
             var claims = new List<Claim> { 
-                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Phone),
+                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
                 new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role),
             };
             var jwt = new JwtSecurityToken(

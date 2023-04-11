@@ -13,7 +13,14 @@ namespace API.Entities
         public virtual Team Away { get; set; }
         public int ChampionshipId { get; set; }
         public virtual Championship Championship { get; set; }
-        public int SeasonId { get; set; } 
-        public virtual Season Season { get; set; } 
+        public int? HomeGoal { get; set; }
+        public int? AwayGoal { get; set; }
+        public int MatchStatisticId { get; set; }
+        public virtual MatchStatistic Statistic { get; set; } = new MatchStatistic();
+        public virtual ICollection<Bet> Bets { get; set; }
+        public Match()
+        {
+            Bets = new List<Bet>();
+        }
     }
 }

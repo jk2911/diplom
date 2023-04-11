@@ -31,6 +31,14 @@ namespace API.Data
             return await _context.Region.ToListAsync();
         }
 
+        public async Task<Region> GetRegionByName(string name)
+        {
+#pragma warning disable CS8603 // Возможно, возврат ссылки, допускающей значение NULL.
+            return await _context.Region.
+                FirstOrDefaultAsync(x => x.Name == name);
+#pragma warning restore CS8603 // Возможно, возврат ссылки, допускающей значение NULL.
+        }
+
         public void Update(Region item)
         {
            _context.Entry(item).State=EntityState.Modified;

@@ -7,7 +7,6 @@
         IChampionship Championship { get; }
         IChampTeams ChampTeams { get; }
         IRegion Region { get; }
-        ISeason Season { get; }
         ITeam Team { get; }
         IMatch Match { get; }
         Task<bool> Complete();

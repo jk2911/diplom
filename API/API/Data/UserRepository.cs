@@ -36,15 +36,24 @@ namespace API.Data
             _context.Entry(item).State = EntityState.Modified;
         }
 
-        public async Task<bool> UserExists(string phone)
+        public async Task<bool> UserExists(string email)
         {
-            return await _context.User.AnyAsync(x => x.Phone == phone);
+            return await _context.User.AnyAsync(x => x.Email == email);
         }
 
-        public async Task<User> GetUserByPhone(string phone)
+        public async Task<User> GetUserByPhone(string email)
         {
             return await _context.User.
-                FirstOrDefaultAsync(x => x.Phone.Equals(phone));
+                FirstOrDefaultAsync(x => x.Email.Equals(email));
+        }
+
+        public async Task<User> CreateAsync(User user)
+        {
+            //var result = _context.User.AddAsync(user);
+
+
+            //return await _context.User.AddAsync(user);
+            return null;
         }
     }
 }
