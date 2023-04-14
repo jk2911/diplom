@@ -5,7 +5,7 @@ using API.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(new WebApplicationOptions { WebRootPath = "images" });
 
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -35,6 +35,7 @@ builder.Services.AddTransient<IHashPassword, HashPasswordService>();
 builder.Services.AddTransient<ITokenService, TokenService>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
+
 builder.Services.AddControllers();
 
 // Add services to the container.
@@ -59,6 +60,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseHttpsRedirection();
+
+app.UseStaticFiles("/images");
 
 app.UseCors(builder => builder.AllowAnyOrigin());
 

@@ -1,5 +1,6 @@
 ﻿using API.Controllers.Base;
 using API.DTOs;
+using API.Entities;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -22,24 +23,24 @@ namespace API.Controllers
             _mapper = mapper;
         }
 
-        [Authorize(Roles = "admin")]
-        [HttpGet("user")]
-        public string Get()
+        [Authorize]
+        [HttpPost("refill/{userId:int}-{sum:float}")]
+
+        public async Task<ActionResult<float>> Refill(int userId, float sum)
         {
-            return "admin";
+            if (sum < 2) return BadRequest("The money should not be less than 2");
+
+            User user = await _unitOfWork.User.Get(userId);
+
+            if (user == null) return NotFound("User not found");
+
+            user.Money += sum;
+
+            _unitOfWork.User.Update(user);
+
+            return Ok(user.Money);
         }
-        [Authorize(Roles = "user")]
-        [HttpGet("user1")]
-        public string Get1()
-        {
-            return "user";
-        }
-        [Authorize(Roles = "admin, user")]
-        [HttpGet("user2")]
-        public string Get2()
-        {
-            return "admin user";
-        }
+
 
         [Authorize]
         [HttpPut("change-password")]

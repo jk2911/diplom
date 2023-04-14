@@ -16,6 +16,8 @@ namespace API.Helpers
 
             CreateMap<Team, TeamDTO>().ForMember(x => x.Region, opt => opt.MapFrom(x => x.Region.Name));
 
+            CreateMap<Region, RegionDTO>();
+
         }
     }
 }

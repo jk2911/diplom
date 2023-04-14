@@ -4,15 +4,18 @@ using AutoMapper;
 
 namespace API.Controllers
 {
-    public class MatchController :BaseApiController
+    public class BetController : BaseApiController
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public MatchController(IUnitOfWork unitOfWork, IMapper mapper)
+        public BetController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
+
+
+
     }
 }

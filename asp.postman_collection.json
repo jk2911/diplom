@@ -1,0 +1,222 @@
+{
+	"info": {
+		"_postman_id": "d643b7be-a9a5-48cb-8945-9aac927736dd",
+		"name": "asp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22269264"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "user",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\":\"asdf\",\r\n    \"password\":\"saf\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7167/api/Account/register",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7167",
+							"path": [
+								"api",
+								"Account",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\":\"1234\",\r\n    \"password\":\"heh\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7167/api/Account/login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7167",
+							"path": [
+								"api",
+								"Account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "loginUser",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "registerUser",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Championship",
+			"item": [
+				{
+					"name": "get all championship",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7167/api/Championship/all-championships",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7167",
+							"path": [
+								"api",
+								"Championship",
+								"all-championships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add team in championship",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7167/api/Championship/add-team/1-2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7167",
+							"path": [
+								"api",
+								"Championship",
+								"add-team",
+								"1-2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete championship",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7167/api/Championship/delete-championship/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7167",
+							"path": [
+								"api",
+								"Championship",
+								"delete-championship",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Team",
+			"item": [
+				{
+					"name": "create team",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Man Utd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7167/api/Team/create-team",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7167",
+							"path": [
+								"api",
+								"Team",
+								"create-team"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Region",
+			"item": [
+				{
+					"name": "get regions",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

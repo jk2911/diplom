@@ -7,14 +7,11 @@ namespace API.Data
         private readonly DataContext _context = new DataContext();
         public UnitOfWork() { }
 
-
         public IUserRepository User => new UserRepository(_context);
 
         public IBet Bet => new BetRepository(_context);
 
         public IChampionship Championship => new ChampionshipRepository(_context);
-
-        public IChampTeams ChampTeams => new ChampTeamRepository(_context);
 
         public IRegion Region => new RegionRepository(_context);
 

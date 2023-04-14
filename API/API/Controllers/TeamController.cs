@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    public class TeamController: BaseApiController
+    public class TeamController : BaseApiController
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -19,7 +19,7 @@ namespace API.Controllers
         }
 
         [HttpPost("create-team")]
-        public async Task<ActionResult<TeamDTO>> CreateTeam(CreateTeamDto createTeam)
+        public async Task<ActionResult<TeamDTO>> CreateTeam([FromBody] CreateTeamDto createTeam)
         {
             Team team = _mapper.Map<Team>(createTeam);
 
