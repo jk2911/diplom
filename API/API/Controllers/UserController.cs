@@ -25,7 +25,6 @@ namespace API.Controllers
 
         [Authorize]
         [HttpPost("refill/{userId:int}-{sum:float}")]
-
         public async Task<ActionResult<float>> Refill(int userId, float sum)
         {
             if (sum < 2) return BadRequest("The money should not be less than 2");
@@ -63,5 +62,12 @@ namespace API.Controllers
            
             return userDto;
         }
+        //[Authorize]
+        //[HttpPut("change-role/{role:string}")]
+        //public Task<ActionResult> ChangeRole()
+        //{
+
+        //    return Ok();
+        //}
     }
 }

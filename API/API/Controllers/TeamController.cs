@@ -3,7 +3,10 @@ using API.DTOs;
 using API.Entities;
 using API.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static System.Net.Mime.MediaTypeNames;
+using System.IO;
 
 namespace API.Controllers
 {
@@ -47,6 +50,28 @@ namespace API.Controllers
             TeamDTO teamDTO = _mapper.Map<TeamDTO>(team);
 
             return teamDTO;
+        }
+        //[Authorize]
+        [HttpPost("add-photo/{teamId:int}")]
+        public async Task<ActionResult<string>> AddPhoto(int teamId)
+        {
+            var file = Request.Form.Files["image"];
+
+            var team = await _unitOfWork.Team.Get(teamId);
+            if (team == null) return NotFound("Team not found");
+
+            var path = "images/teams/" + team.Name + ".png";
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+
+            team.PathToImage = this.Request.Scheme + "://" + Request.Host.ToUriComponent() + "/images/teams/9" + team.Name + ".png";
+
+            _unitOfWork.Team.Update(team);
+
+            return team.PathToImage;
         }
     }
 }

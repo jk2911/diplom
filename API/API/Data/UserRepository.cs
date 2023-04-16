@@ -41,7 +41,7 @@ namespace API.Data
             return await _context.User.AnyAsync(x => x.Email == email);
         }
 
-        public async Task<User> GetUserByPhone(string email)
+        public async Task<User> GetUserByEmail(string email)
         {
             return await _context.User.
                 FirstOrDefaultAsync(x => x.Email.Equals(email));

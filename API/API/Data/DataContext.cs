@@ -26,8 +26,7 @@ namespace API.Data
         }
         public DataContext()
         {
-
-            AddInfoInDatabase();
+            //AddInfoInDatabase();
         }
 
         public void AddInfoInDatabase()

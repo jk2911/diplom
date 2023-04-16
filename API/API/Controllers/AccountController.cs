@@ -46,7 +46,7 @@ namespace API.Controllers
         public async Task<ActionResult<UserDto>> Login(LoginDto loginUser)
         {
             var user = await _unitOfWork.User.
-                GetUserByPhone(loginUser.Email);
+                GetUserByEmail(loginUser.Email);
 
             if (user is null) return BadRequest("Invalid email");
 
