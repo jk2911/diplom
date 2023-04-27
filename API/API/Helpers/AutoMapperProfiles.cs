@@ -18,6 +18,7 @@ namespace API.Helpers
 
             CreateMap<Region, RegionDTO>();
 
+            CreateMap<Championship, ChampionshipDTO>();
         }
     }
 }

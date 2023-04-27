@@ -11,8 +11,11 @@ namespace API.Entities
 
         public string? PathToImage { get; set; }
         public virtual Region? Region { get; set; }
+        [JsonIgnore]
         public virtual ICollection<ChampTeams> ChampTeams { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Match> HomeTeams { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Match> AwayTeams { get; set; }
         public Team()
         {

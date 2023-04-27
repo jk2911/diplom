@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace API.Entities
 {
@@ -9,6 +10,7 @@ namespace API.Entities
         public string Name { get; set; }
         public int MatchId { get; set; }
         public virtual Match Match { get; set; }
+        [JsonIgnore]
         public virtual ICollection<BetValue> Values { get; set; }
         public Bet()
         {

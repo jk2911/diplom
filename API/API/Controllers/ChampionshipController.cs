@@ -1,4 +1,5 @@
 ﻿using API.Controllers.Base;
+using API.DTOs;
 using API.Entities;
 using API.Interfaces;
 using AutoMapper;
@@ -16,11 +17,33 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
+
         [HttpGet("all-championships")]
         public async Task<IEnumerable<Championship>> GetAllChampionships()
         {
             return await _unitOfWork.Championship.GetAll();
         }
+
+        [HttpGet("championships-sorted-by-regions")]
+        public async Task<IEnumerable<ChampionshipSortedByRegionDTO>> GetChampionshipsByRegions()
+        {
+            var regions = await _unitOfWork.Region.GetAll();
+
+            var championshipSortedByRegions = new List<ChampionshipSortedByRegionDTO>();
+
+            foreach (var region in regions)
+            {
+                championshipSortedByRegions.Add(new ChampionshipSortedByRegionDTO
+                {
+                    Id = region.Id,
+                    Region = region.Name,
+                    Championships = _mapper.Map<ICollection<ChampionshipDTO>>(region.Championships)
+                });
+            }
+
+            return championshipSortedByRegions;
+        }
+
         [HttpPost("add-team/{championshipId:int}-{teamId:int}")]
         public async Task<ActionResult> AddTeamInChampionship(int championshipId, int teamId)
         {

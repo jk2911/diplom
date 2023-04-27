@@ -96,6 +96,99 @@ namespace API.Data
 
             SaveChangesAsync().Wait();
 
+            championship = new Championship
+            {
+                Name = "Сегунда",
+                Region = region,
+            };
+
+            Championship.Add(championship);
+            SaveChangesAsync().Wait();
+
+            region = new Region
+            {
+                Name = "Англия"
+            };
+
+            Region.Add(region);
+
+            championship = new Championship
+            {
+                Name = "Премьер-лига",
+                Region = region,
+            };
+
+            Championship.Add(championship);
+            SaveChangesAsync().Wait();
+
+            championship = new Championship
+            {
+                Name = "Чемпионшип",
+                Region = region,
+            };
+
+            Championship.Add(championship);
+            SaveChangesAsync().Wait();
+
+            region = new Region
+            {
+                Name = "Германия"
+            };
+
+            Region.Add(region);
+            SaveChangesAsync().Wait();
+
+            championship = new Championship
+            {
+                Name = "Бундеслига",
+                Region = region,
+            };
+
+            Championship.Add(championship);
+            SaveChangesAsync().Wait();
+
+            region = new Region
+            {
+                Name = "Франция"
+            };
+
+            Region.Add(region);
+            SaveChangesAsync().Wait();
+
+            championship = new Championship
+            {
+                Name = "Лига 1",
+                Region = region,
+            };
+
+            Championship.Add(championship);
+            SaveChangesAsync().Wait();
+
+            region = new Region
+            {
+                Name = "Италия"
+            };
+
+            Region.Add(region);
+            SaveChangesAsync().Wait();
+
+            championship = new Championship
+            {
+                Name = "Серия А",
+                Region = region,
+            };
+
+            Championship.Add(championship);
+            SaveChangesAsync().Wait();
+
+            region = new Region
+            {
+                Name = "Португалия"
+            };
+
+            Region.Add(region);
+            SaveChangesAsync().Wait();
+
             ChampTeams cht = new ChampTeams
             {
                 Championship = championship,

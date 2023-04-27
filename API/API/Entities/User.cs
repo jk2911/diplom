@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace API.Entities
 {
@@ -13,6 +14,7 @@ namespace API.Entities
         public string Role { get; set; } = "user";
         public float Money { get; set; } = 0;
 
+        [JsonIgnore]
         public virtual ICollection<UserBet> UserBets { get; set; }
         public User()
         {

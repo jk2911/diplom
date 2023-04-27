@@ -58,6 +58,7 @@ namespace API.Controllers
             var file = Request.Form.Files["image"];
 
             var team = await _unitOfWork.Team.Get(teamId);
+
             if (team == null) return NotFound("Team not found");
 
             var path = "images/teams/" + team.Name + ".png";
@@ -67,7 +68,7 @@ namespace API.Controllers
                 file.CopyTo(stream);
             }
 
-            team.PathToImage = this.Request.Scheme + "://" + Request.Host.ToUriComponent() + "/images/teams/9" + team.Name + ".png";
+            team.PathToImage = this.Request.Scheme + "://" + Request.Host.ToUriComponent() + "/images/teams/" + team.Name + ".png";
 
             _unitOfWork.Team.Update(team);
 

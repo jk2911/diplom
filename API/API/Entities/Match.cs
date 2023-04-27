@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace API.Entities
 {
@@ -17,6 +18,7 @@ namespace API.Entities
         public int? AwayGoal { get; set; }
         public int MatchStatisticId { get; set; }
         public virtual MatchStatistic Statistic { get; set; } = new MatchStatistic();
+        [JsonIgnore]
         public virtual ICollection<Bet> Bets { get; set; }
         public Match()
         {

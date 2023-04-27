@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace API.Entities
 {
@@ -10,6 +11,7 @@ namespace API.Entities
         public int BetId { get; set; }
         public virtual Bet Bet { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<UserBet> UserBets { get; set; }
 
         public BetValue()
