@@ -26,7 +26,7 @@ namespace API.Data
         }
         public DataContext()
         {
-            //AddInfoInDatabase();
+            AddInfoInDatabase();
         }
 
         public void AddInfoInDatabase()
@@ -103,6 +103,117 @@ namespace API.Data
             };
 
             Championship.Add(championship);
+            SaveChangesAsync().Wait();
+
+            ChampTeams cht = new ChampTeams
+            {
+                Championship = championship,
+                Team = team,
+            };
+
+            ChampTeams.Add(cht);
+
+            SaveChangesAsync().Wait();
+
+            cht = new ChampTeams
+            {
+                Championship = championship,
+                Team = team1,
+            };
+
+            ChampTeams.Add(cht);
+
+            SaveChangesAsync().Wait();
+
+            Match match = new Match
+            {
+                Home = team,
+                Away = team1,
+                Championship = championship,
+                DateTime = new DateTime()
+            };
+
+            Match.Add(match);
+            SaveChangesAsync().Wait();
+
+            Bet bet = new Bet
+            {
+                Name = "Исход",
+                Match = match
+            };
+
+            Bet.Add(bet);
+            SaveChangesAsync().Wait();
+
+            BetValue betValue = new BetValue
+            {
+                Name = "П1",
+                Value = 1.1f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "П2",
+                Value = 2.1f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "X",
+                Value = 1.6f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            /////
+
+            bet = new Bet
+            {
+                Name = "Двойной шанс",
+                Match = match
+            };
+
+            Bet.Add(bet);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "1X",
+                Value = 1.34f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "12",
+                Value = 1.37f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "X2",
+                Value = 1.67f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
             SaveChangesAsync().Wait();
 
             region = new Region
@@ -189,34 +300,6 @@ namespace API.Data
             Region.Add(region);
             SaveChangesAsync().Wait();
 
-            ChampTeams cht = new ChampTeams
-            {
-                Championship = championship,
-                Team = team,
-            };
-
-            ChampTeams.Add(cht);
-
-            SaveChangesAsync().Wait();
-
-            cht = new ChampTeams
-            {
-                Championship = championship,
-                Team = team1,
-            };
-
-            ChampTeams.Add(cht);
-
-            SaveChangesAsync().Wait();
-
-            Match match = new Match
-            {
-                Home = team,
-                Away = team1,
-                Championship = championship
-            };
-
-            SaveChangesAsync().Wait();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

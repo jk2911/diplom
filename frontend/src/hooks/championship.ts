@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { IRegion } from "../entity/Region";
 import { IChampioshipSortedByRegion } from "../entity/ChampionshipSortedByRegion";
 
-export function useChampionshipSortedByRegions() {
+export function useChampionshipSortedByRegionsTodays() {
   const [championships, setChampionships] = useState<IChampioshipSortedByRegion[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");

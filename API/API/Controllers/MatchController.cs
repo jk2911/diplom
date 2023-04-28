@@ -1,6 +1,8 @@
 ﻿using API.Controllers.Base;
+using API.Entities;
 using API.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
@@ -13,6 +15,14 @@ namespace API.Controllers
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+        }
+
+        [HttpGet("/match-todays")]
+        public async Task<ActionResult<IEnumerable<Match>>> GetTodaysMatches()
+        {
+            var matches = await _unitOfWork.Match.GetAll();
+
+            return Ok(matches);
         }
     }
 }
