@@ -26,7 +26,12 @@ namespace API.Data
         }
         public DataContext()
         {
-            AddInfoInDatabase();
+            //AddInfoInDatabase();
+            //Spain();
+            //Germany();
+            //England();
+            //Portugal();
+            //Denmark();
         }
 
         public void AddInfoInDatabase()
@@ -57,14 +62,17 @@ namespace API.Data
             Region region = new Region
             {
                 Name = "Мир",
-                isPopular = false
+                isPopular = true
             };
 
             Region.Add(region);
 
             SaveChangesAsync().Wait();
+        }
 
-            region = new Region
+        public void Spain()
+        {
+            Region region = new Region
             {
                 Name = "Испания",
                 isPopular = true
@@ -75,7 +83,7 @@ namespace API.Data
 
             Championship championship = new Championship
             {
-                Name = "La Liga",
+                Name = "Ла лига",
                 Region = region,
                 IsPopular = true
             };
@@ -85,28 +93,18 @@ namespace API.Data
             Team team = new Team
             {
                 Region = region,
-                Name = "Barcelona",
+                Name = "Барселона",
             };
 
             Team team1 = new Team
             {
                 Region = region,
-                Name = "Real Madrid",
+                Name = "Реал Мадрид",
             };
 
             Team.Add(team);
             Team.Add(team1);
 
-            SaveChangesAsync().Wait();
-
-            championship = new Championship
-            {
-                Name = "Сегунда",
-                Region = region,
-                IsPopular = false
-            };
-
-            Championship.Add(championship);
             SaveChangesAsync().Wait();
 
             ChampTeams cht = new ChampTeams
@@ -220,22 +218,578 @@ namespace API.Data
             BetValue.Add(betValue);
             SaveChangesAsync().Wait();
 
-            region = new Region
+            championship = new Championship
             {
-                Name = "Англия",
-                isPopular = true,
+                Name = "Сегунда",
+                Region = region,
+                IsPopular = false
+            };
+
+            Championship.Add(championship);
+            SaveChangesAsync().Wait();
+
+            team = new Team
+            {
+                Region = region,
+                Name = "Уэска",
+            };
+
+            team1 = new Team
+            {
+                Region = region,
+                Name = "Леванте",
+            };
+
+            Team.Add(team);
+            Team.Add(team1);
+
+            SaveChangesAsync().Wait();
+
+             cht = new ChampTeams
+            {
+                Championship = championship,
+                Team = team,
+            };
+
+            ChampTeams.Add(cht);
+
+            SaveChangesAsync().Wait();
+
+            cht = new ChampTeams
+            {
+                Championship = championship,
+                Team = team1,
+            };
+
+            ChampTeams.Add(cht);
+
+            SaveChangesAsync().Wait();
+
+             match = new Match
+            {
+                Home = team,
+                Away = team1,
+                Championship = championship,
+                DateTime = DateTime.Now
+            };
+
+            Match.Add(match);
+            SaveChangesAsync().Wait();
+
+             bet = new Bet
+            {
+                Name = "Исход",
+                Match = match
+            };
+
+            Bet.Add(bet);
+            SaveChangesAsync().Wait();
+
+             betValue = new BetValue
+            {
+                Name = "П1",
+                Value = 1.1f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "П2",
+                Value = 2.1f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "X",
+                Value = 1.6f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            /////
+
+            bet = new Bet
+            {
+                Name = "Двойной шанс",
+                Match = match
+            };
+
+            Bet.Add(bet);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "1X",
+                Value = 1.34f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "12",
+                Value = 1.37f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "X2",
+                Value = 1.67f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+        }
+
+        public void Germany()
+        {
+            Region region = new Region
+            {
+                Name = "Германия",
+                isPopular = true
             };
 
             Region.Add(region);
+            SaveChangesAsync().Wait();
 
-            championship = new Championship
+            Championship championship = new Championship
             {
-                Name = "Премьер-лига",
+                Name = "Bundesliga",
                 Region = region,
                 IsPopular = true
             };
 
             Championship.Add(championship);
+
+            Team team = new Team
+            {
+                Region = region,
+                Name = "Bayern Munich",
+            };
+
+            Team team1 = new Team
+            {
+                Region = region,
+                Name = "Borussia Dortmund",
+            };
+
+            Team.Add(team);
+            Team.Add(team1);
+
+            SaveChangesAsync().Wait();
+
+            ChampTeams cht = new ChampTeams
+            {
+                Championship = championship,
+                Team = team,
+            };
+
+            ChampTeams.Add(cht);
+
+            SaveChangesAsync().Wait();
+
+            cht = new ChampTeams
+            {
+                Championship = championship,
+                Team = team1,
+            };
+
+            ChampTeams.Add(cht);
+
+            SaveChangesAsync().Wait();
+
+            Match match = new Match
+            {
+                Home = team,
+                Away = team1,
+                Championship = championship,
+                DateTime = DateTime.Now
+            };
+
+            Match.Add(match);
+            SaveChangesAsync().Wait();
+
+            Bet bet = new Bet
+            {
+                Name = "Исход",
+                Match = match
+            };
+
+            Bet.Add(bet);
+            SaveChangesAsync().Wait();
+
+            BetValue betValue = new BetValue
+            {
+                Name = "П1",
+                Value = 1.1f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "П2",
+                Value = 2.1f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "X",
+                Value = 1.6f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            /////
+
+            bet = new Bet
+            {
+                Name = "Двойной шанс",
+                Match = match
+            };
+
+            Bet.Add(bet);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "1X",
+                Value = 1.34f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "12",
+                Value = 1.37f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "X2",
+                Value = 1.67f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            championship = new Championship
+            {
+                Name = "Bundesliga 2",
+                Region = region,
+                IsPopular = false
+            };
+
+            Championship.Add(championship);
+            SaveChangesAsync().Wait();
+
+            team = new Team
+            {
+                Region = region,
+                Name = "Падерборн",
+            };
+
+            team1 = new Team
+            {
+                Region = region,
+                Name = "Санкт-Паули",
+            };
+
+            Team.Add(team);
+            Team.Add(team1);
+
+            SaveChangesAsync().Wait();
+
+            cht = new ChampTeams
+            {
+                Championship = championship,
+                Team = team,
+            };
+
+            ChampTeams.Add(cht);
+
+            SaveChangesAsync().Wait();
+
+            cht = new ChampTeams
+            {
+                Championship = championship,
+                Team = team1,
+            };
+
+            ChampTeams.Add(cht);
+
+            SaveChangesAsync().Wait();
+
+            match = new Match
+            {
+                Home = team,
+                Away = team1,
+                Championship = championship,
+                DateTime = DateTime.Now
+            };
+
+            Match.Add(match);
+            SaveChangesAsync().Wait();
+
+            bet = new Bet
+            {
+                Name = "Исход",
+                Match = match
+            };
+
+            Bet.Add(bet);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "П1",
+                Value = 1.1f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "П2",
+                Value = 2.1f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "X",
+                Value = 1.6f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            /////
+
+            bet = new Bet
+            {
+                Name = "Двойной шанс",
+                Match = match
+            };
+
+            Bet.Add(bet);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "1X",
+                Value = 1.34f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "12",
+                Value = 1.37f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "X2",
+                Value = 1.67f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+        }
+
+        public void England()
+        {
+            Region region = new Region
+            {
+                Name = "Англия",
+                isPopular = true
+            };
+
+            Region.Add(region);
+            SaveChangesAsync().Wait();
+
+            Championship championship = new Championship
+            {
+                Name = "Премьер-Лига",
+                Region = region,
+                IsPopular = true
+            };
+
+            Championship.Add(championship);
+
+            Team team = new Team
+            {
+                Region = region,
+                Name = "Манчестер Сити",
+            };
+
+            Team team1 = new Team
+            {
+                Region = region,
+                Name = "Челси",
+            };
+
+            Team.Add(team);
+            Team.Add(team1);
+
+            SaveChangesAsync().Wait();
+
+            ChampTeams cht = new ChampTeams
+            {
+                Championship = championship,
+                Team = team,
+            };
+
+            ChampTeams.Add(cht);
+
+            SaveChangesAsync().Wait();
+
+            cht = new ChampTeams
+            {
+                Championship = championship,
+                Team = team1,
+            };
+
+            ChampTeams.Add(cht);
+
+            SaveChangesAsync().Wait();
+
+            Match match = new Match
+            {
+                Home = team,
+                Away = team1,
+                Championship = championship,
+                DateTime = DateTime.Now
+            };
+
+            Match.Add(match);
+            SaveChangesAsync().Wait();
+
+            Bet bet = new Bet
+            {
+                Name = "Исход",
+                Match = match
+            };
+
+            Bet.Add(bet);
+            SaveChangesAsync().Wait();
+
+            BetValue betValue = new BetValue
+            {
+                Name = "П1",
+                Value = 1.1f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "П2",
+                Value = 2.1f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "X",
+                Value = 1.6f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            /////
+
+            bet = new Bet
+            {
+                Name = "Двойной шанс",
+                Match = match
+            };
+
+            Bet.Add(bet);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "1X",
+                Value = 1.34f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "12",
+                Value = 1.37f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "X2",
+                Value = 1.67f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
             SaveChangesAsync().Wait();
 
             championship = new Championship
@@ -248,73 +802,708 @@ namespace API.Data
             Championship.Add(championship);
             SaveChangesAsync().Wait();
 
-            region = new Region
+            team = new Team
             {
-                Name = "Германия",
-                isPopular = false,
-            };
-
-            Region.Add(region);
-            SaveChangesAsync().Wait();
-
-            championship = new Championship
-            {
-                Name = "Бундеслига",
                 Region = region,
-                IsPopular = true
+                Name = "Суонси",
             };
 
-            Championship.Add(championship);
-            SaveChangesAsync().Wait();
-
-            region = new Region
+            team1 = new Team
             {
-                Name = "Франция",
-                isPopular = true
-            };
-
-            Region.Add(region);
-            SaveChangesAsync().Wait();
-
-            championship = new Championship
-            {
-                Name = "Лига 1",
                 Region = region,
-                IsPopular = true
+                Name = "Норвич",
             };
 
-            Championship.Add(championship);
+            Team.Add(team);
+            Team.Add(team1);
+
             SaveChangesAsync().Wait();
 
-            region = new Region
+            cht = new ChampTeams
             {
-                Name = "Италия",
+                Championship = championship,
+                Team = team,
+            };
+
+            ChampTeams.Add(cht);
+
+            SaveChangesAsync().Wait();
+
+            cht = new ChampTeams
+            {
+                Championship = championship,
+                Team = team1,
+            };
+
+            ChampTeams.Add(cht);
+
+            SaveChangesAsync().Wait();
+
+            match = new Match
+            {
+                Home = team,
+                Away = team1,
+                Championship = championship,
+                DateTime = DateTime.Now
+            };
+
+            Match.Add(match);
+            SaveChangesAsync().Wait();
+
+            bet = new Bet
+            {
+                Name = "Исход",
+                Match = match
+            };
+
+            Bet.Add(bet);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "П1",
+                Value = 1.1f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "П2",
+                Value = 2.1f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "X",
+                Value = 1.6f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            /////
+
+            bet = new Bet
+            {
+                Name = "Двойной шанс",
+                Match = match
+            };
+
+            Bet.Add(bet);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "1X",
+                Value = 1.34f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "12",
+                Value = 1.37f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "X2",
+                Value = 1.67f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+        }
+
+        public void Portugal()
+        {
+            Region region = new Region
+            {
+                Name = "Португалия",
                 isPopular = false
             };
 
             Region.Add(region);
             SaveChangesAsync().Wait();
 
-            championship = new Championship
+            Championship championship = new Championship
             {
-                Name = "Серия А",
+                Name = "Чемпионат Португалии",
                 Region = region,
                 IsPopular = true
             };
 
             Championship.Add(championship);
+
+            Team team = new Team
+            {
+                Region = region,
+                Name = "Бенфика",
+            };
+
+            Team team1 = new Team
+            {
+                Region = region,
+                Name = "Порту",
+            };
+
+            Team.Add(team);
+            Team.Add(team1);
+
             SaveChangesAsync().Wait();
 
-            region = new Region
+            ChampTeams cht = new ChampTeams
             {
-                Name = "Португалия",
-                isPopular = true
+                Championship = championship,
+                Team = team,
+            };
+
+            ChampTeams.Add(cht);
+
+            SaveChangesAsync().Wait();
+
+            cht = new ChampTeams
+            {
+                Championship = championship,
+                Team = team1,
+            };
+
+            ChampTeams.Add(cht);
+
+            SaveChangesAsync().Wait();
+
+            Match match = new Match
+            {
+                Home = team,
+                Away = team1,
+                Championship = championship,
+                DateTime = DateTime.Now
+            };
+
+            Match.Add(match);
+            SaveChangesAsync().Wait();
+
+            Bet bet = new Bet
+            {
+                Name = "Исход",
+                Match = match
+            };
+
+            Bet.Add(bet);
+            SaveChangesAsync().Wait();
+
+            BetValue betValue = new BetValue
+            {
+                Name = "П1",
+                Value = 1.1f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "П2",
+                Value = 2.1f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "X",
+                Value = 1.6f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            /////
+
+            bet = new Bet
+            {
+                Name = "Двойной шанс",
+                Match = match
+            };
+
+            Bet.Add(bet);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "1X",
+                Value = 1.34f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "12",
+                Value = 1.37f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "X2",
+                Value = 1.67f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            championship = new Championship
+            {
+                Name = "Вторая лига",
+                Region = region,
+                IsPopular = false
+            };
+
+            Championship.Add(championship);
+            SaveChangesAsync().Wait();
+
+            team = new Team
+            {
+                Region = region,
+                Name = "Марфа",
+            };
+
+            team1 = new Team
+            {
+                Region = region,
+                Name = "Тондела",
+            };
+
+            Team.Add(team);
+            Team.Add(team1);
+
+            SaveChangesAsync().Wait();
+
+            cht = new ChampTeams
+            {
+                Championship = championship,
+                Team = team,
+            };
+
+            ChampTeams.Add(cht);
+
+            SaveChangesAsync().Wait();
+
+            cht = new ChampTeams
+            {
+                Championship = championship,
+                Team = team1,
+            };
+
+            ChampTeams.Add(cht);
+
+            SaveChangesAsync().Wait();
+
+            match = new Match
+            {
+                Home = team,
+                Away = team1,
+                Championship = championship,
+                DateTime = DateTime.Now
+            };
+
+            Match.Add(match);
+            SaveChangesAsync().Wait();
+
+            bet = new Bet
+            {
+                Name = "Исход",
+                Match = match
+            };
+
+            Bet.Add(bet);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "П1",
+                Value = 1.1f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "П2",
+                Value = 2.1f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "X",
+                Value = 1.6f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            /////
+
+            bet = new Bet
+            {
+                Name = "Двойной шанс",
+                Match = match
+            };
+
+            Bet.Add(bet);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "1X",
+                Value = 1.34f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "12",
+                Value = 1.37f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "X2",
+                Value = 1.67f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+        }
+        public void Denmark()
+        {
+            Region region = new Region
+            {
+                Name = "Дания",
+                isPopular = false
             };
 
             Region.Add(region);
             SaveChangesAsync().Wait();
 
+            Championship championship = new Championship
+            {
+                Name = "Суперлига",
+                Region = region,
+                IsPopular = true
+            };
+
+            Championship.Add(championship);
+
+            Team team = new Team
+            {
+                Region = region,
+                Name = "Копенгаген",
+            };
+
+            Team team1 = new Team
+            {
+                Region = region,
+                Name = "Норшелланн",
+            };
+
+            Team.Add(team);
+            Team.Add(team1);
+
+            SaveChangesAsync().Wait();
+
+            ChampTeams cht = new ChampTeams
+            {
+                Championship = championship,
+                Team = team,
+            };
+
+            ChampTeams.Add(cht);
+
+            SaveChangesAsync().Wait();
+
+            cht = new ChampTeams
+            {
+                Championship = championship,
+                Team = team1,
+            };
+
+            ChampTeams.Add(cht);
+
+            SaveChangesAsync().Wait();
+
+            Match match = new Match
+            {
+                Home = team,
+                Away = team1,
+                Championship = championship,
+                DateTime = DateTime.Now
+            };
+
+            Match.Add(match);
+            SaveChangesAsync().Wait();
+
+            Bet bet = new Bet
+            {
+                Name = "Исход",
+                Match = match
+            };
+
+            Bet.Add(bet);
+            SaveChangesAsync().Wait();
+
+            BetValue betValue = new BetValue
+            {
+                Name = "П1",
+                Value = 1.1f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "П2",
+                Value = 2.1f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "X",
+                Value = 1.6f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            /////
+
+            bet = new Bet
+            {
+                Name = "Двойной шанс",
+                Match = match
+            };
+
+            Bet.Add(bet);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "1X",
+                Value = 1.34f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "12",
+                Value = 1.37f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "X2",
+                Value = 1.67f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            championship = new Championship
+            {
+                Name = "Первый дивизион",
+                Region = region,
+                IsPopular = false
+            };
+
+            Championship.Add(championship);
+            SaveChangesAsync().Wait();
+
+            team = new Team
+            {
+                Region = region,
+                Name = "Нествед",
+            };
+
+            team1 = new Team
+            {
+                Region = region,
+                Name = "Вайле",
+            };
+
+            Team.Add(team);
+            Team.Add(team1);
+
+            SaveChangesAsync().Wait();
+
+            cht = new ChampTeams
+            {
+                Championship = championship,
+                Team = team,
+            };
+
+            ChampTeams.Add(cht);
+
+            SaveChangesAsync().Wait();
+
+            cht = new ChampTeams
+            {
+                Championship = championship,
+                Team = team1,
+            };
+
+            ChampTeams.Add(cht);
+
+            SaveChangesAsync().Wait();
+
+            match = new Match
+            {
+                Home = team,
+                Away = team1,
+                Championship = championship,
+                DateTime = DateTime.Now
+            };
+
+            Match.Add(match);
+            SaveChangesAsync().Wait();
+
+            bet = new Bet
+            {
+                Name = "Исход",
+                Match = match
+            };
+
+            Bet.Add(bet);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "П1",
+                Value = 1.1f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "П2",
+                Value = 2.1f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "X",
+                Value = 1.6f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            /////
+
+            bet = new Bet
+            {
+                Name = "Двойной шанс",
+                Match = match
+            };
+
+            Bet.Add(bet);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "1X",
+                Value = 1.34f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "12",
+                Value = 1.37f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "X2",
+                Value = 1.67f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Match>().HasOne(a => a.Home).WithMany(a => a.HomeTeams).OnDelete(DeleteBehavior.Restrict);

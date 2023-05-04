@@ -25,6 +25,8 @@ namespace API.Helpers
 
             CreateMap<Region, UpcomingMatchesDTO>().
                 ForMember(x=>x.Region, opt=>opt.MapFrom(x=>x.Name));
+            CreateMap<Region, RegionsUpcomingMatchesDTO>().
+                ForMember(x=>x.Region, opt=>opt.MapFrom(x=>x.Name));
         }
     }
 }

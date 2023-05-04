@@ -62,6 +62,10 @@ namespace API.Data
 
         public async Task<IEnumerable<Region>> GetRegionsTodaysMatches()
         {
+            var r = _context.Region.ToArray();
+            var t = _context.Team.ToArray();
+            var c = _context.Championship.ToArray();
+
             var date = DateTime.Now;
 
             var regions = new List<Region>();
@@ -76,11 +80,15 @@ namespace API.Data
             championshipsId.ForEach(x => championships.Add(_context.Championship.Find(x)));
 
             var regionsId = championships.
-                Select(x => x.Id).
+                Select(x => x.RegionId).
                 Distinct().
                 ToList();
 
             regionsId.ForEach(x => regions.Add(_context.Region.Find(x)));
+
+            regions.ForEach(x => x.Championships = championships.
+                Where(y => y.RegionId == x.Id).
+                ToList());
 
             return regions;
         }

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { IRegion } from "../entity/Region";
 import { IUpcomingMatches } from "../entity/UpcomingMatches";
 
-export function useRegionsUpcomingMatches() {
+export function useUpcomingMatchesSortedByRegion() {
   const [regions, setRegions] = useState<IUpcomingMatches[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -12,7 +12,7 @@ export function useRegionsUpcomingMatches() {
     try {
       setLoading(true);
       const response = await axios.get<IUpcomingMatches[]>(
-        "https://localhost:7167/api/Region/get-regions-upcoming-matches"
+        "https://localhost:7167/api/Match/upcoming-matches"
       );
       console.log(response.data)
       setRegions(response.data);
