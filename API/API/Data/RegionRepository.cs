@@ -31,6 +31,27 @@ namespace API.Data
             return await _context.Region.ToListAsync();
         }
 
+        public async Task<int> GetCountMatches(int id)
+        {
+            int count = 0;
+
+            var date = new DateTime();
+
+            var championships = await _context.Championship.Where(x => x.Id == id).
+                ToListAsync();
+
+            if(championships.Count == 0)
+                return 0;
+
+            foreach (var championship in championships)
+            {
+                var matches = await _context.Match.Where(x => x.DateTime.Date == date.Date &&
+                x.ChampionshipId == championship.Id).ToListAsync();
+                count += matches.Count;
+            }
+            return count;
+        }
+
         public async Task<Region> GetRegionByName(string name)
         {
 #pragma warning disable CS8603 // Возможно, возврат ссылки, допускающей значение NULL.
@@ -39,9 +60,34 @@ namespace API.Data
 #pragma warning restore CS8603 // Возможно, возврат ссылки, допускающей значение NULL.
         }
 
+        public async Task<IEnumerable<Region>> GetRegionsTodaysMatches()
+        {
+            var date = DateTime.Now;
+
+            var regions = new List<Region>();
+            var championships = new List<Championship>();
+
+            var championshipsId = await _context.Match.
+                Where(x => x.DateTime.Date == date.Date).
+                Select(x => x.ChampionshipId).
+                Distinct().
+                ToListAsync();
+
+            championshipsId.ForEach(x => championships.Add(_context.Championship.Find(x)));
+
+            var regionsId = championships.
+                Select(x => x.Id).
+                Distinct().
+                ToList();
+
+            regionsId.ForEach(x => regions.Add(_context.Region.Find(x)));
+
+            return regions;
+        }
+
         public void Update(Region item)
         {
-           _context.Entry(item).State=EntityState.Modified;
+            _context.Entry(item).State = EntityState.Modified;
         }
     }
 }

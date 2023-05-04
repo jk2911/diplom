@@ -14,11 +14,17 @@ namespace API.Helpers
 
             CreateMap<CreateTeamDto, Team>();
 
-            CreateMap<Team, TeamDTO>().ForMember(x => x.Region, opt => opt.MapFrom(x => x.Region.Name));
+            CreateMap<Team, TeamDTO>().
+                ForMember(x => x.Region, opt => opt.MapFrom(x => x.Region.Name));
 
             CreateMap<Region, RegionDTO>();
 
             CreateMap<Championship, ChampionshipDTO>();
+
+            CreateMap<Match, MatchDTO>();
+
+            CreateMap<Region, UpcomingMatchesDTO>().
+                ForMember(x=>x.Region, opt=>opt.MapFrom(x=>x.Name));
         }
     }
 }

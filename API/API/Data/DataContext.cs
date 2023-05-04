@@ -56,7 +56,8 @@ namespace API.Data
 
             Region region = new Region
             {
-                Name = "Мир"
+                Name = "Мир",
+                isPopular = false
             };
 
             Region.Add(region);
@@ -65,7 +66,8 @@ namespace API.Data
 
             region = new Region
             {
-                Name = "Испания"
+                Name = "Испания",
+                isPopular = true
             };
 
             Region.Add(region);
@@ -75,6 +77,7 @@ namespace API.Data
             {
                 Name = "La Liga",
                 Region = region,
+                IsPopular = true
             };
 
             Championship.Add(championship);
@@ -100,6 +103,7 @@ namespace API.Data
             {
                 Name = "Сегунда",
                 Region = region,
+                IsPopular = false
             };
 
             Championship.Add(championship);
@@ -130,7 +134,7 @@ namespace API.Data
                 Home = team,
                 Away = team1,
                 Championship = championship,
-                DateTime = new DateTime()
+                DateTime = DateTime.Now
             };
 
             Match.Add(match);
@@ -218,7 +222,8 @@ namespace API.Data
 
             region = new Region
             {
-                Name = "Англия"
+                Name = "Англия",
+                isPopular = true,
             };
 
             Region.Add(region);
@@ -227,6 +232,7 @@ namespace API.Data
             {
                 Name = "Премьер-лига",
                 Region = region,
+                IsPopular = true
             };
 
             Championship.Add(championship);
@@ -236,6 +242,7 @@ namespace API.Data
             {
                 Name = "Чемпионшип",
                 Region = region,
+                IsPopular = false
             };
 
             Championship.Add(championship);
@@ -243,7 +250,8 @@ namespace API.Data
 
             region = new Region
             {
-                Name = "Германия"
+                Name = "Германия",
+                isPopular = false,
             };
 
             Region.Add(region);
@@ -253,6 +261,7 @@ namespace API.Data
             {
                 Name = "Бундеслига",
                 Region = region,
+                IsPopular = true
             };
 
             Championship.Add(championship);
@@ -260,7 +269,8 @@ namespace API.Data
 
             region = new Region
             {
-                Name = "Франция"
+                Name = "Франция",
+                isPopular = true
             };
 
             Region.Add(region);
@@ -270,6 +280,7 @@ namespace API.Data
             {
                 Name = "Лига 1",
                 Region = region,
+                IsPopular = true
             };
 
             Championship.Add(championship);
@@ -277,7 +288,8 @@ namespace API.Data
 
             region = new Region
             {
-                Name = "Италия"
+                Name = "Италия",
+                isPopular = false
             };
 
             Region.Add(region);
@@ -287,6 +299,7 @@ namespace API.Data
             {
                 Name = "Серия А",
                 Region = region,
+                IsPopular = true
             };
 
             Championship.Add(championship);
@@ -294,7 +307,8 @@ namespace API.Data
 
             region = new Region
             {
-                Name = "Португалия"
+                Name = "Португалия",
+                isPopular = true
             };
 
             Region.Add(region);

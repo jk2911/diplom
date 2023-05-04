@@ -46,6 +46,15 @@ namespace API.Data
             return await _context.Championship.ToListAsync();
         }
 
+        public async Task<IEnumerable<Championship>> GetChampionshipsTodaysMatchesByRegion(int regionId)
+        {
+            var champioships = await _context.Championship.
+                Where(x=>x.RegionId == regionId).
+                ToListAsync();
+
+            return null;
+        }
+
         public async Task<bool> TeamExistsInChampionship(int championshipId, int teamId)
         {
             var champTeams = await _context.ChampTeams.

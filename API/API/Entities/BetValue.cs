@@ -10,6 +10,7 @@ namespace API.Entities
         public string Name { get; set; }
         public float Value { get; set; }
         public int BetId { get; set; }
+        [JsonIgnore]
         public virtual Bet Bet { get; set; }
 
         [JsonIgnore]

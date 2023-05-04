@@ -1,19 +1,26 @@
 import { Col, Container, Row, Tab } from "react-bootstrap";
-import { IChampioshipSortedByRegion } from "../entity/ChampionshipSortedByRegion";
+import { IUpcomingMatches } from "../entity/UpcomingMatches";
 
 interface RegionsProps {
-  region: IChampioshipSortedByRegion;
+  region: IUpcomingMatches;
 }
 
 export function Region({ region }: RegionsProps) {
   return (
     <Row>
-      <details>
+      {/* <details>
         <summary>{region.region}</summary>
         {region.championships.map((ch) => (
               <Row>{ch.name}</Row>
           ))} 
-      </details>
+      </details> */}
+
+      <>{region.region} </>
+
+      
+      {/* <>{regions.map((region) => (
+              <Row>{region.region}</Row>
+          ))} </> */}
       {/* <Container>{region.region}</Container>
       {region.championships.map((ch) => (
               <Row>{ch.name}</Row>
@@ -21,8 +28,3 @@ export function Region({ region }: RegionsProps) {
     </Row>
   );
 }
-
-<details open>
-  <summary>Легенда</summary>
-  <p>Раскрывающийся текст</p>
-</details>;

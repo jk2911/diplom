@@ -1,8 +1,8 @@
 import { IChampionship } from "./Championship";
 
-export interface IChampioshipSortedByRegion {
+export interface IUpcomingMatches {
     id:number;
     region:string,
-    championships: IChampionship[]
+    championships:IChampionship[]
   }
   

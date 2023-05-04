@@ -1,4 +1,5 @@
 ﻿using API.Controllers.Base;
+using API.DTOs;
 using API.Entities;
 using API.Interfaces;
 using AutoMapper;
@@ -6,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    public class MatchController :BaseApiController
+    public class MatchController : BaseApiController
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -17,12 +18,13 @@ namespace API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("/match-todays")]
-        public async Task<ActionResult<IEnumerable<Match>>> GetTodaysMatches()
+        [HttpGet("upcoming-matches")]
+        public async Task<IEnumerable<UpcomingMatchesDTO>> GetUpComingMatches()
         {
-            var matches = await _unitOfWork.Match.GetAll();
 
-            return Ok(matches);
+            var regions = await _unitOfWork.Region.GetRegionsTodaysMatches();
+
+            return _mapper.Map<IEnumerable<UpcomingMatchesDTO>>(regions);
         }
     }
 }

@@ -7,5 +7,6 @@ namespace API.Interfaces
     {
         Task<bool> TeamExistsInChampionship(int championshipId, int teamId);
         void AddTeamInChampionship(int championshipId, int teamId);
+        Task<IEnumerable<Championship>> GetChampionshipsTodaysMatchesByRegion(int regionId);
     }
 }

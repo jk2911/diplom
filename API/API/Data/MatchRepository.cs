@@ -32,6 +32,15 @@ namespace API.Data
             return await _context.Match.ToListAsync();
         }
 
+        public async Task<IEnumerable<Match>> GetUpcomingMatches()
+        {
+            var date = new DateTime();
+
+            return await _context.Match.
+                Where(x=>x.DateTime.Date==date.Date).
+                ToListAsync();
+        }
+
         public void Update(Match item)
         {
             _context.Entry(item).State = EntityState.Modified;

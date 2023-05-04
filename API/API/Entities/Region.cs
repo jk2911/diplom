@@ -8,6 +8,7 @@ namespace API.Entities
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
+        public bool isPopular { get; set; } = false;
         [JsonIgnore]
         public virtual ICollection<Championship> Championships { get; set; }
         [JsonIgnore]
