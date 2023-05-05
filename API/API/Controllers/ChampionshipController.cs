@@ -24,32 +24,7 @@ namespace API.Controllers
             return await _unitOfWork.Championship.GetAll();
         }
 
-        //[HttpGet("championships-sorted-by-regions")]
-        //public async Task<IEnumerable<ChampionshipSortedByRegionDTO>> GetChampionshipsByRegions()
-        //{
-        //    var regions = await _unitOfWork.Region.GetRegionsTodaysMatches();
-
-        //    var championshipSortedByRegions = new List<ChampionshipSortedByRegionDTO>();
-
-        //    foreach (var region in regions)
-        //    {
-        //        var regionChampionships = _unitOfWork.Championship.
-        //            GetChampionshipsTodaysMatchesByRegion(region.Id);
-
-        //        championshipSortedByRegions.Add(new ChampionshipSortedByRegionDTO
-        //        {
-        //            Id = region.Id,
-        //            Region = region.Name,
-        //            CountMatches = await _unitOfWork.Region.GetCountMatches(region.Id),
-        //            Championships = _mapper.Map<ICollection<ChampionshipDTO>>(region.Championships)
-        //        });
-        //    }
-
-        //    return championshipSortedByRegions;
-        //}
-
-
-
+        
         [HttpPost("add-team/{championshipId:int}-{teamId:int}")]
         public async Task<ActionResult> AddTeamInChampionship(int championshipId, int teamId)
         {
@@ -72,7 +47,6 @@ namespace API.Controllers
 
             return BadRequest("Failed to add team in championship");
         }
-
 
         [HttpDelete("delete-championship/{championshipId:int}")]
         public async Task<ActionResult> deleteChampionship(int championshipId)

@@ -21,7 +21,7 @@ namespace API.Controllers
         [HttpGet("get-regions")]
         public async Task<IEnumerable<RegionDTO>> Get()
         {
-            var regions = await _unitOfWork.Region.GetAll();
+            var regions = await _unitOfWork.Region.GetAllRegionsSortedByName();
 
             return _mapper.Map<IEnumerable<RegionDTO>>(regions);
         }

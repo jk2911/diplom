@@ -7,5 +7,6 @@ namespace API.Interfaces
         Task<Region> GetRegionByName(string name);
         Task<IEnumerable<Region>> GetRegionsTodaysMatches();
         Task<int> GetCountMatches(int id);
+        Task<IEnumerable<Region>> GetAllRegionsSortedByName();
     }
 }

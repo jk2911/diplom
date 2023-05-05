@@ -29,3 +29,30 @@ export function useRegionsUpcomingMatches() {
   }, []);
   return { regions, error, loading };
 }
+
+export function useAllRegions(){
+  const [regions, setRegions] = useState<IRegion[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  async function fetchRegions() {
+    try {
+      setLoading(true);
+      const response = await axios.get<IRegion[]>(
+        "https://localhost:7167/api/Region/get-regions"
+      );
+      console.log(response.data)
+      setRegions(response.data);
+      setLoading(false);
+    } catch (e: unknown) {
+      const error = e as AxiosError;
+      setLoading(false);
+      setError(error.message);
+    }
+  }
+
+  useEffect(() => {
+    fetchRegions();
+  }, []);
+  return { regions, error, loading };
+}

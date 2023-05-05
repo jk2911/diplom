@@ -31,13 +31,27 @@ namespace API.Data
             return await _context.Region.ToListAsync();
         }
 
+        public async Task<IEnumerable<Region>> GetAllRegionsSortedByName()
+        {
+            var regions = await _context.Region.
+                OrderBy(x => x.Name).
+                ToListAsync();
+
+            regions.ForEach(
+                x => x.Championships = x.Championships.OrderBy(x => x.IsPopular).
+                     OrderBy(x => x.Name).ToList());
+
+            return regions;
+        }
+
         public async Task<int> GetCountMatches(int id)
         {
             int count = 0;
 
             var date = new DateTime();
 
-            var championships = await _context.Championship.Where(x => x.Id == id).
+            var championships = await _context.Championship.
+                Where(x => x.Id == id).
                 ToListAsync();
 
             if(championships.Count == 0)
@@ -62,10 +76,6 @@ namespace API.Data
 
         public async Task<IEnumerable<Region>> GetRegionsTodaysMatches()
         {
-            var r = _context.Region.ToArray();
-            var t = _context.Team.ToArray();
-            var c = _context.Championship.ToArray();
-
             var date = DateTime.Now;
 
             var regions = new List<Region>();
