@@ -25,6 +25,7 @@ namespace API.Controllers
 
             return _mapper.Map<IEnumerable<RegionDTO>>(regions);
         }
+
         [HttpGet("get-regions-upcoming-matches")]
         public async Task<IEnumerable<RegionsUpcomingMatchesDTO>> GetRegionsUpcomingMatches()
         {

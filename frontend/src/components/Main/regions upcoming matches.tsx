@@ -8,14 +8,14 @@ export function RegionsUpcomingMatches() {
   return (
     <Row>
         {regions.map((region)=>(
-            <>
+            <Container key={region.id}>
                 <details>
                     <summary>{region.region}</summary>
                     {region.championships.map((ch)=>(
                         <p>{ch.name}</p>
                     ))}
                 </details>
-            </>
+            </Container>
             )) }
     </Row>
   );

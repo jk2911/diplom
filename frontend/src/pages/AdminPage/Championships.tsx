@@ -7,7 +7,7 @@ export function AllChampionships() {
     <>
       {loading && <>Загрузка епта</>}
       {regions.map((region)=>(
-        <Row>
+        <Row key={region.id}>
             <details>
                 <summary>{region.id} {region.name}</summary>
                 <></>

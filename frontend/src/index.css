@@ -27,6 +27,11 @@ details > div {
   padding: 10px;
 }
 
+details[open] > summary {
+  color:#eee; 
+  background-color:#333;
+}
+
 
 
 

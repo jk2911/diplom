@@ -1,6 +1,8 @@
 import { Container, Tab, Row, Col, Nav } from "react-bootstrap";
 import styled from "styled-components";
 import { AllRegions } from "./Regions";
+import { AllUsers } from "./Users";
+import { AllTeams } from "./Teams";
 
 export function AdminPage() {
     // const suka = (eventKey:any)=> 
@@ -32,6 +34,12 @@ export function AdminPage() {
             <Tab.Content>
               <Tab.Pane eventKey="first">
                 <AllRegions/>
+              </Tab.Pane>
+              <Tab.Pane eventKey="second">
+                <AllTeams/>
+              </Tab.Pane>
+              <Tab.Pane eventKey="third">
+                <AllUsers/>
               </Tab.Pane>
             </Tab.Content>
           </Col>

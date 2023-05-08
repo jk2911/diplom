@@ -74,5 +74,11 @@ namespace API.Controllers
 
             return team.PathToImage;
         }
+
+        [HttpGet("get-teams")]
+        public async Task<IEnumerable<Team>> GetTeams()
+        {
+            return await _unitOfWork.Team.GetAll();
+        }
     }
 }

@@ -14,7 +14,6 @@ export function useChampionshipSortedByRegionsTodays() {
       const response = await axios.get<IUpcomingMatches[]>(
         "https://localhost:7167/api/Match/upcoming-matches"
       );
-      console.log(response.data)
       setChampionships(response.data);
       setLoading(false);
     } catch (e: unknown) {

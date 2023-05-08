@@ -62,12 +62,13 @@ namespace API.Controllers
            
             return userDto;
         }
-        //[Authorize]
-        //[HttpPut("change-role/{role:string}")]
-        //public Task<ActionResult> ChangeRole()
-        //{
 
-        //    return Ok();
-        //}
+        [HttpGet("get-users")]
+        public async Task<IEnumerable<UserDto>> GetUsers() 
+        {
+            var users = await _unitOfWork.User.GetAll();
+
+            return _mapper.Map<IEnumerable<UserDto>>(users);
+        }            
     }
 }

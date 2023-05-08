@@ -14,7 +14,6 @@ export function useRegionsUpcomingMatches() {
       const response = await axios.get<IUpcomingMatches[]>(
         "https://localhost:7167/api/Region/get-regions-upcoming-matches"
       );
-      console.log(response.data)
       setRegions(response.data);
       setLoading(false);
     } catch (e: unknown) {
@@ -41,7 +40,6 @@ export function useAllRegions(){
       const response = await axios.get<IRegion[]>(
         "https://localhost:7167/api/Region/get-regions"
       );
-      console.log(response.data)
       setRegions(response.data);
       setLoading(false);
     } catch (e: unknown) {
