@@ -18,7 +18,7 @@ namespace API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("all-championships")]
+        [HttpGet("get-championships")]
         public async Task<IEnumerable<Championship>> GetAllChampionships()
         {
             return await _unitOfWork.Championship.GetAll();

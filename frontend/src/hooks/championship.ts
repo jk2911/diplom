@@ -2,17 +2,18 @@ import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { IRegion } from "../entity/Region";
 import { IUpcomingMatches } from "../entity/UpcomingMatches";
+import { IChampionship } from "../entity/Championship";
 
-export function useChampionshipSortedByRegionsTodays() {
-  const [championships, setChampionships] = useState<IUpcomingMatches[]>([]);
+export function useAllChampionships() {
+  const [championships, setChampionships] = useState<IChampionship[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   async function fetchChampionship() {
     try {
       setLoading(true);
-      const response = await axios.get<IUpcomingMatches[]>(
-        "https://localhost:7167/api/Match/upcoming-matches"
+      const response = await axios.get<IChampionship[]>(
+        "https://localhost:7167/api/Championship/get-championships"
       );
       setChampionships(response.data);
       setLoading(false);

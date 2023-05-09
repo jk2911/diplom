@@ -3,28 +3,34 @@ import styled from "styled-components";
 import { AllRegions } from "./Regions";
 import { AllUsers } from "./Users";
 import { AllTeams } from "./Teams";
+import { AllChampionships } from "./Championships";
 
 export function AdminPage() {
     // const suka = (eventKey:any)=> 
 
   return (
     <Container>
-      <Tab.Container id="ledt-tabs-example" defaultActiveKey="first">
+      <Tab.Container id="ledt-tabs-example" defaultActiveKey="regions">
         <Row>
           <Nav variant="pills" className="flex-row mt" >
             <Col>
               <Nav.Item>
-                <Nav.Link eventKey="first">Чемпионаты</Nav.Link>
+                <Nav.Link eventKey="regions">Регионы</Nav.Link>
               </Nav.Item>
             </Col>
             <Col>
               <Nav.Item>
-                <Nav.Link eventKey="second">Команды</Nav.Link>
+                <Nav.Link eventKey="championships">Чемпионаты</Nav.Link>
               </Nav.Item>
             </Col>
             <Col>
               <Nav.Item>
-                <Nav.Link eventKey="third">Пользователи</Nav.Link>
+                <Nav.Link eventKey="teams">Команды</Nav.Link>
+              </Nav.Item>
+            </Col>
+            <Col>
+              <Nav.Item>
+                <Nav.Link eventKey="users">Пользователи</Nav.Link>
               </Nav.Item>
             </Col>
           </Nav>
@@ -32,13 +38,16 @@ export function AdminPage() {
         <Row>
           <Col>
             <Tab.Content>
-              <Tab.Pane eventKey="first">
+              <Tab.Pane eventKey="regions">
                 <AllRegions/>
               </Tab.Pane>
-              <Tab.Pane eventKey="second">
+              <Tab.Pane eventKey="championships">
+                <AllChampionships/>
+              </Tab.Pane>
+              <Tab.Pane eventKey="teams">
                 <AllTeams/>
               </Tab.Pane>
-              <Tab.Pane eventKey="third">
+              <Tab.Pane eventKey="users">
                 <AllUsers/>
               </Tab.Pane>
             </Tab.Content>

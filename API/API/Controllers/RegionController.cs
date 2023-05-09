@@ -19,11 +19,9 @@ namespace API.Controllers
         }
 
         [HttpGet("get-regions")]
-        public async Task<IEnumerable<RegionDTO>> Get()
+        public async Task<IEnumerable<Region>> Get()
         {
-            var regions = await _unitOfWork.Region.GetAllRegionsSortedByName();
-
-            return _mapper.Map<IEnumerable<RegionDTO>>(regions);
+            return await _unitOfWork.Region.GetAllRegionsSortedByName();
         }
 
         [HttpGet("get-regions-upcoming-matches")]
