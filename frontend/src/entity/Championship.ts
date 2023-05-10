@@ -7,4 +7,5 @@ export interface IChampionship {
   isPopular: boolean;
   matches: IMatch[];
   region: IRegion;
+  image: string;
 }

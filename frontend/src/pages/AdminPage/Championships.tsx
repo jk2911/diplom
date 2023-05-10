@@ -60,6 +60,7 @@ export function AllChampionships() {
       {loading && <>Загрузка епта</>}
       {sortChampionshipsList.map((ch) => (
         <RowItem key={ch.id}>
+          <img src={ch.image} style={{minHeight:10, maxHeight:70, minWidth:10, maxWidth:70}}/>
           {ch.id} {ch.name} {ch.region.name}
         </RowItem>
       ))}

@@ -9,6 +9,7 @@ export function AllTeams(){
     {loading && <>Загрузка</>}
     {teams.map((team)=>(
         <RowItem key={team.id}>
+            <img src={team.image} style={{minHeight:10, maxHeight:70, minWidth:10, maxWidth:70}}/>
             {team.id} {team.name} {team.region.name} 
         </RowItem>
     ))}
