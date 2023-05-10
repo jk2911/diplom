@@ -16,7 +16,7 @@ export function AllChampionships() {
     setSortChampionships(championships);
   }, [championships]);
 
-  function sortRegions(value: string) {
+  function sortChampionships(value: string) {
     if (championships == null) return;
 
     var buffer = championships;
@@ -49,7 +49,7 @@ export function AllChampionships() {
       <Modal active={createModalActive} setActive={setCreateModalActive}>
         <CreateChampionship />
       </Modal>
-      <select onChange={(e) => sortRegions(e.target.value)}>
+      <select onChange={(e) => sortChampionships(e.target.value)}>
         <option value="1">id</option>
         <option value="2">названию</option>
         <option value="3">региону</option>

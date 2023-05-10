@@ -1,10 +1,25 @@
 import { Row } from "react-bootstrap";
 import { useTeams } from "../../hooks/team";
 import styled from "styled-components";
+import { useState } from "react";
+import { CreateTeam } from "../../components/Admin/CreateTeam";
+import { Modal } from "../../modal/Modal";
 
 export function AllTeams(){
     const {teams, loading, error} = useTeams();
+    const [createModalActive, setCreateModalActive] = useState(false);
     return <>
+    <Modal active={createModalActive} setActive={setCreateModalActive}>
+        <CreateTeam />
+      </Modal>
+      {/* <select onChange={(e) => sortRegions(e.target.value)}>
+        <option value="1">id</option>
+        <option value="2">названию</option>
+        <option value="3">региону</option>
+      </select> */}
+      <button onClick={() => setCreateModalActive(true)}>
+        Создать команду
+      </button>
     {error && <>Ошибка</>}
     {loading && <>Загрузка</>}
     {teams.map((team)=>(

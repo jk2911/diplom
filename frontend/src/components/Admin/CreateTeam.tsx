@@ -1,33 +1,40 @@
 import axios, { AxiosError } from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAllRegions } from "../../hooks/region";
 
-export function CreateRegion() {
+export function CreateTeam() {
   const [name, setName] = useState("");
   const [image, setImage] = useState(null);
   const [buttonState, setButton] = useState("Создать");
-  const [errorCreate, setErrorCreate]=useState("");
+  const [errorCreate, setErrorCreate] = useState("");
+  const [region, setRegion] = useState("Испания");
+  const { regions, error, loading } = useAllRegions();
 
-  const FetchCreateRegion = async (event: any) => {
+  useEffect(() => {
+    setRegion(regions == null || regions.length < 1 ? "Мир" : regions[0].name);
+  }, [regions]);
+
+  const FetchCreateTeam = async (event: any) => {
     //event.preventDefault();
     event.stopPropagation();
     setButton("Создание");
 
     const formData = new FormData();
     formData.append("name", name);
+    formData.append("region", region);
 
     if (image != null) formData.append("image", image);
 
+
     try {
       const response = await axios.post(
-        "https://localhost:7167/api/Region/create-region",
+        "https://localhost:7167/api/Team/CreateTeam",
         formData
       );
       const message = response.data as String;
       setErrorCreate(message.toString());
     } catch (e: unknown) {
       const error = e as AxiosError;
-      // console.log(error.message);
-      // console.log(error.response?.data);
       const message = error.response?.data as String;
       setErrorCreate(message.toString());
     }
@@ -41,14 +48,18 @@ export function CreateRegion() {
   return (
     <>
       название <input value={name} onChange={(e) => setName(e.target.value)} />
-      
       <input
         type="file"
         accept="image/*,.png,.jpg,.gif,.web"
         onChange={AddImage}
       />
+      <select onChange={(e) => setRegion(e.target.value)}>
+        {regions.map((region) => (
+          <option>{region.name}</option>
+        ))}
+      </select>
       {errorCreate}
-      <button onClick={FetchCreateRegion}>{buttonState}</button>
+      <button onClick={FetchCreateTeam}>{buttonState}</button>
     </>
   );
 }
