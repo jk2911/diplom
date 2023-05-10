@@ -8,6 +8,7 @@ namespace API.Entities
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
+        public string? Image { get; set; }
         public int RegionId { get; set; }
         public virtual Region Region { get; set; }
         public bool IsPopular { get; set; } = true;

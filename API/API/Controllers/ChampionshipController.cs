@@ -2,6 +2,7 @@
 using API.DTOs;
 using API.Entities;
 using API.Interfaces;
+using API.Service;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,11 +12,13 @@ namespace API.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IPhotoService _photoService;
 
-        public ChampionshipController(IUnitOfWork unitOfWork, IMapper mapper)
+        public ChampionshipController(IUnitOfWork unitOfWork, IMapper mapper, IPhotoService photoService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _photoService = photoService;
         }
 
         [HttpGet("get-championships")]
@@ -61,6 +64,42 @@ namespace API.Controllers
                 return Ok("Championship delete");
 
             return BadRequest("Failed to delete championship");
+        }
+
+        [HttpPost("CreateChampionship")]
+        public async Task<ActionResult> CreateChampionship()
+        {
+            var req = Request.Form;
+
+            string? name = req["name"];
+            string? regionName = req["region"];
+            var image = req.Files["image"];
+
+            if (name == null || name.Length < 3)
+                return BadRequest("Длина названия должна быть минимум 3 символа");
+
+
+
+            var region = await _unitOfWork.Region.GetRegionByName(regionName);
+
+            if (region == null) return NotFound("Регион не найден");
+
+            var pathImage = image == null ? "" : 
+                _photoService.AddPhoto(Request, "images/championships/" + image.FileName, image);
+
+            var championship = new Championship
+            {
+                Name = name,
+                Region = region,
+                Image = pathImage
+            };
+
+            _unitOfWork.Championship.Create(championship);
+
+            if(await  _unitOfWork.Complete())
+                return Ok("Чемпионат создан");
+
+            return BadRequest("Не удалось создать");
         }
     }
 }

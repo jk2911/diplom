@@ -9,7 +9,7 @@ namespace API.Entities
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public string? PathToImage { get; set; }
+        public string? Image { get; set; }
         public virtual Region? Region { get; set; }
         [JsonIgnore]
         public virtual ICollection<ChampTeams> ChampTeams { get; set; }

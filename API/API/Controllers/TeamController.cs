@@ -68,11 +68,11 @@ namespace API.Controllers
                 file.CopyTo(stream);
             }
 
-            team.PathToImage = Request.Scheme + "://" + Request.Host.ToUriComponent() + "/images/teams/" + team.Name + ".png";
+            team.Image = Request.Scheme + "://" + Request.Host.ToUriComponent() + "/images/teams/" + team.Name + ".png";
 
             _unitOfWork.Team.Update(team);
 
-            return team.PathToImage;
+            return team.Image;
         }
 
         [HttpGet("get-teams")]

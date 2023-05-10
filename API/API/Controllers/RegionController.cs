@@ -51,7 +51,8 @@ namespace API.Controllers
             if (regionExists != null)
                 return BadRequest("Такой регион уже существует");
 
-            var pathImage = image == null ? "" : _photoService.AddPhoto(Request,"images/regions/"+image.FileName, image);
+            var pathImage = image == null ? "" : 
+                _photoService.AddPhoto(Request,"images/regions/"+image.FileName, image);
 
             var newRegion = new Region
             {
@@ -62,7 +63,7 @@ namespace API.Controllers
             _unitOfWork.Region.Create(newRegion);
 
             if(await _unitOfWork.Complete())
-                return Ok("Регион успешно создан");
+                return Ok("Регион создан");
 
             return BadRequest("Не удалось создать регион");
         }

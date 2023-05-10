@@ -14,7 +14,7 @@ namespace API.Service
                 image.CopyTo(stream);
             }
             return request.Scheme + "://" + request.Host.ToUriComponent() 
-                + "/images/regions/" + image.FileName;
+                + path;
         }
 
         public void RemovePhoto(string name)
