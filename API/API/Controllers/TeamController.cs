@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static System.Net.Mime.MediaTypeNames;
 using System.IO;
+using API.Service;
 
 namespace API.Controllers
 {
@@ -14,43 +15,15 @@ namespace API.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IPhotoService _photoService;
 
-        public TeamController(IUnitOfWork unitOfWork, IMapper mapper)
+        public TeamController(IUnitOfWork unitOfWork, IMapper mapper, IPhotoService photoService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _photoService = photoService;
         }
 
-        [HttpPost("create-team")]
-        public async Task<ActionResult<TeamDTO>> CreateTeam([FromBody] CreateTeamDto createTeam)
-        {
-            Team team = _mapper.Map<Team>(createTeam);
-
-            if (createTeam.RegionId != 0)
-            {
-
-                var region = await _unitOfWork.Region.Get(createTeam.RegionId);
-
-                if (region == null) return BadRequest("Region doesn`t exists");
-
-                var teamExists = await _unitOfWork.Team.GetTeamByName(createTeam.Name);
-
-                if (teamExists != null) return BadRequest("Such a team already exists");
-
-                team.Region = region;
-            }
-            else
-                team.Region = await _unitOfWork.Region.Get(1);
-
-            _unitOfWork.Team.Create(team);
-
-            if (!await _unitOfWork.Complete())
-                return BadRequest("Failed to create team");
-
-            TeamDTO teamDTO = _mapper.Map<TeamDTO>(team);
-
-            return teamDTO;
-        }
         //[Authorize]
         [HttpPost("add-photo/{teamId:int}")]
         public async Task<ActionResult<string>> AddPhoto(int teamId)
@@ -79,6 +52,48 @@ namespace API.Controllers
         public async Task<IEnumerable<Team>> GetTeams()
         {
             return await _unitOfWork.Team.GetAll();
+        }
+
+        [HttpPost("CreateTeam")]
+        public async Task<ActionResult> CreateChampionship()
+        {
+            var req = Request.Form;
+
+            string? name = req["name"];
+            string? regionName = req["region"];
+            var image = req.Files["image"];
+
+            if (name == null || name.Length < 3)
+                return BadRequest("Длина названия должна быть минимум 3 символа");
+
+            var region = await _unitOfWork.Region.GetRegionByName(regionName);
+
+            if (region == null) return NotFound("Регион не найден");
+
+            var teamExists = await _unitOfWork.
+                Team.
+                GetTeamInRegionByName(name, region);
+
+            if (teamExists != null)
+                return BadRequest("Такая команда уже существует в регионе");
+
+
+            var pathImage = image == null ? "" :
+                _photoService.AddPhoto(Request, "images/teams/" + image.FileName, image);
+
+            var team = new Team
+            {
+                Name = name,
+                Region = region,
+                Image = pathImage
+            };
+
+            _unitOfWork.Team.Create(team);
+
+            if (await _unitOfWork.Complete())
+                return Ok("Команда создана");
+
+            return BadRequest("Не удалось создать");
         }
     }
 }

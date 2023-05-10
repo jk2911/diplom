@@ -13,8 +13,7 @@ namespace API.Service
             {
                 image.CopyTo(stream);
             }
-            return request.Scheme + "://" + request.Host.ToUriComponent() 
-                + path;
+            return request.Scheme + "://" + request.Host.ToUriComponent() + "/" + path;
         }
 
         public void RemovePhoto(string name)

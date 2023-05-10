@@ -31,14 +31,21 @@ namespace API.Data
             return await _context.Team.ToListAsync();
         }
 
-        public async Task<Team> GetTeamByName(string name)
+        public async Task<Team?> GetTeamByName(string name)
         {
             return await _context.Team.FirstOrDefaultAsync(x => x.Name == name);
+        }
+
+        public async Task<Team?> GetTeamInRegionByName(string name, Region region)
+        {
+            return await _context.Team.
+                FirstOrDefaultAsync(team => team.Name == name && team.RegionId == region.Id);
         }
 
         public void Update(Team item)
         {
             _context.Entry(item).State = EntityState.Modified;
         }
+        
     }
 }

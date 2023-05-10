@@ -46,6 +46,12 @@ namespace API.Data
             return await _context.Championship.ToListAsync();
         }
 
+        public async Task<Championship?> GetChampionshipInRegionByName(string name, Region region)
+        {
+            return await _context.Championship.
+                FirstOrDefaultAsync(ch => ch.Name == name && ch.RegionId == region.Id);
+        }
+
         public async Task<IEnumerable<Championship>> GetChampionshipsTodaysMatchesByRegion(int regionId)
         {
             var champioships = await _context.Championship.

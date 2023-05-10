@@ -46,13 +46,13 @@ namespace API.Controllers
             if (name == null || name.Length < 3)
                 return BadRequest("Длина названия должна быть минимум 3 символа");
 
-            var regionExists  = await _unitOfWork.Region.GetRegionByName(name);
+            var regionExists = await _unitOfWork.Region.GetRegionByName(name);
 
             if (regionExists != null)
                 return BadRequest("Такой регион уже существует");
 
-            var pathImage = image == null ? "" : 
-                _photoService.AddPhoto(Request,"images/regions/"+image.FileName, image);
+            var pathImage = image == null ? "" :
+                _photoService.AddPhoto(Request, "images/regions/" + image.FileName, image);
 
             var newRegion = new Region
             {
@@ -62,7 +62,7 @@ namespace API.Controllers
 
             _unitOfWork.Region.Create(newRegion);
 
-            if(await _unitOfWork.Complete())
+            if (await _unitOfWork.Complete())
                 return Ok("Регион создан");
 
             return BadRequest("Не удалось создать регион");

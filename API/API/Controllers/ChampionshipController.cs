@@ -78,11 +78,16 @@ namespace API.Controllers
             if (name == null || name.Length < 3)
                 return BadRequest("Длина названия должна быть минимум 3 символа");
 
-
-
             var region = await _unitOfWork.Region.GetRegionByName(regionName);
 
             if (region == null) return NotFound("Регион не найден");
+
+            var championshipExists = await _unitOfWork.
+                Championship.
+                GetChampionshipInRegionByName(name, region);
+
+            if (championshipExists != null)
+                return BadRequest("Такой чемпионат уже существует в регионе");
 
             var pathImage = image == null ? "" : 
                 _photoService.AddPhoto(Request, "images/championships/" + image.FileName, image);
