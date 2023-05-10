@@ -13,7 +13,7 @@ export function useAllChampionships() {
     try {
       setLoading(true);
       const response = await axios.get<IChampionship[]>(
-        "https://localhost:7167/api/Championship/get-championships"
+        "https://localhost:7167/api/Championship/GetChampionships"
       );
       setChampionships(response.data);
       setLoading(false);

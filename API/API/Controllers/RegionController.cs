@@ -21,13 +21,13 @@ namespace API.Controllers
             _photoService = photoService;
         }
 
-        [HttpGet("get-regions")]
+        [HttpGet("GetRegions")]
         public async Task<IEnumerable<Region>> Get()
         {
             return await _unitOfWork.Region.GetAllRegionsSortedByName();
         }
 
-        [HttpGet("get-regions-upcoming-matches")]
+        [HttpGet("GetRegionsUpcomingMatches")]
         public async Task<IEnumerable<RegionsUpcomingMatchesDTO>> GetRegionsUpcomingMatches()
         {
             var regions = await _unitOfWork.Region.GetRegionsTodaysMatches();
@@ -35,7 +35,7 @@ namespace API.Controllers
             return _mapper.Map<IEnumerable<RegionsUpcomingMatchesDTO>>(regions);
         }
 
-        [HttpPost("create-region")]
+        [HttpPost("CreateRegion")]
         public async Task<ActionResult> CreateRegion()
         {
             var req = Request.Form;

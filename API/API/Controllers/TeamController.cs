@@ -25,7 +25,7 @@ namespace API.Controllers
         }
 
         //[Authorize]
-        [HttpPost("add-photo/{teamId:int}")]
+        [HttpPost("AddPhoto/{teamId:int}")]
         public async Task<ActionResult<string>> AddPhoto(int teamId)
         {
             var file = Request.Form.Files["image"];
@@ -48,7 +48,7 @@ namespace API.Controllers
             return team.Image;
         }
 
-        [HttpGet("get-teams")]
+        [HttpGet("GetTeams")]
         public async Task<IEnumerable<Team>> GetTeams()
         {
             return await _unitOfWork.Team.GetAll();

@@ -11,7 +11,7 @@ export function useUsers() {
       try {
         setLoading(true);
         const response = await axios.get<IUser[]>(
-          "https://localhost:7167/api/User/get-users"
+          "https://localhost:7167/api/User/GetUsers"
         );
         setUsers(response.data);
         setLoading(false);

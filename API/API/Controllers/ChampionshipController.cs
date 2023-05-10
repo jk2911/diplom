@@ -21,14 +21,14 @@ namespace API.Controllers
             _photoService = photoService;
         }
 
-        [HttpGet("get-championships")]
+        [HttpGet("GetChampionships")]
         public async Task<IEnumerable<Championship>> GetAllChampionships()
         {
             return await _unitOfWork.Championship.GetAll();
         }
 
         
-        [HttpPost("add-team/{championshipId:int}-{teamId:int}")]
+        [HttpPost("AddTeam/{championshipId:int}-{teamId:int}")]
         public async Task<ActionResult> AddTeamInChampionship(int championshipId, int teamId)
         {
             Team team = await _unitOfWork.Team.Get(teamId);
@@ -51,7 +51,7 @@ namespace API.Controllers
             return BadRequest("Failed to add team in championship");
         }
 
-        [HttpDelete("delete-championship/{championshipId:int}")]
+        [HttpDelete("DeleteChampionship/{championshipId:int}")]
         public async Task<ActionResult> deleteChampionship(int championshipId)
         {
             Championship championship = await _unitOfWork.Championship.Get(championshipId);

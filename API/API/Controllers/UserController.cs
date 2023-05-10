@@ -24,7 +24,7 @@ namespace API.Controllers
         }
 
         [Authorize]
-        [HttpPost("refill/{userId:int}-{sum:float}")]
+        [HttpPost("Refill/{userId:int}-{sum:float}")]
         public async Task<ActionResult<float>> Refill(int userId, float sum)
         {
             if (sum < 2) return BadRequest("The money should not be less than 2");
@@ -42,7 +42,7 @@ namespace API.Controllers
 
 
         [Authorize]
-        [HttpPut("change-password")]
+        [HttpPut("ChangePassword")]
         public async Task<ActionResult<UserDto>> ChangePassword(ChangePassword item)
         {
             var user = await _unitOfWork.User.Get(item.Id);
@@ -63,7 +63,7 @@ namespace API.Controllers
             return userDto;
         }
 
-        [HttpGet("get-users")]
+        [HttpGet("GetUsers")]
         public async Task<IEnumerable<UserDto>> GetUsers() 
         {
             var users = await _unitOfWork.User.GetAll();

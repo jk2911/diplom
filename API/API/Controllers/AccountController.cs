@@ -22,7 +22,7 @@ namespace API.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost("register")]
+        [HttpPost("Register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
             if (await _unitOfWork.User.UserExists(registerDto.Email))
@@ -42,7 +42,7 @@ namespace API.Controllers
 
             return BadRequest("Failed to create user");
         }
-        [HttpPost("login")]
+        [HttpPost("Login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginUser)
         {
             var user = await _unitOfWork.User.

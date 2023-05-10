@@ -19,7 +19,7 @@ export function CreateRegion() {
 
     try {
       const response = await axios.post(
-        "https://localhost:7167/api/Region/create-region",
+        "https://localhost:7167/api/Region/CreateRegion",
         formData
       );
       const message = response.data as String;

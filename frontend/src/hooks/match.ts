@@ -12,7 +12,7 @@ export function useUpcomingMatchesSortedByRegion() {
     try {
       setLoading(true);
       const response = await axios.get<IUpcomingMatches[]>(
-        "https://localhost:7167/api/Match/upcoming-matches"
+        "https://localhost:7167/api/Match/UpcomingMatches"
       );
       setRegions(response.data);
       setLoading(false);

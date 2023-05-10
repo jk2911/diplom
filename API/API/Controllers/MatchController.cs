@@ -18,7 +18,7 @@ namespace API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("upcoming-matches")]
+        [HttpGet("UpcomingMatches")]
         public async Task<IEnumerable<UpcomingMatchesDTO>> GetUpComingMatches()
         {
             var regions = await _unitOfWork.Region.GetRegionsTodaysMatches();

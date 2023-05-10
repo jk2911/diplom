@@ -11,7 +11,7 @@ export function useTeams() {
       try {
         setLoading(true);
         const response = await axios.get<ITeam[]>(
-          "https://localhost:7167/api/Team/get-teams"
+          "https://localhost:7167/api/Team/GetTeams"
         );
         setTeams(response.data);
         setLoading(false);
