@@ -68,7 +68,7 @@ namespace API.Controllers
                 file.CopyTo(stream);
             }
 
-            team.PathToImage = this.Request.Scheme + "://" + Request.Host.ToUriComponent() + "/images/teams/" + team.Name + ".png";
+            team.PathToImage = Request.Scheme + "://" + Request.Host.ToUriComponent() + "/images/teams/" + team.Name + ".png";
 
             _unitOfWork.Team.Update(team);
 

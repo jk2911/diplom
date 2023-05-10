@@ -9,6 +9,7 @@ namespace API.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public bool isPopular { get; set; } = false;
+        public string? Image { get; set; }
         [JsonIgnore]
         public virtual ICollection<Championship> Championships { get; set; }
         [JsonIgnore]

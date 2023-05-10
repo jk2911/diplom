@@ -17,6 +17,8 @@
 
   <ItemGroup>
     <Folder Include="images\teams\" />
+    <Folder Include="images\regions\" />
+    <Folder Include="images\championships\" />
   </ItemGroup>
 
 </Project>

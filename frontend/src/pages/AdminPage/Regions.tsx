@@ -4,10 +4,13 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { useImmer } from "use-immer";
 import { IRegion } from "../../entity/Region";
+import { Modal } from "../../modal/Modal";
+import { CreateRegion } from "../../components/Admin/CreateRegion";
 
 export function AllRegions() {
   const { regions, error, loading } = useAllRegions();
   const [sortRegionsList, setSortRegions] = useState(regions);
+  const [createModalActive, setCreateModalActive] = useState(false);
 
   useEffect(() => {
     setSortRegions(regions);
@@ -33,13 +36,21 @@ export function AllRegions() {
 
   return (
     <>
+      <Modal
+        active={createModalActive}
+        setActive={setCreateModalActive}
+      >
+        <CreateRegion/>
+      </Modal>
       <select onChange={(e) => sortRegions(e.target.value)}>
         <option value="1">id</option>
         <option value="2">названию</option>
       </select>
+      <button onClick={() => setCreateModalActive(true)}>Создать регион</button>
       {loading && <>Загрузка</>}
       {sortRegionsList.map((region) => (
         <RowItem key={region.id}>
+          <img src={region.image} style={{minHeight:10, maxHeight:70, minWidth:10, maxWidth:70}}/>
           {region.id} {region.name}
         </RowItem>
       ))}
