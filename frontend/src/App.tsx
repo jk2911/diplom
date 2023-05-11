@@ -13,8 +13,8 @@ function App() {
     <Routes>
       <Route path="/" element={<MainPage />} />
       <Route path="/about" element={<AboutPage />} />
-      <Route path="/admin" element={<AdminPage />} />
-      <Route path="/region" element={<RegionPage />} />
+      <Route path="/admin/*" element={<AdminPage />} />
+      <Route path="/admin/region" element={<RegionPage />} />
     </Routes>
   );
 }

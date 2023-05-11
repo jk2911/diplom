@@ -1,7 +1,7 @@
 import { Row } from "react-bootstrap";
 import { useAllRegions } from "../../hooks/region";
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import { useState, useEffect, FC } from "react";
 import { useImmer } from "use-immer";
 import { IRegion } from "../../entity/Region";
 import { Modal } from "../../modal/Modal";
@@ -35,7 +35,7 @@ export function AllRegions() {
   }
 
   const toRegion = (id: number) => {
-    window.location.assign("/region?id=" + id);
+    window.location.assign("/admin/region?id=" + id);
   };
 
   return (
