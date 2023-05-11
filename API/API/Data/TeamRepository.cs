@@ -31,6 +31,19 @@ namespace API.Data
             return await _context.Team.ToListAsync();
         }
 
+        public async Task<IEnumerable<Team>> GetChampionshipTeams(int championshipId)
+        {
+            var teams = new List<Team>();
+
+            foreach(var item in await _context.ChampTeams.ToListAsync())
+            {
+                if (item.ChampionshipId == championshipId)
+                    teams.Add(item.Team);
+            }
+
+            return teams;
+        }
+
         public async Task<IEnumerable<Team>> GetRegionalTeams(int regionId)
         {
             return await _context.Team.

@@ -116,5 +116,11 @@ namespace API.Controllers
         public async Task<Championship> GetChampioship(int id) {
             return await _unitOfWork.Championship.Get(id);
         }
+
+        [HttpGet("GetChampionshipTeams")]
+        public async Task<IEnumerable<Team>> GetChampionshipTeams(int id)
+        {
+            return await _unitOfWork.Team.GetChampionshipTeams(id);
+        }
     }
 }

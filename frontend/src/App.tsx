@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { MainPage } from "./pages/Main";
 import { AboutPage } from "./pages/About";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -14,10 +14,13 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<MainPage />} />
-      <Route path="/about" element={<AboutPage />} />
+
+      <Route path="/admin" element={<Navigate to="/admin/regions" replace />} />
       <Route path="/admin/*" element={<AdminPage />} />
-      <Route path="/admin/region" element={<RegionPage />} />
-      <Route path="/admin/championship" element={<ChampionshipPage />} />
+      <Route path="/admin/region/*" element={<RegionPage />} />
+
+      {/* <Route path="/admin/region/*" element={<Navigate to="/admin/region/championships" replace />} /> */}
+      <Route path="/admin/championship/*" element={<ChampionshipPage />} />
       <Route path="/admin/team" element={<TeamPage />} />
     </Routes>
   );

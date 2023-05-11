@@ -1,7 +1,11 @@
-import { useSearchParams } from "react-router-dom";
+import { Link, Route, Routes, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import { useChampionship } from "../../hooks/championship";
 import { useRegion } from "../../hooks/region";
+import { NavBar } from "../../components/Bar/NavBar";
+import { RegionalChampionships } from "../RegionPage/Championships";
+import { RegionalTeams } from "../RegionPage/Teams";
+import { ChampionshipTeams } from "./ChampionshipTeams";
 
 export function ChampionshipPage() {
   const [params, setParams] = useSearchParams();
@@ -15,7 +19,26 @@ export function ChampionshipPage() {
       <Content>
         {championship && (
           <>
-            {championship.id} {championship.name}
+            {championship.id} {championship.name} {championship.region.name}
+            <NavBar>
+              <TabElement>
+                <Link to={"teams?id=" + championship.id}>Команды</Link>
+              </TabElement>
+              <TabElement>
+                <Link to={"team2s?id=" + championship.id}>Команд2ы</Link>
+              </TabElement>
+            </NavBar>
+            <Routes>
+              <Route
+                path="/teams"
+                element={<ChampionshipTeams championshipId={championship.id} />}
+              />
+
+              <Route
+                path={"teamsa?id=" + championship.id}
+                element={<ChampionshipTeams championshipId={championship.id} />}
+              />
+            </Routes>
           </>
         )}
       </Content>
@@ -49,4 +72,18 @@ const Content = styled.div`
   width: 1600px;
   height: 850px;
   //box-shadow: 2px 5px 25px -3px ${(props) => props.theme.textShadow};
+`;
+
+const TabElement = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  padding: 9px 20px;
+  font-size: 18px;
+  /* box-shadow: 2px 5px 25px -3px ${(props) => props.theme.textShadow}; */
+  border-radius: 10px;
+  /* background-color: ${(props) => props.theme.tabsBackColor};
+  color: ${(props) => props.theme.paginationButtonColor}; */
+  cursor: pointer;
 `;

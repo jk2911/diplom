@@ -46,7 +46,7 @@ export function AllChampionships() {
   }
 
   const toChampionship = (id: number) => {
-    window.location.assign("/admin/championship?id=" + id);
+    window.location.assign("/admin/championship/teams?id=" + id);
   };
 
   return (

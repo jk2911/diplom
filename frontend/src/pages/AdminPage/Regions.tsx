@@ -35,7 +35,7 @@ export function AllRegions() {
   }
 
   const toRegion = (id: number) => {
-    window.location.assign("/admin/region?id=" + id);
+    window.location.assign("/admin/region/championships?id=" + id);
   };
 
   return (

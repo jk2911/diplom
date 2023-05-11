@@ -7,5 +7,6 @@ namespace API.Interfaces
         Task<Team?> GetTeamByName(string name);
         Task<Team?> GetTeamInRegionByName(string name, Region region);
         Task<IEnumerable<Team>> GetRegionalTeams(int regionId);
+        Task<IEnumerable<Team>> GetChampionshipTeams(int championshipId);
     }
 }

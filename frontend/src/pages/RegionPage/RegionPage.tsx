@@ -31,7 +31,9 @@ export function RegionPage() {
             {region.name}
             <NavBar>
               <TabElement>
-                <Link to="championships">Чемпионаты</Link>
+                <Link to={"championships?id=" + region.id + ""}>
+                  Чемпионаты
+                </Link>
               </TabElement>
               <TabElement>
                 <Link to="teams">Команды</Link>
@@ -39,8 +41,14 @@ export function RegionPage() {
             </NavBar>
 
             <Routes>
-              <Route path="/championships" element={<RegionalChampionships regionId={region.id}/>}/>
-              <Route path="/teams" element={<RegionalTeams regionId={region.id} />} />
+              <Route
+                path="/championships"
+                element={<RegionalChampionships regionId={region.id} />}
+              />
+              <Route
+                path="/teams"
+                element={<RegionalTeams regionId={region.id} />}
+              />
             </Routes>
           </>
         )}
