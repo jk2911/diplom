@@ -9,5 +9,6 @@ namespace API.Interfaces
         void AddTeamInChampionship(int championshipId, int teamId);
         Task<IEnumerable<Championship>> GetChampionshipsTodaysMatchesByRegion(int regionId);
         Task<Championship?> GetChampionshipInRegionByName(string name, Region region);
+        Task<IEnumerable<Championship>> GetRegionalChampionships(int regionId);
     }
 }

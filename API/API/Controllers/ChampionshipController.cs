@@ -106,5 +106,10 @@ namespace API.Controllers
 
             return BadRequest("Не удалось создать");
         }
+        [HttpGet("GetRegionalChampionships")]
+        public async Task<IEnumerable<Championship>> GetRegionalChampionships(int regionId)
+        {
+            return await _unitOfWork.Championship.GetRegionalChampionships(regionId);
+        }
     }
 }

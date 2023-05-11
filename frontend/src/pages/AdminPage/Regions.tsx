@@ -34,13 +34,14 @@ export function AllRegions() {
     setSortRegions(buffer);
   }
 
+  const toRegion = (id: number) => {
+    window.location.assign("/region?id=" + id);
+  };
+
   return (
     <>
-      <Modal
-        active={createModalActive}
-        setActive={setCreateModalActive}
-      >
-        <CreateRegion/>
+      <Modal active={createModalActive} setActive={setCreateModalActive}>
+        <CreateRegion />
       </Modal>
       <select onChange={(e) => sortRegions(e.target.value)}>
         <option value="1">id</option>
@@ -49,8 +50,11 @@ export function AllRegions() {
       <button onClick={() => setCreateModalActive(true)}>Создать регион</button>
       {loading && <>Загрузка</>}
       {sortRegionsList.map((region) => (
-        <RowItem key={region.id}>
-          <img src={region.image} style={{minHeight:10, maxHeight:70, minWidth:10, maxWidth:70}}/>
+        <RowItem key={region.id} onClick={() => toRegion(region.id)}>
+          <img
+            src={region.image}
+            style={{ minHeight: 10, maxHeight: 70, minWidth: 10, maxWidth: 70 }}
+          />
           {region.id} {region.name}
         </RowItem>
       ))}

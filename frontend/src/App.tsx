@@ -6,6 +6,7 @@ import { MainPage } from "./pages/Main";
 import { AboutPage } from "./pages/About";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AdminPage } from "./pages/AdminPage/AdminPage";
+import { RegionPage } from "./pages/RegionPage/RegionPage";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/" element={<MainPage />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/admin" element={<AdminPage />} />
+      <Route path="/region" element={<RegionPage />} />
     </Routes>
   );
 }

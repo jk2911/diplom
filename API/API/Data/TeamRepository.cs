@@ -31,6 +31,13 @@ namespace API.Data
             return await _context.Team.ToListAsync();
         }
 
+        public async Task<IEnumerable<Team>> GetRegionalTeams(int regionId)
+        {
+            return await _context.Team.
+                Where(t => t.RegionId == regionId).
+                ToListAsync();
+        }
+
         public async Task<Team?> GetTeamByName(string name)
         {
             return await _context.Team.FirstOrDefaultAsync(x => x.Name == name);

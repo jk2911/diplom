@@ -67,5 +67,11 @@ namespace API.Controllers
 
             return BadRequest("Не удалось создать регион");
         }
+
+        [HttpGet("GetRegion")]
+        public async Task<Region> GetRegion(int id)
+        {
+            return await _unitOfWork.Region.Get(id);
+        }
     }
 }

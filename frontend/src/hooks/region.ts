@@ -29,7 +29,7 @@ export function useRegionsUpcomingMatches() {
   return { regions, error, loading };
 }
 
-export function useAllRegions(){
+export function useAllRegions() {
   const [regions, setRegions] = useState<IRegion[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -53,4 +53,30 @@ export function useAllRegions(){
     fetchRegions();
   }, []);
   return { regions, error, loading };
+}
+
+export function useRegion(id: number) {
+  const [region, setRegion] = useState<IRegion>();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  async function fetchRegions() {
+    try {
+      setLoading(true);
+      const response = await axios.get<IRegion>(
+        "https://localhost:7167/api/Region/GetRegion?id=" + id
+      );
+      setRegion(response.data);
+      setLoading(false);
+    } catch (e: unknown) {
+      const error = e as AxiosError;
+      setLoading(false);
+      setError(error.message);
+    }
+  }
+
+  useEffect(() => {
+    fetchRegions();
+  }, []);
+  return { region, error, loading };
 }

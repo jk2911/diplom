@@ -29,3 +29,30 @@ export function useAllChampionships() {
   }, []);
   return { championships, error, loading };
 }
+
+export function useRegionalChampionship(regionId: number) {
+  const [championships, setChampionships] = useState<IChampionship[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  async function fetchChampionship() {
+    try {
+      setLoading(true);
+      const response = await axios.get<IChampionship[]>(
+        "https://localhost:7167/api/Championship/GetRegionalChampionships?regionId=" +
+          regionId
+      );
+      setChampionships(response.data);
+      setLoading(false);
+    } catch (e: unknown) {
+      const error = e as AxiosError;
+      setLoading(false);
+      setError(error.message);
+    }
+  }
+
+  useEffect(() => {
+    fetchChampionship();
+  }, []);
+  return { championships, error, loading };
+}

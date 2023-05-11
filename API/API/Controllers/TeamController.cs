@@ -95,5 +95,11 @@ namespace API.Controllers
 
             return BadRequest("Не удалось создать");
         }
+
+        [HttpGet("GetRegionalTeams")]
+        public async Task<IEnumerable<Team>> GetRegionalTeams(int regionId)
+        {
+            return await _unitOfWork.Team.GetRegionalTeams(regionId);
+        }
     }
 }
