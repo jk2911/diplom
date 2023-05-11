@@ -40,7 +40,8 @@ namespace API.Data
 
         public async Task<Team?> GetTeamByName(string name)
         {
-            return await _context.Team.FirstOrDefaultAsync(x => x.Name == name);
+            return await _context.Team.
+                FirstOrDefaultAsync(x => x.Name == name);
         }
 
         public async Task<Team?> GetTeamInRegionByName(string name, Region region)

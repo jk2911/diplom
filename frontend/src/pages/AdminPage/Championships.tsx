@@ -44,6 +44,11 @@ export function AllChampionships() {
 
     setSortChampionships(buffer);
   }
+
+  const toChampionship = (id: number) => {
+    window.location.assign("/admin/championship?id=" + id);
+  };
+
   return (
     <>
       <Modal active={createModalActive} setActive={setCreateModalActive}>
@@ -59,8 +64,11 @@ export function AllChampionships() {
       </button>
       {loading && <>Загрузка епта</>}
       {sortChampionshipsList.map((ch) => (
-        <RowItem key={ch.id}>
-          <img src={ch.image} style={{minHeight:10, maxHeight:70, minWidth:10, maxWidth:70}}/>
+        <RowItem key={ch.id} onClick={() => toChampionship(ch.id)}>
+          <img
+            src={ch.image}
+            style={{ minHeight: 10, maxHeight: 70, minWidth: 10, maxWidth: 70 }}
+          />
           {ch.id} {ch.name} {ch.region.name}
         </RowItem>
       ))}

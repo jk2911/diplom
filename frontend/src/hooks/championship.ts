@@ -56,3 +56,29 @@ export function useRegionalChampionship(regionId: number) {
   }, []);
   return { championships, error, loading };
 }
+
+export function useChampionship(id: number) {
+  const [championship, setChampionship] = useState<IChampionship>();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  async function fetchChampionship() {
+    try {
+      setLoading(true);
+      const response = await axios.get<IChampionship>(
+        "https://localhost:7167/api/Championship/GetChampionship?id=" + id
+      );
+      setChampionship(response.data);
+      setLoading(false);
+    } catch (e: unknown) {
+      const error = e as AxiosError;
+      setLoading(false);
+      setError(error.message);
+    }
+  }
+
+  useEffect(() => {
+    fetchChampionship();
+  }, []);
+  return { championship, error, loading };
+}

@@ -111,5 +111,10 @@ namespace API.Controllers
         {
             return await _unitOfWork.Championship.GetRegionalChampionships(regionId);
         }
+
+        [HttpGet("GetChampionship")]
+        public async Task<Championship> GetChampioship(int id) {
+            return await _unitOfWork.Championship.Get(id);
+        }
     }
 }

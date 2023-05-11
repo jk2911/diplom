@@ -78,7 +78,7 @@ namespace API.Controllers
                 return BadRequest("Такая команда уже существует в регионе");
 
 
-            var pathImage = image == null ? "" :
+            var pathImage = image == null ? null :
                 _photoService.AddPhoto(Request, "images/teams/" + image.FileName, image);
 
             var team = new Team
@@ -100,6 +100,12 @@ namespace API.Controllers
         public async Task<IEnumerable<Team>> GetRegionalTeams(int regionId)
         {
             return await _unitOfWork.Team.GetRegionalTeams(regionId);
+        }
+
+        [HttpGet("GetTeam")]
+        public async Task<Team> GetTeam(int id)
+        {
+            return await _unitOfWork.Team.Get(id);
         }
     }
 }

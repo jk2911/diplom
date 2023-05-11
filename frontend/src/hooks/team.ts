@@ -53,3 +53,29 @@ export function useRegionalTeams(regionId: number) {
   }, []);
   return { teams, error, loading };
 }
+
+export function useTeam(id: number) {
+  const [team, setTeam] = useState<ITeam>();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  async function fetchTeam() {
+    try {
+      setLoading(true);
+      const response = await axios.get<ITeam>(
+        "https://localhost:7167/api/Team/GetTeam?id=" + id
+      );
+      setTeam(response.data);
+      setLoading(false);
+    } catch (e: unknown) {
+      const error = e as AxiosError;
+      setLoading(false);
+      setError(error.message);
+    }
+  }
+
+  useEffect(() => {
+    fetchTeam();
+  }, []);
+  return { team, error, loading };
+}
