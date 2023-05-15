@@ -8,5 +8,7 @@ export interface IMatch{
     home:ITeam,
     awayId:number,
     away:ITeam,
+    homeGoal:number;
+    awayGoal:number;
     bets:IBet[]
 }

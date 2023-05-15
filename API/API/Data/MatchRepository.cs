@@ -32,6 +32,22 @@ namespace API.Data
             return await _context.Match.ToListAsync();
         }
 
+        public async Task<IEnumerable<Match>> GetCalendarOfChampionshipsMatches(int championshipId)
+        {
+            return await _context.Match.
+                Where(m => m.ChampionshipId== championshipId && m.HomeGoal == null).
+                OrderBy(m=>m.DateTime).
+                ToListAsync();
+        }
+
+        public async Task<IEnumerable<Match>> GetChampionshipMatchResults(int championshipId)
+        {
+            return await _context.Match.
+                Where(m => m.ChampionshipId == championshipId && m.HomeGoal != null).
+                OrderBy(m => m.DateTime).
+                ToListAsync();
+        }
+
         public async Task<IEnumerable<Match>> GetUpcomingMatches()
         {
             var date = new DateTime();

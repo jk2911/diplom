@@ -6,6 +6,8 @@ import { NavBar } from "../../components/Bar/NavBar";
 import { RegionalChampionships } from "../RegionPage/Championships";
 import { RegionalTeams } from "../RegionPage/Teams";
 import { ChampionshipTeams } from "./ChampionshipTeams";
+import { MatchCalendar } from "./MatchCalendar";
+import { ResultsMatch } from "./ResultsMatch";
 
 export function ChampionshipPage() {
   const [params, setParams] = useSearchParams();
@@ -25,7 +27,10 @@ export function ChampionshipPage() {
                 <Link to={"teams?id=" + championship.id}>Команды</Link>
               </TabElement>
               <TabElement>
-                <Link to={"team2s?id=" + championship.id}>Команд2ы</Link>
+                <Link to={"calendar?id=" + championship.id}>Календарь</Link>
+              </TabElement>
+              <TabElement>
+                <Link to={"results?id=" + championship.id}>Результаты</Link>
               </TabElement>
             </NavBar>
             <Routes>
@@ -35,8 +40,12 @@ export function ChampionshipPage() {
               />
 
               <Route
-                path={"teamsa?id=" + championship.id}
-                element={<ChampionshipTeams championshipId={championship.id} />}
+                path="/calendar"
+                element={<MatchCalendar id={championship.id} />}
+              />
+              <Route
+                path="/results"
+                element={<ResultsMatch id={championship.id} />}
               />
             </Routes>
           </>

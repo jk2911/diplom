@@ -5,7 +5,6 @@ import { AllUsers } from "./Users";
 import { AllTeams } from "./Teams";
 import { AllChampionships } from "./Championships";
 import { Route, Routes } from "react-router";
-import { Region } from "../../components/championshipSortedByRegions";
 import { Link } from "react-router-dom";
 
 export function AdminPage() {

@@ -18,6 +18,7 @@ namespace API.Data
         public virtual DbSet<MatchStatistic> MatchStatistic { get; set; }
         public virtual DbSet<BetValue> BetValue { get; set; }
         public virtual DbSet<UserBet> UserBets { get; set; }
+        public virtual DbSet<HistoryBankAccount> HistoryBankAccounts { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
@@ -75,7 +76,8 @@ namespace API.Data
             Region region = new Region
             {
                 Name = "Испания",
-                isPopular = true
+                isPopular = true,
+                Image = "https://localhost:7167/images/regions/spain.png"
             };
 
             Region.Add(region);
@@ -85,7 +87,8 @@ namespace API.Data
             {
                 Name = "Ла лига",
                 Region = region,
-                IsPopular = true
+                IsPopular = true, 
+                Image = "https://localhost:7167/images/championships/Laliga.jpg"
             };
 
             Championship.Add(championship);
@@ -94,12 +97,14 @@ namespace API.Data
             {
                 Region = region,
                 Name = "Барселона",
+                Image = "https://localhost:7167/images/teams/Barcelona-logo-2048x1152.jpg"
             };
 
             Team team1 = new Team
             {
                 Region = region,
                 Name = "Реал Мадрид",
+                Image = "https://localhost:7167/images/teams/RealMadrid.jpg"
             };
 
             Team.Add(team);
@@ -217,6 +222,21 @@ namespace API.Data
 
             BetValue.Add(betValue);
             SaveChangesAsync().Wait();
+
+            match = new Match
+            {
+                Home = team,
+                Away = team1,
+                HomeGoal = 1,
+                AwayGoal = 0,
+                Championship = championship,
+                DateTime = DateTime.Now
+            };
+
+            Match.Add(match);
+            SaveChangesAsync().Wait();
+
+            //
 
             championship = new Championship
             {
