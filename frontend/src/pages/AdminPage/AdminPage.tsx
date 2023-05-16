@@ -6,13 +6,22 @@ import { AllTeams } from "./Teams";
 import { AllChampionships } from "./Championships";
 import { Route, Routes } from "react-router";
 import { Link } from "react-router-dom";
+import { useTypesSelector } from "../../hooks/useTypedSelector";
+import { useSelector } from "react-redux";
 
 export function AdminPage() {
-  // const suka = (eventKey:any)=>
+  const {user, error, loading} = useTypesSelector((state) => state.user);
+
+  const a = useSelector(state=>state);
+
+  console.log(a);
 
   return (
     <Container>
       <Content>
+      {user && <>
+        {user.token}   {user.email}  {user.role}
+      </>}
       <TabsContainer>
         <TabElement>
           <Link to="regions">Регионы</Link>

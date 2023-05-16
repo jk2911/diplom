@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { MainPage } from "./pages/MainPage/Main";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AdminPage } from "./pages/AdminPage/AdminPage";
@@ -12,7 +12,7 @@ import { Header } from "./components/Header/Header";
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <Header />
       <Routes>
         <Route path="/" element={<MainPage />} />
@@ -28,7 +28,7 @@ function App() {
         <Route path="/admin/championship/*" element={<ChampionshipPage />} />
         <Route path="/admin/team/*" element={<TeamPage />} />
       </Routes>
-    </>
+    </BrowserRouter>
   );
 }
 

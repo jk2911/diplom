@@ -1,6 +1,9 @@
 import { Col, Container, Row } from "react-bootstrap";
 import { useRegionsUpcomingMatches } from "../../hooks/region";
 import { useEffect } from "react";
+import { useTypesSelector } from "../../hooks/useTypedSelector";
+import { useDispatch } from "react-redux";
+import { fetchUsers } from "../../store/action-creators/user";
 
 interface Props {
   championship: number;
@@ -13,6 +16,15 @@ export function RegionsUpcomingMatches({
 }: Props) {
   const { regions, error, loading } = useRegionsUpcomingMatches();
 
+  const {user, error:r, loading:l} = useTypesSelector((state) => state.user);
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    dispatch(fetchUsers("333", "333"))
+  },[])
+
+  console.log(user);
+
   return (
     <Row>
       {regions.map((region) => (
@@ -20,7 +32,7 @@ export function RegionsUpcomingMatches({
           <details>
             <summary>{region.region}</summary>
             {region.championships.map((ch) => (
-              <div onClick={() => setChampionship(ch.id)}>{ch.name}</div>
+              <div key={ch.id} onClick={() => setChampionship(ch.id)}>{ch.name}</div>
             ))}
           </details>
         </Container>
