@@ -223,6 +223,39 @@ namespace API.Data
             BetValue.Add(betValue);
             SaveChangesAsync().Wait();
 
+            //Тотал 2.5
+
+            bet = new Bet
+            {
+                Name = "Тотал",
+                Match = match
+            };
+
+            Bet.Add(bet);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "Больше 2.5",
+                Value = 2.1f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "Меньше 2.5",
+                Value = 1.11f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+         ///
+
             match = new Match
             {
                 Home = team,
@@ -478,6 +511,37 @@ namespace API.Data
             {
                 Name = "X",
                 Value = 1.6f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            ///
+
+            bet = new Bet
+            {
+                Name = "Тотал",
+                Match = match
+            };
+
+            Bet.Add(bet);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "Больше 2.5",
+                Value = 2.1f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "Меньше 2.5",
+                Value = 1.11f,
                 Bet = bet
             };
 
@@ -771,6 +835,37 @@ namespace API.Data
             BetValue.Add(betValue);
             SaveChangesAsync().Wait();
 
+            //
+
+            bet = new Bet
+            {
+                Name = "Тотал",
+                Match = match
+            };
+
+            Bet.Add(bet);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "Больше 2.5",
+                Value = 2.1f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "Меньше 2.5",
+                Value = 1.11f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
             /////
 
             bet = new Bet
@@ -1052,6 +1147,37 @@ namespace API.Data
             {
                 Name = "X",
                 Value = 1.6f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            //
+
+            bet = new Bet
+            {
+                Name = "Тотал",
+                Match = match
+            };
+
+            Bet.Add(bet);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "Больше 2.5",
+                Value = 2.1f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "Меньше 2.5",
+                Value = 1.11f,
                 Bet = bet
             };
 
@@ -1344,6 +1470,36 @@ namespace API.Data
             BetValue.Add(betValue);
             SaveChangesAsync().Wait();
 
+            //
+
+            bet = new Bet
+            {
+                Name = "Тотал",
+                Match = match
+            };
+
+            Bet.Add(bet);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "Больше 2.5",
+                Value = 2.1f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
+
+            betValue = new BetValue
+            {
+                Name = "Меньше 2.5",
+                Value = 1.11f,
+                Bet = bet
+            };
+
+            BetValue.Add(betValue);
+            SaveChangesAsync().Wait();
             /////
 
             bet = new Bet

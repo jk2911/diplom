@@ -82,7 +82,7 @@ namespace API.Data
             var championships = new List<Championship>();
 
             var championshipsId = await _context.Match.
-                Where(x => x.DateTime.Date == date.Date).
+                Where(x => x.DateTime.Date == date.Date && x.HomeGoal == null).
                 Select(x => x.ChampionshipId).
                 Distinct().
                 ToListAsync();
