@@ -1,9 +1,10 @@
-﻿namespace API.DTOs
+﻿using API.Entities;
+
+namespace API.DTOs
 {
     public class UpcomingMatchesDTO
     {
-        public int Id { get; set; }
-        public string Region { get; set; }
-        public IEnumerable<ChampionshipDTO> Championships { get; set; } = new List<ChampionshipDTO>();
+        public ChampionshipDTO Championship { get; set; }
+        public IEnumerable<Match> Matches { get; set; } = new List<Match>();
     }
 }

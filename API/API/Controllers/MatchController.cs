@@ -18,12 +18,13 @@ namespace API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("UpcomingMatches")]
-        public async Task<IEnumerable<UpcomingMatchesDTO>> GetUpComingMatches()
+        [HttpGet("GetUpcomingMatches")]
+        public async Task<IEnumerable<UpcomingMatchesDTO>> GetUpcomingMatches()
         {
-            var regions = await _unitOfWork.Region.GetRegionsTodaysMatches();
+            var matches = await _unitOfWork.Match.
+                GetUpcomingMatchesSortedByChampionships();
 
-            return _mapper.Map<IEnumerable<UpcomingMatchesDTO>>(regions);
+            return _mapper.Map<IEnumerable<UpcomingMatchesDTO>>(matches);
         }
 
         [HttpGet("GetCalendarOfChampionshipMatches")]

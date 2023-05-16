@@ -30,7 +30,7 @@ namespace API.Controllers
         [HttpGet("GetRegionsUpcomingMatches")]
         public async Task<IEnumerable<RegionsUpcomingMatchesDTO>> GetRegionsUpcomingMatches()
         {
-            var regions = await _unitOfWork.Region.GetRegionsTodaysMatches();
+            var regions = await _unitOfWork.Region.GetRegionsUpcomingMatches();
 
             return _mapper.Map<IEnumerable<RegionsUpcomingMatchesDTO>>(regions);
         }

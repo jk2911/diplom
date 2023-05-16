@@ -23,8 +23,9 @@ namespace API.Helpers
 
             CreateMap<Match, MatchDTO>();
 
-            CreateMap<Region, UpcomingMatchesDTO>().
-                ForMember(x=>x.Region, opt=>opt.MapFrom(x=>x.Name));
+            CreateMap<Championship, UpcomingMatchesDTO>().
+                ForMember(x => x.Championship, opt => opt.MapFrom(x => x));
+
             CreateMap<Region, RegionsUpcomingMatchesDTO>().
                 ForMember(x=>x.Region, opt=>opt.MapFrom(x=>x.Name));
         }

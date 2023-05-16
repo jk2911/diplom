@@ -74,7 +74,7 @@ namespace API.Data
 #pragma warning restore CS8603 // Возможно, возврат ссылки, допускающей значение NULL.
         }
 
-        public async Task<IEnumerable<Region>> GetRegionsTodaysMatches()
+        public async Task<IEnumerable<Region>> GetRegionsUpcomingMatches()
         {
             var date = DateTime.Now;
 

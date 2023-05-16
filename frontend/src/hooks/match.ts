@@ -4,8 +4,8 @@ import { IRegion } from "../entity/Region";
 import { IUpcomingMatches } from "../entity/UpcomingMatches";
 import { IMatch } from "../entity/Match";
 
-export function useUpcomingMatchesSortedByRegion() {
-  const [regions, setRegions] = useState<IUpcomingMatches[]>([]);
+export function useUpcomingMatchesSortedByChampionships() {
+  const [championships, setChampionships] = useState<IUpcomingMatches[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -13,9 +13,9 @@ export function useUpcomingMatchesSortedByRegion() {
     try {
       setLoading(true);
       const response = await axios.get<IUpcomingMatches[]>(
-        "https://localhost:7167/api/Match/UpcomingMatches"
+        "https://localhost:7167/api/Match/GetUpcomingMatches"
       );
-      setRegions(response.data);
+      setChampionships(response.data);
       setLoading(false);
     } catch (e: unknown) {
       const error = e as AxiosError;
@@ -27,7 +27,7 @@ export function useUpcomingMatchesSortedByRegion() {
   useEffect(() => {
     fetchRegions();
   }, []);
-  return { regions, error, loading };
+  return { championships, error, loading };
 }
 
 export function useCalendarOfChampionshipMatches(championshipId: number) {

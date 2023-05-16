@@ -1,4 +1,5 @@
-﻿using API.Entities;
+﻿using API.DTOs;
+using API.Entities;
 
 namespace API.Interfaces
 {
@@ -9,5 +10,6 @@ namespace API.Interfaces
         Task<IEnumerable<Match>> GetChampionshipMatchResults(int championshipId);
         Task<IEnumerable<Match>> GetCalendarOfTeamsMatches(int teamId);
         Task<IEnumerable<Match>> GetTeamsMatchResults(int teamId);
+        Task<IEnumerable<Championship>> GetUpcomingMatchesSortedByChampionships();
     }
 }

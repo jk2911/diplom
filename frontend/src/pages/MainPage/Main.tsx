@@ -1,22 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { RegionsUpcomingMatches } from "../../components/Main/regions upcoming matches";
 import { UpcomingMatchesSortedByRegion } from "../../components/Main/upcoming matches sorted by regions";
 import styled from "styled-components";
 
 export function MainPage() {
+  const [championship, setChampionship] = useState(0);
+
   return (
     <Container>
       <Content>
         <Row>
-          <Col sm={3}>
-            <RegionsUpcomingMatches />
+          <Col sm={2}>
+            <RegionsUpcomingMatches championship={championship} setChampionship={setChampionship} />
           </Col>
-          <Col>
+          <Col sm={7}>
             <Row>
-              <UpcomingMatchesSortedByRegion />
+              <UpcomingMatchesSortedByRegion championship={championship} setChampionship={setChampionship} />
             </Row>
           </Col>
+          <Col sm={3}></Col>
         </Row>
       </Content>
     </Container>

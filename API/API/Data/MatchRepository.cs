@@ -1,4 +1,5 @@
-﻿using API.Entities;
+﻿using API.DTOs;
+using API.Entities;
 using API.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -71,6 +72,30 @@ namespace API.Data
             return await _context.Match.
                 Where(x=>x.DateTime.Date==date.Date).
                 ToListAsync();
+        }
+
+        public async Task<IEnumerable<Championship>> GetUpcomingMatchesSortedByChampionships()
+        {
+            var upcomingMatches = new List<Championship>();
+            var date = DateTime.Now;
+
+            var matches = await _context.Match.
+                Where(m => m.DateTime.Date == date.Date && m.HomeGoal == null).
+                ToListAsync();
+
+            var championshipId = matches.
+                Select(c => c.ChampionshipId).
+                Distinct();
+
+            foreach(int i in championshipId)
+            {
+                var championship = _context.Championship.Find(i);
+                championship.Matches = matches.
+                    Where(m => m.ChampionshipId == i).ToList();
+                upcomingMatches.Add(championship);
+            }
+
+            return upcomingMatches;    
         }
 
         public void Update(Match item)
