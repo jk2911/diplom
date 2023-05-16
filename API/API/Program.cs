@@ -64,7 +64,12 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles("/images");
 
-app.UseCors(builder => builder.AllowAnyOrigin());
+//app.UseCors(builder => builder.AllowAnyOrigin());
+
+app.UseCors(options => options.WithOrigins("http://localhost:3000")//AllowAnyOrigin()
+.WithMethods("POST", "GET", "DELETE", "PROPFIND", "PROPPATCH", "COPY", "MOVE", "DELETE", "MKCOL", "LOCK", "UNLOCK", "PUT", "GETLIB", "VERSION-CONTROL", "CHECKIN", "CHECKOUT", "UNCHECKOUT", "REPORT", "UPDATE", "CANCELUPLOAD", "HEAD", "OPTIONS", "FETCH", "POST")
+.AllowAnyHeader()
+.AllowCredentials());
 
 app.MapControllers();
 

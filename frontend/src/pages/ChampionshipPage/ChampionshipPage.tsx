@@ -8,9 +8,13 @@ import { RegionalTeams } from "../RegionPage/Teams";
 import { ChampionshipTeams } from "./ChampionshipTeams";
 import { MatchCalendar } from "./MatchCalendar";
 import { ResultsMatch } from "./ResultsMatch";
+import { useState } from "react";
+import { Modal } from "../../modal/Modal";
+import { DeleteChampionship } from "../../components/Admin/Championship/DeleteChampionship";
 
 export function ChampionshipPage() {
   const [params, setParams] = useSearchParams();
+  const [deleteModalChampionship, setDeleteModalChampionship] = useState(false);
 
   const id = params.get("id");
 
@@ -21,7 +25,25 @@ export function ChampionshipPage() {
       <Content>
         {championship && (
           <>
+            <Modal
+              active={deleteModalChampionship}
+              setActive={setDeleteModalChampionship}
+            >
+              <DeleteChampionship championship={championship} />
+            </Modal>
             {championship.id} {championship.name} {championship.region.name}
+            <button onClick={() => setDeleteModalChampionship(true)}>
+              Удалить чемпионат
+            </button>
+            <img
+              src={championship.image}
+              style={{
+                minHeight: 10,
+                maxHeight: 70,
+                minWidth: 10,
+                maxWidth: 70,
+              }}
+            />
             <NavBar>
               <TabElement>
                 <Link to={"teams?id=" + championship.id}>Команды</Link>

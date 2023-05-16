@@ -1,9 +1,16 @@
-import { useSearchParams } from "react-router-dom";
+import { Link, Route, Routes, useSearchParams } from "react-router-dom";
 import { useTeam } from "../../hooks/team";
 import styled from "styled-components";
+import { NavBar } from "../../components/Bar/NavBar";
+import { MatchCalendar } from "./MatchCalendar";
+import { ResultsMatch } from "./ResultsMatch";
+import { DeleteTeam } from "../../components/Admin/Team/DeleteTeam";
+import { Modal } from "../../modal/Modal";
+import { useState } from "react";
 
 export function TeamPage() {
   const [params, setParams] = useSearchParams();
+  const [ deleteModalTeam, setDeleteModalTeam ] = useState(false);
 
   const id = params.get("id");
 
@@ -11,7 +18,42 @@ export function TeamPage() {
 
   return (
     <Container>
-      <Content>{team && <>{team.id} {team.name}</>}</Content>
+      <Content>
+        {team && (
+          <>
+            <Modal active={deleteModalTeam} setActive={setDeleteModalTeam}>
+              <DeleteTeam team={team} />
+            </Modal>
+            {team.id} {team.name}
+            <button onClick={() => setDeleteModalTeam(true)}>
+              Удалить команду
+            </button>
+            <NavBar>
+              {/* <TabElement>
+            <Link to={"teams?id=" + team.id}>Команды</Link>
+          </TabElement> */}
+              <TabElement>
+                <Link to={"calendar?id=" + team.id}>Календарь</Link>
+              </TabElement>
+              <TabElement>
+                <Link to={"results?id=" + team.id}>Результаты</Link>
+              </TabElement>
+            </NavBar>
+            <Routes>
+              {/* <Route
+            path="/teams"
+            element={<ChampionshipTeams championshipId={championship.id} />}
+          /> */}
+
+              <Route
+                path="/calendar"
+                element={<MatchCalendar id={team.id} />}
+              />
+              <Route path="/results" element={<ResultsMatch id={team.id} />} />
+            </Routes>
+          </>
+        )}
+      </Content>
     </Container>
   );
 }
@@ -41,4 +83,18 @@ const Content = styled.div`
   width: 1600px;
   /* height: 850px; */
   background-color: whitesmoke;
+`;
+
+const TabElement = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  padding: 9px 20px;
+  font-size: 18px;
+  /* box-shadow: 2px 5px 25px -3px ${(props) => props.theme.textShadow}; */
+  border-radius: 10px;
+  /* background-color: ${(props) => props.theme.tabsBackColor};
+  color: ${(props) => props.theme.paginationButtonColor}; */
+  cursor: pointer;
 `;

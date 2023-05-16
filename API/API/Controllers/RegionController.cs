@@ -73,5 +73,21 @@ namespace API.Controllers
         {
             return await _unitOfWork.Region.Get(id);
         }
+
+        [HttpDelete("DeleteRegion")]
+        public async Task<ActionResult> DeleteRegion(int id)
+        {
+            var region = await _unitOfWork.Region.Get(id);
+
+            if (region == null)
+                return BadRequest("Регион не найден");
+
+            _unitOfWork.Region.Delete(region);
+
+            if (await _unitOfWork.Complete())
+                return Ok("Регион удален");
+                
+            return BadRequest("Не удалось удалить регион");
+        }
     }
 }

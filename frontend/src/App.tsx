@@ -20,7 +20,7 @@ function App() {
 
       {/* <Route path="/admin/region/*" element={<Navigate to="/admin/region/championships" replace />} /> */}
       <Route path="/admin/championship/*" element={<ChampionshipPage />} />
-      <Route path="/admin/team" element={<TeamPage />} />
+      <Route path="/admin/team/*" element={<TeamPage />} />
     </Routes>
   );
 }

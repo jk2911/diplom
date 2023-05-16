@@ -122,5 +122,21 @@ namespace API.Controllers
         {
             return await _unitOfWork.Team.GetChampionshipTeams(id);
         }
+
+        [HttpDelete("DeleteChampionship")]
+        public async Task<ActionResult> DeleteChampionship(int id)
+        {
+            var championship = await _unitOfWork.Championship.Get(id);
+
+            if (championship == null)
+                return BadRequest("Чемпионат не найден");
+
+            _unitOfWork.Championship.Delete(championship);
+
+            if (await _unitOfWork.Complete())
+                return Ok("Чемпионат удален");
+
+            return BadRequest("Не удалось удалить чемпионат");
+        }
     }
 }

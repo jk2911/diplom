@@ -40,11 +40,27 @@ namespace API.Data
                 ToListAsync();
         }
 
+        public async Task<IEnumerable<Match>> GetCalendarOfTeamsMatches(int teamId)
+        {
+            return await _context.Match.
+                Where(m => (m.HomeId == teamId || m.AwayId == teamId) && m.HomeGoal == null).
+                OrderBy(m => m.DateTime).
+                ToListAsync();
+        }
+
         public async Task<IEnumerable<Match>> GetChampionshipMatchResults(int championshipId)
         {
             return await _context.Match.
                 Where(m => m.ChampionshipId == championshipId && m.HomeGoal != null).
                 OrderBy(m => m.DateTime).
+                ToListAsync();
+        }
+
+        public async Task<IEnumerable<Match>> GetTeamsMatchResults(int teamId)
+        {
+            return await _context.Match.
+                Where(m => (m.HomeId == teamId || m.AwayId == teamId) && m.HomeGoal != null).
+                OrderByDescending(m => m.DateTime).
                 ToListAsync();
         }
 

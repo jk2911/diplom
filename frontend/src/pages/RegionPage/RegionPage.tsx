@@ -4,9 +4,13 @@ import { RegionalChampionships } from "./Championships";
 import { RegionalTeams } from "./Teams";
 import styled from "styled-components";
 import { NavBar } from "../../components/Bar/NavBar";
+import { useState } from "react";
+import { Modal } from "../../modal/Modal";
+import { DeleteRegion } from "../../components/Admin/Region/DeleteRegion";
 
 export function RegionPage() {
   const [params, setParams] = useSearchParams();
+  const [deleteModalRegion, setDeleteModalRegion] = useState(false);
 
   const id = params.get("id");
 
@@ -19,6 +23,9 @@ export function RegionPage() {
         {loading && <>Загрузка</>}
         {region && (
           <>
+            <Modal active={deleteModalRegion} setActive={setDeleteModalRegion}>
+              <DeleteRegion region={region} />
+            </Modal>
             <img
               src={region.image}
               style={{
@@ -29,6 +36,7 @@ export function RegionPage() {
               }}
             />
             {region.name}
+            <button onClick={() => setDeleteModalRegion(true)}>Удалить</button>
             <NavBar>
               <TabElement>
                 <Link to={"championships?id=" + region.id + ""}>

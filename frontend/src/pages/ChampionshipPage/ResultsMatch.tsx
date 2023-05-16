@@ -23,7 +23,7 @@ function Match(m: IMatch) {
       {m.dateTime.getMonth()} ---
       {m.dateTime.getHours()}:
       {m.dateTime.getMinutes()}
-      {formatDate}
+      
       <img
         src={m.home.image}
         style={{ minHeight: 10, maxHeight: 70, minWidth: 10, maxWidth: 70 }}

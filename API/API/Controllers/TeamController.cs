@@ -107,5 +107,21 @@ namespace API.Controllers
         {
             return await _unitOfWork.Team.Get(id);
         }
+
+        [HttpDelete("DeleteTeam")]
+        public async Task<ActionResult> DeleteTeam(int id)
+        {
+            var team = await _unitOfWork.Team.Get(id);
+
+            if (team == null)
+                return BadRequest("Команда не найден");
+
+            _unitOfWork.Team.Delete(team);
+
+            if (await _unitOfWork.Complete())
+                return Ok("Команда удалена");
+
+            return BadRequest("Не удалось удалить команду");
+        }
     }
 }

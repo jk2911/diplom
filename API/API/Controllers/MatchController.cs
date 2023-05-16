@@ -25,17 +25,33 @@ namespace API.Controllers
 
             return _mapper.Map<IEnumerable<UpcomingMatchesDTO>>(regions);
         }
+
         [HttpGet("GetCalendarOfChampionshipMatches")]
         public async Task<IEnumerable<Match>> GetCalendarOfChampionshipsMatches(int id)
         {
             return await _unitOfWork.Match.
                 GetCalendarOfChampionshipsMatches(id);
         }
+
         [HttpGet("GetChampionshipMatchResults")]
         public async Task<IEnumerable<Match>> GetChampionshipMatchResults(int id)
         {
             return await _unitOfWork.Match.
                 GetChampionshipMatchResults(id);
+        }
+
+        [HttpGet("GetCalendarOfTeamsMatches")]
+        public async Task<IEnumerable<Match>> GetCalendarOfTeamsMatches(int id)
+        {
+            return await _unitOfWork.Match.
+                GetCalendarOfTeamsMatches(id);
+        }
+
+        [HttpGet("GetTeamsMatchResults")]
+        public async Task<IEnumerable<Match>> GetTeamsMatchResults(int id)
+        {
+            return await _unitOfWork.Match.
+                GetTeamsMatchResults(id);
         }
     }
 }

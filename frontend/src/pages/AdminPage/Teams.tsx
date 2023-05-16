@@ -10,7 +10,7 @@ export function AllTeams() {
   const [createModalActive, setCreateModalActive] = useState(false);
 
   const toTeam = (id: number) => {
-    window.location.assign("/admin/team?id=" + id);
+    window.location.assign("/admin/team/calendar?id=" + id);
   };
 
   return (

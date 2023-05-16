@@ -18,6 +18,21 @@ namespace API.Data
 
         public void Delete(Team item)
         {
+            var champTeams = _context.ChampTeams.Where(t => t.TeamId == item.Id);
+
+            var matches = _context.Match.
+                Where(m=>m.HomeId ==item.Id || m.AwayId ==item.Id);
+
+            foreach(var i in champTeams)
+            {
+                _context.ChampTeams.Remove(i);
+            }
+
+            foreach(var i in matches)
+            {
+                _context.Match.Remove(i);
+            }
+
             _context.Team.Remove(item);
         }
 

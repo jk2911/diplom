@@ -59,6 +59,7 @@ const Container = styled.div`
   background-repeat: no-repeat;
   background-position: 50%;
   background-size: cover;
+  /* background-color: rgba(127, 255, 0, 0.9); */
   background-image: url("https://s1.1zoom.ru/big3/335/Footbal_Men_Ball_Legs_493200.jpg");
 `;
 
