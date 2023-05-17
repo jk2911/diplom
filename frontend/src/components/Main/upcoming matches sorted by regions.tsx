@@ -8,6 +8,8 @@ import { match } from "assert";
 import { IMatch } from "../../entity/Match";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
+// import image from "D:/bstu/diplom/frontend/src/assets/main_matches.jpg";
+import image from "../../assets/main_matches.jpg"
 
 interface Props {
   championship: number;
@@ -49,6 +51,7 @@ export function UpcomingMatchesSortedByRegion({
 
   return (
     <Row>
+      <img src={image} style={{minHeight:80,minWidth:40}}/>
       <ButtonCon onClick={() => setChampionship(0)}>Все</ButtonCon>
       <table>
         {selectedChampionships.map((ch) => (
