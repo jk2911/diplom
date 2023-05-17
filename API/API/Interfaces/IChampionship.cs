@@ -10,5 +10,6 @@ namespace API.Interfaces
         Task<IEnumerable<Championship>> GetChampionshipsTodaysMatchesByRegion(int regionId);
         Task<Championship?> GetChampionshipInRegionByName(string name, Region region);
         Task<IEnumerable<Championship>> GetRegionalChampionships(int regionId);
+        void DeleteTeamFromChampionship(int championshipId, int teamId);
     }
 }

@@ -50,6 +50,30 @@ namespace API.Controllers
 
             return BadRequest("Failed to add team in championship");
         }
+        [HttpDelete("DeleteTeam/{championshipId:int}-{teamId:int}")]
+        public async Task<ActionResult> DeleteTeamFromChampionship(int championshipId, int teamId)
+        {
+            var championship = await _unitOfWork.Championship.Get(championshipId);
+
+            if (championship == null)
+                return NotFound("Чемпионат не найден");
+
+            var team = await _unitOfWork.Team.Get(teamId);
+
+            if (team == null) return NotFound("Команда не найдена");
+
+            var teamExists =  await _unitOfWork.Championship.
+                TeamExistsInChampionship(championshipId, teamId);
+
+            if(!teamExists) return BadRequest("Такой команды нет в чемпионате");
+
+            _unitOfWork.Championship.DeleteTeamFromChampionship(championshipId, teamId);
+
+            if (await _unitOfWork.Complete())
+                return Ok("Команда удалена из чемпионата");
+
+            return BadRequest("Ошибка при удалении команды из чемпионата");
+        }
 
         [HttpDelete("DeleteChampionship/{championshipId:int}")]
         public async Task<ActionResult> deleteChampionship(int championshipId)

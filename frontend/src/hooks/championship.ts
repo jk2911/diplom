@@ -97,8 +97,8 @@ export function useChampionshipTeams(id: number) {
       );
       setTeams(response.data);
       setLoading(false);
-      console.log(response.data)
-      console.log(teams)
+      console.log(response.data);
+      console.log(teams);
     } catch (e: unknown) {
       const error = e as AxiosError;
       setLoading(false);
@@ -109,5 +109,5 @@ export function useChampionshipTeams(id: number) {
   useEffect(() => {
     fetchChampionship();
   }, []);
-  return { teams, error, loading };
+  return { teams, error, loading, fetchChampionship };
 }

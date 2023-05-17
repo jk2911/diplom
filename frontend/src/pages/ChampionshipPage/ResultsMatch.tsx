@@ -1,5 +1,7 @@
+import { NormalDate } from "../../components/Main/upcoming matches sorted by regions";
 import { IMatch } from "../../entity/Match";
 import { useChampionshipMatchResults } from "../../hooks/match";
+import image from "../../assets/club.png";
 
 interface Props {
   id: number;
@@ -19,20 +21,17 @@ function Match(m: IMatch) {
 
   return (
     <>
-      {m.dateTime.getDate()}.
-      {m.dateTime.getMonth()} ---
-      {m.dateTime.getHours()}:
-      {m.dateTime.getMinutes()}
-      
+      {NormalDate(m.dateTime.getDate())}.{NormalDate(m.dateTime.getMonth())}{" "}
+      {NormalDate(m.dateTime.getHours())}:{NormalDate(m.dateTime.getMinutes())}
       <img
-        src={m.home.image}
+        src={m.home.image != null ? m.home.image : image}
         style={{ minHeight: 10, maxHeight: 70, minWidth: 10, maxWidth: 70 }}
-      />
-      {m.home.name}
-      {m.homeGoal}-{m.awayGoal}
-      {m.away.name}
+      />{" "}
+      {m.home.name}{" "}
+      {m.homeGoal}{" "}-{" "}{m.awayGoal}{" "}
+      {m.away.name}{" "}
       <img
-        src={m.away.image}
+        src={m.away.image != null ? m.away.image : image}
         style={{ minHeight: 10, maxHeight: 70, minWidth: 10, maxWidth: 70 }}
       />
     </>

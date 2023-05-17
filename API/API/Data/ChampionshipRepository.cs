@@ -21,9 +21,7 @@ namespace API.Data
                 TeamId = teamId
             };
 
-            _context.ChampTeams.Add(champTeams);
-
-            _context.SaveChangesAsync().Wait();
+            _context.ChampTeams.AddAsync(champTeams);
         }
 
         public void Create(Championship item)
@@ -34,6 +32,21 @@ namespace API.Data
         public void Delete(Championship item)
         {
             _context.Championship.Remove(item);
+        }
+
+        public void DeleteTeamFromChampionship(int championshipId, int teamId)
+        {
+            var champTeam = _context.ChampTeams.
+                FirstOrDefault(c=> championshipId == c.ChampionshipId && teamId==c.TeamId);
+
+            _context.ChampTeams.Remove(champTeam);
+
+            var matches = _context.Match.
+                Where(m=>m.ChampionshipId==championshipId && (m.HomeId==teamId || m.AwayId==teamId));
+            foreach (var match in matches)
+            {
+                _context.Match.Remove(match);
+            }
         }
 
         public async Task<Championship> Get(int id)

@@ -1,5 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useCalendarOfChampionshipMatches } from "../../hooks/match";
+import { NormalDate } from "../../components/Main/upcoming matches sorted by regions";
+import { IMatch } from "../../entity/Match";
+import { Match } from "../../components/Admin/Championship/Match";
 
 interface Props {
   id: number;
@@ -17,34 +20,9 @@ export function MatchCalendar({ id }: Props) {
   return (
     <>
       {matches.map((m) => (
-        <div key={m.id} onClick={() => toMatch(m.id)}>
-          <>
-            {m.dateTime.getDate}
-            {m.dateTime.getMonth}
-            <img
-              src={m.home.image}
-              style={{
-                minHeight: 10,
-                maxHeight: 70,
-                minWidth: 10,
-                maxWidth: 70,
-              }}
-            />
-            {m.home.name}
-            {/* {m.homeGoal}-{m.awayGoal} */}
-            {m.away.name}
-            <img
-              src={m.away.image}
-              style={{
-                minHeight: 10,
-                maxHeight: 70,
-                minWidth: 10,
-                maxWidth: 70,
-              }}
-            />
-          </>
-        </div>
+        <Match m={m} key={m.id}/>
       ))}
     </>
   );
 }
+
