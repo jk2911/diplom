@@ -79,3 +79,29 @@ export function useTeam(id: number) {
   }, []);
   return { team, error, loading };
 }
+
+export function useTeamNotInChampionship(id: number) {
+  const [teams, setTeams] = useState<ITeam[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  async function fetchTeams() {
+    try {
+      setLoading(true);
+      const response = await axios.get<ITeam[]>(
+        "https://localhost:7167/api/Team/GetTeamNotInChampionship?id=" + id
+      );
+      setTeams(response.data);
+      setLoading(false);
+    } catch (e: unknown) {
+      const error = e as AxiosError;
+      setLoading(false);
+      setError(error.message);
+    }
+  }
+
+  useEffect(() => {
+    fetchTeams();
+  }, []);
+  return { teams, error, loading };
+}

@@ -10,5 +10,22 @@ export interface IMatch{
     away:ITeam,
     homeGoal:number;
     awayGoal:number;
-    bets:IBet[]
+    bets:IBet[];
+    cornerHome:number;
+    cornerAway:number;
+    shotsHome:number;
+    shotsAway:number;
+    shotsInTargetHome:number;
+    shotsInTargetAway:number;
+    saveHome:number;
+    saveAway:number;
+    possession:number;
+    foulsHome:number;
+    foulsAway:number;
+    offsideHome:number;
+    offsideAway:number;
+    yellowCardHome:number;
+    yellowCardAway:number;
+    redCardHome:number;
+    redCardAway:number;
 }

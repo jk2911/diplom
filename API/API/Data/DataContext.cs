@@ -15,7 +15,6 @@ namespace API.Data
         public virtual DbSet<Bet> Bet { get; set; }
         public virtual DbSet<Region> Region { get; set; }
         public virtual DbSet<Match> Match { get; set; }
-        public virtual DbSet<MatchStatistic> MatchStatistic { get; set; }
         public virtual DbSet<BetValue> BetValue { get; set; }
         public virtual DbSet<UserBet> UserBets { get; set; }
         public virtual DbSet<HistoryBankAccount> HistoryBankAccounts { get; set; }
@@ -56,8 +55,16 @@ namespace API.Data
                 Role = "user"
             };
 
+            User user2 = new User
+            {
+                Email = "555",
+                Password = hash.CreateHash("444"),
+                Role = "bukmeker"
+            };
+
             User.AddAsync(user);
             User.AddAsync(user1);
+            User.AddAsync(user2);
 
             SaveChangesAsync().Wait();
 

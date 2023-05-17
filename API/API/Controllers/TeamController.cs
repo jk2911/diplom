@@ -123,5 +123,10 @@ namespace API.Controllers
 
             return BadRequest("Не удалось удалить команду");
         }
+        [HttpGet("GetTeamNotInChampionship")]
+        public Task<IEnumerable<Team>> GetTeamsNotInChampionship(int id)
+        {
+            return _unitOfWork.Team.GetTeamsNotInChampionship(id);
+        }
     }
 }

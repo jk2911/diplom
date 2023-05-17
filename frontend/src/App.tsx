@@ -9,6 +9,7 @@ import { RegionPage } from "./pages/RegionPage/RegionPage";
 import { ChampionshipPage } from "./pages/ChampionshipPage/ChampionshipPage";
 import { TeamPage } from "./pages/TeamPage/TeamPage";
 import { Header } from "./components/Header/Header";
+import { MatchPageAdmin } from "./pages/AdminPage/MatchPage/MatchPageAdmin";
 
 function App() {
   return (
@@ -26,7 +27,10 @@ function App() {
 
         {/* <Route path="/admin/region/*" element={<Navigate to="/admin/region/championships" replace />} /> */}
         <Route path="/admin/championship/*" element={<ChampionshipPage />} />
+
         <Route path="/admin/team/*" element={<TeamPage />} />
+        
+        <Route path="/admin/match" element={<MatchPageAdmin />} />
       </Routes>
     </BrowserRouter>
   );

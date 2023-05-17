@@ -78,6 +78,19 @@ namespace API.Data
                 FirstOrDefaultAsync(team => team.Name == name && team.RegionId == region.Id);
         }
 
+        public async Task<IEnumerable<Team>> GetTeamsNotInChampionship(int championshipId)
+        {
+            var teams = new List<Team>();
+
+            foreach (var i in _context.ChampTeams)
+            {
+                if (i.ChampionshipId != championshipId)
+                    teams.Add(i.Team);
+            }
+
+            return teams;
+        }
+
         public void Update(Team item)
         {
             _context.Entry(item).State = EntityState.Modified;

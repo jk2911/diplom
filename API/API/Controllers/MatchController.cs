@@ -54,5 +54,10 @@ namespace API.Controllers
             return await _unitOfWork.Match.
                 GetTeamsMatchResults(id);
         }
+        [HttpGet("GetMatch")]
+        public async Task<Match> GetMatch(int id)
+        {
+            return await _unitOfWork.Match.Get(id);
+        }
     }
 }

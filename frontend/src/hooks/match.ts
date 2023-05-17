@@ -137,3 +137,30 @@ export function useTeamMatchResults(id: number) {
   }, []);
   return { matches, error, loading };
 }
+
+export function useMatch(id: number) {
+  const [match, setMatch] = useState<IMatch>();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  async function fetchMatch() {
+    try {
+      setLoading(true);
+      const response = await axios.get<IMatch>(
+        "https://localhost:7167/api/Match/GetMatch?id=" +
+          id
+      );
+      setMatch(response.data);
+      setLoading(false);
+    } catch (e: unknown) {
+      const error = e as AxiosError;
+      setLoading(false);
+      setError(error.message);
+    }
+  }
+
+  useEffect(() => {
+    fetchMatch();
+  }, []);
+  return { match, error, loading };
+}

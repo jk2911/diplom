@@ -37,7 +37,6 @@ export function Header() {
         <>
           {user != null ? (
             <>
-              {user.email} {user.role}
               {user.role == "user" ? (
                 <> {user.money}</>
               ) : (
@@ -45,6 +44,7 @@ export function Header() {
                   <button onClick={toAdmin}>Панель Администрирования</button>
                 </>
               )}
+              {user.email} {user.role}
               <button onClick={exit}>Выйти</button>
             </>
           ) : (
