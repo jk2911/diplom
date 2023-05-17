@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { IMatch } from "../../../entity/Match";
 import { NormalDate } from "../../Main/upcoming matches sorted by regions";
 
@@ -6,9 +7,15 @@ interface MatchProps {
 }
 
 export function Match({ m }: MatchProps) {
+  const navigate=useNavigate();
+
+  const toMatch = () => {
+    navigate("/admin/match?id=" + m.id);
+  };
+
   m.dateTime = new Date(m.dateTime);
   return (
-    <div>
+    <div onClick={toMatch}>
       <>
         {NormalDate(m.dateTime.getDate())}.{NormalDate(m.dateTime.getMonth())}{" "}
         {NormalDate(m.dateTime.getHours())}:

@@ -30,7 +30,7 @@ function App() {
 
         <Route path="/admin/team/*" element={<TeamPage />} />
         
-        <Route path="/admin/match" element={<MatchPageAdmin />} />
+        <Route path="/admin/match/*" element={<MatchPageAdmin />} />
       </Routes>
     </BrowserRouter>
   );

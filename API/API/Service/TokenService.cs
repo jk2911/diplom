@@ -12,8 +12,10 @@ namespace API.Service
         public async Task<string> CreateToken(User user)
         {
             var claims = new List<Claim> { 
-                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role),
+                new Claim("email", user.Email),
+                new Claim("role", user.Role),
+                new Claim("id", user.Id.ToString()),
+                new Claim("money", user.Money.ToString()),
             };
             var jwt = new JwtSecurityToken(
                     issuer: AuthOptions.ISSUER,

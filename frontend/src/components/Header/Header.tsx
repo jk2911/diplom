@@ -8,13 +8,26 @@ import type {} from "redux-thunk/extend-redux";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "../../modal/Modal";
 import { Login } from "../User/Login";
+import jwt_decode from "jwt-decode";
+import { IToken } from "../../entity/User";
 
 export function Header() {
   const { user, error, loading } = useTypesSelector((state) => state.user);
   const dispatch = useDispatch();
+  const [decoded, setDecoded] = useState<IToken>({id:"",money:"",email:"",role:""});
 
   const [activeLogin, setActiveLogin] = useState(false);
   const [activeRegistration, setActiveRegistration] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const i:IToken = jwt_decode(token);
+      console.log(i);
+      setDecoded(i);
+      console.log(decoded)
+    }
+  }, []);
 
   const navigate = useNavigate();
 
@@ -25,6 +38,7 @@ export function Header() {
     navigate("/");
   };
   const exit = () => {
+    localStorage.removeItem("token")
     window.location.assign("/");
   };
 
@@ -35,16 +49,16 @@ export function Header() {
         <button>Матчи</button>
         <button>Чемпионаты</button>
         <>
-          {user != null ? (
+          {decoded.email != "" ? (
             <>
-              {user.role == "user" ? (
-                <> {user.money}</>
+              {decoded.role == "user" ? (
+                <> {decoded.money} {" "}</>
               ) : (
                 <>
                   <button onClick={toAdmin}>Панель Администрирования</button>
                 </>
               )}
-              {user.email} {user.role}
+              {decoded.email} {decoded.role}
               <button onClick={exit}>Выйти</button>
             </>
           ) : (

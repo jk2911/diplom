@@ -7,14 +7,18 @@ const initialState: UserState = {
   error: null,
 };
 
-export const userReducer = (state = initialState, action: UserAction  ): UserState => {
+export const userReducer = (
+  state = initialState,
+  action: UserAction
+): UserState => {
   switch (action.type) {
     case UserActionTypes.FETCH_USER:
-      return { loading: true, error: null, user: null }
+      return { loading: true, error: null, user: null };
     case UserActionTypes.FETCH_USER_SUCCESS:
-      return { loading: false, error: null, user: action.payload }
+      localStorage.setItem("token", action.payload.token);
+      return { loading: false, error: null, user: action.payload };
     case UserActionTypes.FETCH_USER_ERROR:
-      return { loading: false, error: action.payload, user: null }
+      return { loading: false, error: action.payload, user: null };
     default:
       return state;
   }

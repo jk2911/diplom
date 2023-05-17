@@ -1,31 +1,44 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { fetchUser } from "../../store/action-creators/user";
 import { useTypesSelector } from "../../hooks/useTypedSelector";
+import axios, { AxiosError } from "axios";
 
 export function Login(active: boolean, setActive: any) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { user, loading, error } = useTypesSelector((state) => state.user);
-  console.log(user);
-  console.log(error);
+  //const { user, loading, error } = useTypesSelector((state) => state.user);
+  const [error, setError]=useState("");
 
   const dispatch = useDispatch();
 
-  const Login = () => {
-    dispatch(fetchUser(email, password));
-    if (user != null) {
-        setActive(false);
-      }
+  const Login = async () => {
+    try {
+      const response = await axios.post(
+        "https://localhost:7167/api/Account/Login",
+        { email, password }
+      );
+      localStorage.setItem("token", response.data.token);
+      window.location.assign("/")
+    } catch (e: unknown) {
+      const error = e as AxiosError;
+      // console.log(error.message);
+      // console.log(error.response?.data);
+      const message = error.response?.data as String;
+      setError(message.toString());
+      //setErrorCreate(message.toString());
+    }
   };
 
-  
+  // useEffect(() => {
+  //   if (error == null && loading === false) window.location.assign("/");
+  // }, [error, loading]);
 
   return (
     <Form>
       <StyledInput
-        type="email"
+        type="text"
         value={email}
         placeholder="E-mail"
         onChange={(e) => setEmail(e.target.value)}
@@ -36,10 +49,15 @@ export function Login(active: boolean, setActive: any) {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <StyledInput
+       {/* <StyledInput
         type="text"
         value={error ? error : ""}
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={(e) => setPassword(e.target.value)} 
+      /> */}
+      <StyledInput
+        type="text"
+        placeholder="password"
+        value={error}
       />
       <button onClick={Login}>Войти</button>
     </Form>

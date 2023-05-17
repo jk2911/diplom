@@ -89,5 +89,29 @@ namespace API.Controllers
                 
             return BadRequest("Не удалось удалить регион");
         }
+        [HttpPut("EditRegion/{id:int}")]
+        public async Task<ActionResult> EditRegion(int id)
+        {
+            var region = await _unitOfWork.Region.Get(id);
+
+            if (region == null)
+                return BadRequest("Регион не найден");
+
+            var req = Request.Form;
+
+            string? name = req["name"];
+            var image = req.Files["image"];
+
+            if (name == null || name.Length < 3)
+                return BadRequest("Длина названия должна быть минимум 3 символа");
+
+
+            region.Name = name;
+
+            _unitOfWork.Region.Update(region);
+
+
+            return Ok("Регион изменен");
+        }
     }
 }

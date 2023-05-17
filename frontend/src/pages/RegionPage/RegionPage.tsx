@@ -7,10 +7,12 @@ import { NavBar } from "../../components/Bar/NavBar";
 import { useState } from "react";
 import { Modal } from "../../modal/Modal";
 import { DeleteRegion } from "../../components/Admin/Region/DeleteRegion";
+import { UpdateRegion } from "../../components/Admin/Region/UpdateRegion";
 
 export function RegionPage() {
   const [params, setParams] = useSearchParams();
   const [deleteModalRegion, setDeleteModalRegion] = useState(false);
+  const [updateModalRegion, setUpdateModalRegion] = useState(false);
 
   const id = params.get("id");
 
@@ -23,6 +25,9 @@ export function RegionPage() {
         {loading && <>Загрузка</>}
         {region && (
           <>
+            <Modal active={updateModalRegion} setActive={setUpdateModalRegion}>
+              <UpdateRegion region={region} />
+            </Modal>
             <Modal active={deleteModalRegion} setActive={setDeleteModalRegion}>
               <DeleteRegion region={region} />
             </Modal>
@@ -36,6 +41,7 @@ export function RegionPage() {
               }}
             />
             {region.name}
+            <button onClick={() => setUpdateModalRegion(true)}>Изменить</button>
             <button onClick={() => setDeleteModalRegion(true)}>Удалить</button>
             <NavBar>
               <TabElement>

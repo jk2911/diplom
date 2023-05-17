@@ -6,9 +6,6 @@ export const fetchUser = (email: string, password: string) => {
   return async (dispatch: Dispatch<UserAction>) => {
     try {
       dispatch({ type: UserActionTypes.FETCH_USER });
-      const formData = new FormData();
-      formData.append("email", email);
-      formData.append("password", password);
       const data = {
         email: email,
         password: password,
@@ -21,6 +18,10 @@ export const fetchUser = (email: string, password: string) => {
         type: UserActionTypes.FETCH_USER_SUCCESS,
         payload: response.data,
       });
+      
+      const user = response.data;
+      console.log(user.token)
+      localStorage.setItem("token",user.token.toString());
     } catch (e) {
       const error = e as AxiosError;
       const message = error.response?.data as String;
