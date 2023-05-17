@@ -3,4 +3,5 @@ export interface IUser{
     email:string;
     token:string;
     role:string;
+    money:number
 }

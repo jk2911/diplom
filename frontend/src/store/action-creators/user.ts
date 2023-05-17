@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { UserAction, UserActionTypes } from "../../types/user";
 import { Dispatch } from "redux";
 
-export const fetchUsers = (email: string, password: string) => {
+export const fetchUser = (email: string, password: string) => {
   return async (dispatch: Dispatch<UserAction>) => {
     try {
       dispatch({ type: UserActionTypes.FETCH_USER });
@@ -22,7 +22,9 @@ export const fetchUsers = (email: string, password: string) => {
         payload: response.data,
       });
     } catch (e) {
-      dispatch({ type: UserActionTypes.FETCH_USER_ERROR, payload: "Ошибка" });
+      const error = e as AxiosError;
+      const message = error.response?.data as String;
+      dispatch({ type: UserActionTypes.FETCH_USER_ERROR, payload: message.toString() });
     }
   };
 };

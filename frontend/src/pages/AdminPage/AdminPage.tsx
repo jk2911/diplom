@@ -10,18 +10,11 @@ import { useTypesSelector } from "../../hooks/useTypedSelector";
 import { useSelector } from "react-redux";
 
 export function AdminPage() {
-  const {user, error, loading} = useTypesSelector((state) => state.user);
-
-  const a = useSelector(state=>state);
-
-  console.log(a);
+  
 
   return (
     <Container>
       <Content>
-      {user && <>
-        {user.token}   {user.email}  {user.role}
-      </>}
       <TabsContainer>
         <TabElement>
           <Link to="regions">Регионы</Link>

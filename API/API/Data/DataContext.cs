@@ -45,7 +45,8 @@ namespace API.Data
             User user = new User
             {
                 Email = "333",
-                Password = hash.CreateHash("333")
+                Password = hash.CreateHash("333"),
+                Role="admin"
             };
 
             User user1 = new User

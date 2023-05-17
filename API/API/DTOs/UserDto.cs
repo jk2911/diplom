@@ -9,5 +9,6 @@ namespace API.DTOs
         [Required] public string Email { get; set; }
         [Required] public string Token { get; set; }
         [Required] public string Role { get; set; }
+        [Required] public float Money { get; set; }
     }
 }
