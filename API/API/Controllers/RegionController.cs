@@ -51,7 +51,7 @@ namespace API.Controllers
             if (regionExists != null)
                 return BadRequest("Такой регион уже существует");
 
-            var pathImage = image == null ? "" :
+            var pathImage = image == null ? null :
                 _photoService.AddPhoto(Request, "images/regions/" + image.FileName, image);
 
             var newRegion = new Region
@@ -102,14 +102,19 @@ namespace API.Controllers
             string? name = req["name"];
             var image = req.Files["image"];
 
-            if (name == null || name.Length < 3)
+            if (name == null & image == null)
+                return BadRequest();
+
+            if (name.Length < 3)
                 return BadRequest("Длина названия должна быть минимум 3 символа");
 
+            if(name!=null)
+                region.Name = name;
 
-            region.Name = name;
+            if(image!= null)
+                region.Image = _photoService.AddPhoto(Request, "images/regions/" + image.FileName, image);
 
             _unitOfWork.Region.Update(region);
-
 
             return Ok("Регион изменен");
         }

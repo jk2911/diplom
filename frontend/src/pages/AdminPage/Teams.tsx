@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import { CreateTeam } from "../../components/Admin/CreateTeam";
 import { Modal } from "../../modal/Modal";
+import image from "../../assets/club.png"
 
 export function AllTeams() {
   const { teams, loading, error } = useTeams();
@@ -31,7 +32,7 @@ export function AllTeams() {
       {teams.map((team) => (
         <RowItem key={team.id} onClick={() => toTeam(team.id)}>
           <img
-            src={team.image}
+            src={team.image != null ? team.image : image}
             style={{ minHeight: 10, maxHeight: 70, minWidth: 10, maxWidth: 70 }}
           />
           {team.id} {team.name} {team.region.name}

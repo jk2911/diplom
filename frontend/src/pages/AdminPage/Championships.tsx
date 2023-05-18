@@ -6,6 +6,7 @@ import { IChampionship } from "../../entity/Championship";
 import { useState, useEffect } from "react";
 import { Modal } from "../../modal/Modal";
 import { CreateChampionship } from "../../components/Admin/CreateChampionship";
+import image from "../../assets/club.png"
 
 export function AllChampionships() {
   const { championships, error, loading } = useAllChampionships();
@@ -66,7 +67,7 @@ export function AllChampionships() {
       {sortChampionshipsList.map((ch) => (
         <RowItem key={ch.id} onClick={() => toChampionship(ch.id)}>
           <img
-            src={ch.image}
+            src={ch.image != null ? ch.image : image}
             style={{ minHeight: 10, maxHeight: 70, minWidth: 10, maxWidth: 70 }}
           />
           {ch.id} {ch.name} {ch.region.name}

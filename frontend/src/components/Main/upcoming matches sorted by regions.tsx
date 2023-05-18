@@ -51,7 +51,7 @@ export function UpcomingMatchesSortedByRegion({
 
   return (
     <Row>
-      <img src={image} style={{minHeight:80,minWidth:40}}/>
+      <img src={image} style={{ minHeight: 80, minWidth: 40 }} />
       <ButtonCon onClick={() => setChampionship(0)}>Все</ButtonCon>
       <table>
         {selectedChampionships.map((ch) => (
@@ -92,6 +92,11 @@ function Championship(championship: IChampionship, regionName: string) {
 }
 
 function Match(match: IMatch) {
+
+  function toMatch(id: number) {
+    window.location.assign("/match?id=" + id)
+  }
+
   const Issue = match.bets.find((x) => x.name == "Исход");
 
   const P1 = Issue?.values.find((i) => i.name == "П1");
@@ -112,7 +117,7 @@ function Match(match: IMatch) {
   const d = new Date(match.dateTime);
 
   return (
-    <div>
+    <div onClick={() => toMatch(match.id)}>
       <TeamsTd>
         {match.home.name} - {match.away.name}
       </TeamsTd>
@@ -134,7 +139,7 @@ function Match(match: IMatch) {
   );
 }
 
-const ButtonCon=styled.button`
+const ButtonCon = styled.button`
   width: 100px;
 `
 

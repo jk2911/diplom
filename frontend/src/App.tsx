@@ -10,6 +10,7 @@ import { ChampionshipPage } from "./pages/ChampionshipPage/ChampionshipPage";
 import { TeamPage } from "./pages/TeamPage/TeamPage";
 import { Header } from "./components/Header/Header";
 import { MatchPageAdmin } from "./pages/AdminPage/MatchPage/MatchPageAdmin";
+import { UserMatchPage } from "./pages/UserMatchPage/UserMatchPage";
 
 function App() {
   return (
@@ -31,6 +32,8 @@ function App() {
         <Route path="/admin/team/*" element={<TeamPage />} />
         
         <Route path="/admin/match/*" element={<MatchPageAdmin />} />
+
+        <Route path="/match" element={<UserMatchPage />} />
       </Routes>
     </BrowserRouter>
   );

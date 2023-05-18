@@ -6,6 +6,7 @@ import { useImmer } from "use-immer";
 import { IRegion } from "../../entity/Region";
 import { Modal } from "../../modal/Modal";
 import { CreateRegion } from "../../components/Admin/CreateRegion";
+import image from "../../assets/club.png"
 
 export function AllRegions() {
   const { regions, error, loading } = useAllRegions();
@@ -52,7 +53,7 @@ export function AllRegions() {
       {sortRegionsList.map((region) => (
         <RowItem key={region.id} onClick={() => toRegion(region.id)}>
           <img
-            src={region.image}
+            src={region.image != null ? region.image : image}
             style={{ minHeight: 10, maxHeight: 70, minWidth: 10, maxWidth: 70 }}
           />
           {region.id} {region.name}

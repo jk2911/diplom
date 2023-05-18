@@ -42,11 +42,11 @@ export function CreateRegion() {
     <>
       название <input value={name} onChange={(e) => setName(e.target.value)} />
       
-      <input
+      {/* <input
         type="file"
         accept="image/*,.png,.jpg,.gif,.web"
         onChange={AddImage}
-      />
+      /> */}
       {errorCreate}
       <button onClick={FetchCreateRegion}>{buttonState}</button>
     </>

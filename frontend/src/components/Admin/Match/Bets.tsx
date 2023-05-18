@@ -45,6 +45,9 @@ export function Bet({ bet }: BetProps) {
     setName(nam);
     bet.name = nam;
   }
+  function RemoveBet(){
+    
+  }
 
   return (
     <>
@@ -52,6 +55,7 @@ export function Bet({ bet }: BetProps) {
       {bet.values.map((bv) => (
         <div key={bv.id}>{BetValueInput(bv)}</div>
       ))}
+      <button onClick={RemoveBet}></button>
     </>
   );
 }
