@@ -289,7 +289,7 @@ export function UserMatchPage() {
               </div>
                 <button onClick={AddBet}>Добавить</button>
                 <button onClick={Save}>Сохранить</button>
-                <BetsValue bets={bets} setBets={() => setBets} />
+                {/* <BetsValue bets={bets} setBets={() => setBets} /> */}
               </div>
               
             </div>

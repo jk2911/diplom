@@ -12,6 +12,30 @@ namespace API.Data
             _context = context;
         }
 
+        public void AddBet(Match match, string name, int count)
+        {
+            var bet = new Bet
+            {
+                Name = name,
+                MatchId = match.Id,
+            };
+
+            _context.Bet.Add(bet);
+            _context.SaveChanges();
+
+            var betValues = new List<BetValue>();
+
+            for (int i = 0; i < count; i++)
+            {
+                _context.BetValue.Add(new BetValue
+                {
+                    Name = "Исход " + i + 1,
+                    Value = 1f,
+                    BetId = bet.Id
+                });
+            }
+        }
+
         public void Create(Bet item)
         {
             _context.Bet.Add(item);

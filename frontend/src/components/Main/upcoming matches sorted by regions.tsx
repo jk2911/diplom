@@ -54,6 +54,7 @@ export function UpcomingMatchesSortedByRegion({
       <img src={image} style={{ minHeight: 80, minWidth: 40 }} />
       <ButtonCon onClick={() => setChampionship(0)}>Все</ButtonCon>
       <table>
+        {loading && <>Загрузка</>}
         {selectedChampionships.map((ch) => (
           <div key={ch.id}>
             <ChampionshipTr>

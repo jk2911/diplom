@@ -5,6 +5,7 @@ import { IBetValue } from "../../../entity/BetValue";
 interface Props {
   bets: IBet[];
   setBets: () => void;
+  removeBet: (i: number) => void;
 }
 
 const newBet: IBet = {
@@ -21,11 +22,11 @@ const newBetValue: IBetValue = {
   value: 1,
 };
 
-export function BetsValue({ bets, setBets }: Props) {
+export function BetsValue({ bets, setBets, removeBet }: Props) {
   return (
     <div>
-      {bets.map((bet) => (
-        <Bet bet={bet} key={bet.id} />
+      {bets.map((bet, index) => (
+        <Bet bet={bet} key={bet.id} removeBet={removeBet} index={index} />
       ))}
     </div>
   );
@@ -33,9 +34,11 @@ export function BetsValue({ bets, setBets }: Props) {
 
 interface BetProps {
   bet: IBet;
+  removeBet: (i: number) => void;
+  index: number
 }
 
-export function Bet({ bet }: BetProps) {
+export function Bet({ bet, removeBet, index }: BetProps) {
   const [name, setName] = useState(bet.name);
 
   function SetName(e: any) {
@@ -45,18 +48,15 @@ export function Bet({ bet }: BetProps) {
     setName(nam);
     bet.name = nam;
   }
-  function RemoveBet(){
-    
-  }
 
   return (
-    <>
+    <div>
       <input type="text" value={name} onChange={(e) => SetName(e)} />
       {bet.values.map((bv) => (
         <div key={bv.id}>{BetValueInput(bv)}</div>
       ))}
-      <button onClick={RemoveBet}></button>
-    </>
+      <button onClick={() => removeBet(index)}> Удалить исход</button>
+    </div>
   );
 }
 

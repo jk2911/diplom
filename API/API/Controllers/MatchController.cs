@@ -59,5 +59,17 @@ namespace API.Controllers
         {
             return await _unitOfWork.Match.Get(id);
         }
+        [HttpPost("EditMatch")]
+        public async Task<ActionResult> EditMatch(MatchDTO matchDTO)
+        {
+            var match = _mapper.Map<Match>(matchDTO);
+
+            _unitOfWork.Match.Update(match);
+
+            if(await _unitOfWork.Complete())
+                return Ok();
+
+            return BadRequest("Не удалось сохранить");
+        }
     }
 }

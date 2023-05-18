@@ -8,6 +8,9 @@ import { useEffect, useState } from "react";
 import { IBet } from "../../../entity/Bet";
 import { IBetValue } from "../../../entity/BetValue";
 import image from "../../../assets/club.png";
+import axios, { AxiosError } from "axios";
+import { Modal } from "../../../modal/Modal";
+import { AddBet } from "../../../components/Admin/Match/AddBet";
 
 const newBetValue: IBetValue = {
   id: 0,
@@ -46,6 +49,8 @@ export function MatchPageAdmin() {
   const [redCardAway, setRedCardAway] = useState(0);
   //const [stage, setStage] = useState("");
 
+  const [addBet, setAddBet] = useState(false);
+
   const [params, setParams] = useSearchParams();
   const [matchHook, setMatchHook] = useState();
 
@@ -70,16 +75,43 @@ export function MatchPageAdmin() {
     setStatistics();
   }, [match?.bets]);
 
-  function AddBet() {
+  // function AddBet() {
+  //   if (!match) return;
+  //   if (match.bets) {
+  //     newBet.matchId = match.id;
+  //     match.bets.push(newBet)
+  //     setBets([...match.bets])
+  //   };
+  // }
+  function RemoveBet(index: number) {
+    console.log(index)
+    // console.log(match?.bets)
     if (!match) return;
     if (match.bets) {
-      match.bets.push(newBet)
+      const temp = match.bets.splice(index, 1)
+      console.log(temp);
       setBets([...match.bets])
     };
   }
 
-  function Save() {
-    console.log(match);
+  async function Save() {
+    try {
+      const response = await axios.post(
+        "https://localhost:7167/api/Match/EditMatch",
+        // JSON.stringify(match)
+        match
+      );
+      // const message = response.data as String;
+      // setErrorCreate(message.toString());
+      console.log("oafoasf")
+    } catch (e: unknown) {
+      const error = e as AxiosError;
+      // console.log(error.message);
+      // console.log(error.response?.data);
+      const message = error.response?.data as String;
+      console.log(message.toString());
+      console.log(error.response?.data)
+    }
   }
 
   const setStatistics = () => {
@@ -109,8 +141,12 @@ export function MatchPageAdmin() {
   return (
     <Container>
       <Content>
+        {loading && <>Загрузка</>}
         {match && (
           <div>
+            <Modal setActive={setAddBet} active={addBet}>
+              <AddBet matchId={match.id} />
+            </Modal>
             <div>
               <img
                 src={match.home.image != null ? match.home.image : image}
@@ -131,7 +167,7 @@ export function MatchPageAdmin() {
                   maxWidth: 70,
                 }}
               />
-              <button onClick={save}>Сохранить</button>
+              <button onClick={Save}>Сохранить</button>
             </div>
 
             <div className="tabs">
@@ -146,143 +182,143 @@ export function MatchPageAdmin() {
               <input type="radio" name="tab-btn" id="tab-btn-2" value="" />
               <label htmlFor="tab-btn-2">Ставки</label>
               <div id="content-1">
-              <div id="content-2">
-                <div>
-                  <>Голы</>
-                  <input
-                    type="number"
-                    value={homeGoal}
-                    onChange={(e) => setGoalHome(Number(e.target.value))}
-                  />
-                  <input
-                    type="number"
-                    value={awayGoal}
-                    onChange={(e) => setGoalAway(Number(e.target.value))}
-                  />
+                <div id="content-2">
+                  <div>
+                    <>Голы</>
+                    <input
+                      type="number"
+                      value={homeGoal}
+                      onChange={(e) => setGoalHome(Number(e.target.value))}
+                    />
+                    <input
+                      type="number"
+                      value={awayGoal}
+                      onChange={(e) => setGoalAway(Number(e.target.value))}
+                    />
+                  </div>
+                  <div>
+                    <>Угловые</>
+                    <input
+                      type="number"
+                      value={cornerHome}
+                      onChange={(e) => setCornerHome(Number(e.target.value))}
+                    />
+                    <input
+                      type="number"
+                      value={cornerAway}
+                      onChange={(e) => setCornerAway(Number(e.target.value))}
+                    />
+                  </div>
+                  <div>
+                    <>Удары</>
+                    <input
+                      type="number"
+                      value={shotsHome}
+                      onChange={(e) => setShotsHome(Number(e.target.value))}
+                    />
+                    <input
+                      type="number"
+                      value={shotsAway}
+                      onChange={(e) => setShostAway(Number(e.target.value))}
+                    />
+                  </div>
+                  <div>
+                    <>Удары в створ</>
+                    <input
+                      type="number"
+                      value={shotsInTargetHome}
+                      onChange={(e) => setShotsTarHome(Number(e.target.value))}
+                    />
+                    <input
+                      type="number"
+                      value={shotsInTargetAway}
+                      onChange={(e) => setShotsTarAway(Number(e.target.value))}
+                    />
+                  </div>
+                  <div>
+                    <>Сэйвы</>
+                    <input
+                      type="number"
+                      value={saveHome}
+                      onChange={(e) => setSaveHome(Number(e.target.value))}
+                    />
+                    <input
+                      type="number"
+                      value={saveAway}
+                      onChange={(e) => setSaveAway(Number(e.target.value))}
+                    />
+                  </div>
+                  <div>
+                    <>Владение</>
+                    <input
+                      type="number"
+                      value={possession}
+                      onChange={(e) => setPossesion(Number(e.target.value))}
+                    />
+                    <input
+                      type="number"
+                      value={possession}
+                      onChange={(e) => setPossesion(Number(e.target.value))}
+                    />
+                  </div>
+                  <div>
+                    <>Фолы</>
+                    <input
+                      type="number"
+                      value={foulsHome}
+                      onChange={(e) => setFoulsHome(Number(e.target.value))}
+                    />
+                    <input
+                      type="number"
+                      value={foulsAway}
+                      onChange={(e) => setFoulsAway(Number(e.target.value))}
+                    />
+                  </div>
+                  <div>
+                    <>Оффсайды</>
+                    <input
+                      type="number"
+                      value={offsideHome}
+                      onChange={(e) => setOffsideHome(Number(e.target.value))}
+                    />
+                    <input
+                      type="number"
+                      value={offsideAway}
+                      onChange={(e) => setOffsideAway(Number(e.target.value))}
+                    />
+                  </div>
+                  <div>
+                    <>Желтые карточки</>
+                    <input
+                      type="number"
+                      value={yellowCardHome}
+                      onChange={(e) => setYellowCardHome(Number(e.target.value))}
+                    />
+                    <input
+                      type="number"
+                      value={yellowCardAway}
+                      onChange={(e) => setYellowCardAway(Number(e.target.value))}
+                    />
+                  </div>
+                  <div>
+                    <>Красные карточки</>
+                    <input
+                      type="number"
+                      value={redCardHome}
+                      onChange={(e) => setRedCardHome(Number(e.target.value))}
+                    />
+                    <input
+                      type="number"
+                      value={redCardAway}
+                      onChange={(e) => setRedCardAway(Number(e.target.value))}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <>Угловые</>
-                  <input
-                    type="number"
-                    value={cornerHome}
-                    onChange={(e) => setCornerHome(Number(e.target.value))}
-                  />
-                  <input
-                    type="number"
-                    value={cornerAway}
-                    onChange={(e) => setCornerAway(Number(e.target.value))}
-                  />
-                </div>
-                <div>
-                  <>Удары</>
-                  <input
-                    type="number"
-                    value={shotsHome}
-                    onChange={(e) => setShotsHome(Number(e.target.value))}
-                  />
-                  <input
-                    type="number"
-                    value={shotsAway}
-                    onChange={(e) => setShostAway(Number(e.target.value))}
-                  />
-                </div>
-                <div>
-                  <>Удары в створ</>
-                  <input
-                    type="number"
-                    value={shotsInTargetHome}
-                    onChange={(e) => setShotsTarHome(Number(e.target.value))}
-                  />
-                  <input
-                    type="number"
-                    value={shotsInTargetAway}
-                    onChange={(e) => setShotsTarAway(Number(e.target.value))}
-                  />
-                </div>
-                <div>
-                  <>Сэйвы</>
-                  <input
-                    type="number"
-                    value={saveHome}
-                    onChange={(e) => setSaveHome(Number(e.target.value))}
-                  />
-                  <input
-                    type="number"
-                    value={saveAway}
-                    onChange={(e) => setSaveAway(Number(e.target.value))}
-                  />
-                </div>
-                <div>
-                  <>Владение</>
-                  <input
-                    type="number"
-                    value={possession}
-                    onChange={(e) => setPossesion(Number(e.target.value))}
-                  />
-                  <input
-                    type="number"
-                    value={possession}
-                    onChange={(e) => setPossesion(Number(e.target.value))}
-                  />
-                </div>
-                <div>
-                  <>Фолы</>
-                  <input
-                    type="number"
-                    value={foulsHome}
-                    onChange={(e) => setFoulsHome(Number(e.target.value))}
-                  />
-                  <input
-                    type="number"
-                    value={foulsAway}
-                    onChange={(e) => setFoulsAway(Number(e.target.value))}
-                  />
-                </div>
-                <div>
-                  <>Оффсайды</>
-                  <input
-                    type="number"
-                    value={offsideHome}
-                    onChange={(e) => setOffsideHome(Number(e.target.value))}
-                  />
-                  <input
-                    type="number"
-                    value={offsideAway}
-                    onChange={(e) => setOffsideAway(Number(e.target.value))}
-                  />
-                </div>
-                <div>
-                  <>Желтые карточки</>
-                  <input
-                    type="number"
-                    value={yellowCardHome}
-                    onChange={(e) => setYellowCardHome(Number(e.target.value))}
-                  />
-                  <input
-                    type="number"
-                    value={yellowCardAway}
-                    onChange={(e) => setYellowCardAway(Number(e.target.value))}
-                  />
-                </div>
-                <div>
-                  <>Красные карточки</>
-                  <input
-                    type="number"
-                    value={redCardHome}
-                    onChange={(e) => setRedCardHome(Number(e.target.value))}
-                  />
-                  <input
-                    type="number"
-                    value={redCardAway}
-                    onChange={(e) => setRedCardAway(Number(e.target.value))}
-                  />
-                </div>
+                <button onClick={() => setAddBet(true)}>Добавить</button>
+                {/* <button onClick={Save}>Сохранить</button> */}
+                <BetsValue bets={bets} removeBet={RemoveBet} setBets={() => setBets} />
               </div>
-                <button onClick={AddBet}>Добавить</button>
-                <button onClick={Save}>Сохранить</button>
-                <BetsValue bets={bets} setBets={() => setBets} />
-              </div>
-              
+
             </div>
           </div>
         )}

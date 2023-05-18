@@ -9,6 +9,8 @@ namespace API.Helpers
             var bets = new List<Bet>();
             var values = new List<BetValue>();
 
+            #region 
+
             values.Add(new BetValue 
             {
                 Name = "П1",
@@ -90,6 +92,8 @@ namespace API.Helpers
             });
 
             values = new List<BetValue>();
+
+            #endregion
 
             return bets;
         }

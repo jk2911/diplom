@@ -28,6 +28,12 @@ namespace API.Helpers
 
             CreateMap<Region, RegionsUpcomingMatchesDTO>().
                 ForMember(x=>x.Region, opt=>opt.MapFrom(x=>x.Name));
+
+            CreateMap<MatchDTO, Match>();
+
+            CreateMap<BetDTO, Bet>();
+
+            CreateMap<BetValueDTO, BetValue>();
         }
     }
 }
