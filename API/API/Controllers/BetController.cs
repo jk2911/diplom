@@ -21,7 +21,7 @@ namespace API.Controllers
         {
             string? name = Request.Form["name"];
 
-            if (name == null && name.Length < 2)
+            if (name == null || name.Length < 2)
                 return BadRequest("Слишком короткий исход");
 
             if (count == 0)
@@ -31,6 +31,12 @@ namespace API.Controllers
 
             if (match == null)
                 return BadRequest("Матч не найден");
+
+            var isOutcomeInMatch = await _unitOfWork.Bet.
+                IsOutcomeInMatch(match, name);
+
+            if (isOutcomeInMatch)
+                return BadRequest("Такой исход уже есть");
             
             _unitOfWork.Bet.AddBet(match, name, count);
 

@@ -64,10 +64,6 @@ export function MatchPageAdmin() {
     console.log(match?.bets);
   }
 
-  // useEffect(() => {
-  //   if (!match) return;
-  // }, [match?.bets]);
-
   useEffect(() => {
     if (!match) return;
     if (match.bets) setBets(match.bets);
@@ -75,14 +71,6 @@ export function MatchPageAdmin() {
     setStatistics();
   }, [match?.bets]);
 
-  // function AddBet() {
-  //   if (!match) return;
-  //   if (match.bets) {
-  //     newBet.matchId = match.id;
-  //     match.bets.push(newBet)
-  //     setBets([...match.bets])
-  //   };
-  // }
   function RemoveBet(index: number) {
     console.log(index)
     // console.log(match?.bets)
@@ -94,8 +82,33 @@ export function MatchPageAdmin() {
     };
   }
 
+  function setMatchStatistic() {
+    if (match == undefined) return
+    match.homeGoal = homeGoal;
+    match.awayGoal = awayGoal;
+    match.possession = possession;
+    match.shotsHome = shotsHome;
+    match.shotsAway = shotsAway;
+    match.shotsInTargetHome = shotsInTargetHome
+    match.shotsInTargetAway = shotsInTargetAway;
+    match.cornerHome = cornerHome
+    match.cornerAway = cornerAway
+    match.saveHome = saveHome
+    match.saveAway = saveAway
+    match.foulsHome = foulsHome
+    match.foulsAway = foulsAway
+    match.offsideHome = offsideHome
+    match.offsideAway = offsideAway
+    match.yellowCardHome = yellowCardHome
+    match.yellowCardAway = yellowCardAway
+    match.redCardHome = redCardHome
+    match.redCardAway = redCardAway
+  }
+
   async function Save() {
     try {
+      setMatchStatistic();
+      console.log(match)
       const response = await axios.post(
         "https://localhost:7167/api/Match/EditMatch",
         // JSON.stringify(match)
@@ -116,7 +129,7 @@ export function MatchPageAdmin() {
 
   const setStatistics = () => {
     if (match === undefined) return;
-    console.log(match);
+    //console.log(match);
 
     setGoalHome(match.homeGoal);
     setGoalAway(match.awayGoal);
@@ -127,7 +140,8 @@ export function MatchPageAdmin() {
     setShotsTarAway(match.shotsInTargetAway);
     setCornerHome(match.cornerHome);
     setCornerAway(match.cornerAway);
-    setSaveHome(match.cornerAway);
+    setSaveHome(match.saveHome);
+    setSaveAway(match.saveAway);
     setFoulsHome(match.foulsHome);
     setFoulsAway(match.foulsAway);
     setOffsideHome(match.offsideHome);

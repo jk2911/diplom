@@ -29,7 +29,7 @@ namespace API.Data
             {
                 _context.BetValue.Add(new BetValue
                 {
-                    Name = "Исход " + i + 1,
+                    Name = "Исход " + (i + 1),
                     Value = 1f,
                     BetId = bet.Id
                 });
@@ -54,6 +54,17 @@ namespace API.Data
         public async Task<IEnumerable<Bet>> GetAll()
         {
             return await _context.Bet.ToListAsync();
+        }
+
+        public async Task<bool> IsOutcomeInMatch(Match match, string name)
+        {
+            var bet = match.Bets.FirstOrDefault(b=>b.Name==name);
+             
+            if (bet==null)
+            {
+                return false;
+            }
+            return true;
         }
 
         public void Update(Bet item)

@@ -10,6 +10,7 @@ export function AddBet({ matchId }: Props) {
     const [name, setName] = useState("");
     const [buttonState, setButton] = useState("Добавить");
     const [count, setCount] = useState(1);
+    const [error, setError] = useState("");
 
 
     const FetchAddBet = async (event: any) => {
@@ -18,7 +19,7 @@ export function AddBet({ matchId }: Props) {
         setButton("Добавление");
 
         const form = new FormData();
-        form.append("name",name);
+        form.append("name", name);
 
         try {
             const response = await axios.post(
@@ -31,6 +32,8 @@ export function AddBet({ matchId }: Props) {
         } catch (e: unknown) {
             const error = e as AxiosError;
             const message = error.response?.data as String;
+            console.log(message.toString());
+            setError(message.toString());
             //setErrorCreate(message.toString());
         }
         setButton("Создать");
@@ -45,6 +48,7 @@ export function AddBet({ matchId }: Props) {
                 onChange={(e) => setCount(Number(e.target.value))}
             />
             {/* {errorCreate} */}
+            <div>{error}</div>
             <button onClick={FetchAddBet}>{buttonState}</button>
         </div>
     );

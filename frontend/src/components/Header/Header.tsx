@@ -10,6 +10,7 @@ import { Modal } from "../../modal/Modal";
 import { Login } from "../User/Login";
 import jwt_decode from "jwt-decode";
 import { IToken } from "../../entity/User";
+import { Registration } from "../User/Registration";
 
 export function Header() {
   const { user, error, loading } = useTypesSelector((state) => state.user);
@@ -74,7 +75,7 @@ export function Header() {
           {Login(activeLogin, setActiveLogin)}
         </Modal>
         <Modal active={activeRegistration} setActive={setActiveRegistration}>
-          {Login(activeLogin, setActiveLogin)}
+          {Registration(activeLogin, setActiveLogin)}
         </Modal>
       </HeaderContainer>
     </>

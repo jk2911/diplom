@@ -3,57 +3,67 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { useTypesSelector } from "../../hooks/useTypedSelector";
 import { fetchUser } from "../../store/action-creators/user";
+import axios, { AxiosError } from "axios";
 
 export function Registration(active: boolean, setActive: any) {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [passwordAgain, setPasswordAgaion] = useState("");
-    const { user, loading, error } = useTypesSelector((state) => state.user);
-    console.log(user);
-    console.log(error);
-  
-    const dispatch = useDispatch();
-  
-    const Registration = () => {
-      dispatch(fetchUser(email, password));
-      if (user != null) {
-          setActive(false);
-        }
-    };
-  
-    
-  
-    return (
-      <Form>
-        <StyledInput
-          type="email"
-          value={email}
-          placeholder="E-mail"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <StyledInput
-          type="password"
-          placeholder="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <StyledInput
-          type="password"
-          placeholder="password"
-          value={passwordAgain}
-          onChange={(e) => setPasswordAgaion(e.target.value)}
-        />
-        <StyledInput
-          type="text"
-          value={error ? error : ""}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button onClick={Registration}>Войти</button>
-      </Form>
-    );
-  }
-  
-  export const Container = styled.div`
+  const [button, setButton] = useState("Зарегестрироватсья");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordAgain, setPasswordAgaion] = useState("");
+  const [error, setError] = useState("");
+
+  const Registration = async () => {
+    setButton("Регистрация...");
+
+    if (password != passwordAgain)
+      setError("Пароли не совпадают")
+
+    try {
+      const response = await axios.post(
+        "https://localhost:7167/api/Account/Register",
+        { email, password }
+      );
+      const user = response.data;
+      console.log(user)
+      localStorage.setItem("token", user.token);
+      window.location.assign("/");
+    } catch (e: unknown) {
+      const error = e as AxiosError;
+      const message = error.response?.data as String;
+      console.log(message.toString());
+      setError(message.toString());
+    }
+  };
+
+
+
+  return (
+    <Form>
+      <StyledInput
+        type="email"
+        value={email}
+        placeholder="E-mail"
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <StyledInput
+        type="password"
+        placeholder="Пароль"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <StyledInput
+        type="password"
+        placeholder="Повторите пароль"
+        value={passwordAgain}
+        onChange={(e) => setPasswordAgaion(e.target.value)}
+      />
+      <div style={{ height: 30, width: 120 }}>{error}</div>
+      <button onClick={Registration}>{button}</button>
+    </Form>
+  );
+}
+
+export const Container = styled.div`
     position: fixed;
     display: flex;
     justify-content: center;
@@ -72,8 +82,8 @@ export function Registration(active: boolean, setActive: any) {
       ),
       url("https://yastatic.net/s3/passport-auth-customs/customs/_/4vui26y6.jpg");
   `;
-  
-  export const Form = styled.div`
+
+export const Form = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -83,8 +93,8 @@ export function Registration(active: boolean, setActive: any) {
     background-color: ${(props) => props.theme.loginForm};
     box-shadow: 2px 5px 25px -3px ${(props) => props.theme.textShadow};
   `;
-  
-  const StyledInput = styled.input`
+
+const StyledInput = styled.input`
     display: flex;
     width: 400px;
     height: 49.48px;

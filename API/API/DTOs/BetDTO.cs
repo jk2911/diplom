@@ -8,6 +8,6 @@ namespace API.DTOs
         public int Id { get; set; }
         public string Name { get; set; }
         public int? MatchId { get; set; }
-        public virtual ICollection<BetValueDTO> Values { get; set; }
+        public virtual IEnumerable<BetValueDTO> Values { get; set; } = new List<BetValueDTO>();
     }
 }

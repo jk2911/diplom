@@ -34,6 +34,10 @@ namespace API.Helpers
             CreateMap<BetDTO, Bet>();
 
             CreateMap<BetValueDTO, BetValue>();
+
+            CreateMap<Bet, BetDTO>();
+
+            CreateMap<BetValue, BetValueDTO>();
         }
     }
 }

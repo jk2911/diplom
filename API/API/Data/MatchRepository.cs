@@ -100,7 +100,17 @@ namespace API.Data
 
         public void Update(Match item)
         {
-            _context.Entry(item.Bets).State = EntityState.Modified;
+            foreach(var bet in item.Bets)
+            {
+                foreach(var betValue in bet.Values)
+                {
+                    _context.Entry(betValue).State = EntityState.Modified;
+                }
+
+                _context.Entry(bet).State = EntityState.Modified;
+            }
+
+            _context.Entry(item).State = EntityState.Modified;
         }
     }
 }
