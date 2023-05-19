@@ -51,7 +51,7 @@ export function UpcomingMatchesSortedByRegion({
 
   return (
     <Row>
-      <img src={image} style={{ minHeight: 80, minWidth: 40 }} />
+      {/* <img src={image} style={{ minHeight: 80, minWidth: 40 }} /> */}
       <ButtonCon onClick={() => setChampionship(0)}>Все</ButtonCon>
       <table>
         {loading && <>Загрузка</>}
@@ -118,8 +118,8 @@ function Match(match: IMatch) {
   const d = new Date(match.dateTime);
 
   return (
-    <div onClick={() => toMatch(match.id)}>
-      <TeamsTd>
+    <div>
+      <TeamsTd onClick={() => toMatch(match.id)}>
         {match.home.name} - {match.away.name}
       </TeamsTd>
       <DateTd>

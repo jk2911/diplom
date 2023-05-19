@@ -27,6 +27,7 @@ export function RegionsUpcomingMatches({
 
   return (
     <Row>
+      {loading && <>Загрузка</>}
       {regions.map((region) => (
         <Container key={region.id}>
           <details>

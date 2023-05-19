@@ -18,8 +18,7 @@ export function DeleteRegion({ region }: Props) {
       const response = await axios.delete(
         "https://localhost:7167/api/Region/DeleteRegion?id=" + region.id
       );
-      const message = response.data as String;
-      setErrorMessage(message.toString());
+      window.location.assign("/admin/regions");
     } catch (e: unknown) {
       const error = e as AxiosError;
       // console.log(error.message);
@@ -27,7 +26,7 @@ export function DeleteRegion({ region }: Props) {
       const message = error.response?.data as String;
       setErrorMessage(message.toString());
     }
-    window.location.assign("/admin/regions");
+    //window.location.assign("/admin/regions");
   };
 
   return (

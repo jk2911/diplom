@@ -18,7 +18,10 @@ namespace API.Service
 
         public void RemovePhoto(string name)
         {
-            throw new NotImplementedException();
+            FileInfo fileInfo = new FileInfo(name);
+
+            if(fileInfo.Exists)
+                fileInfo.Delete();
         }
     }
 }

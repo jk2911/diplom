@@ -18,22 +18,27 @@ export function UpdateRegion({ region }: Props) {
     //event.preventDefault();
     setButton("Изменение...");
 
+    const formData = new FormData();
+
+    formData.append("name", regionName);
+    if (image != null) formData.append("image", image);
+
     try {
-      const response = await axios.delete(
-        "https://localhost:7167/api/Region/DeleteRegion?id=" + region.id
+      const response = await axios.put(
+        "https://localhost:7167/api/Region/EditRegion/" + region.id,
+        formData
       );
-      navigate("admin/region/championships?id=" + region.id);
-      //   const message = response.data as String;
-      //   setErrorMessage(message.toString());
+      window.location.assign("/admin/region/championships?id=" + region.id);
     } catch (e: unknown) {
       const error = e as AxiosError;
       // console.log(error.message);
       // console.log(error.response?.data);
       const message = error.response?.data as String;
+      console.log(message.toString());
       setErrorMessage(message.toString());
       setButton("Изменить");
     }
-    // navigate("admin/region/championships?id=" + region.id);
+    setButton("Изменить");
   };
 
   const AddImage = (e: any) => {
@@ -44,7 +49,7 @@ export function UpdateRegion({ region }: Props) {
     <>
       <div>Изменение региона </div>
       <input
-        type="number"
+        type="text"
         value={regionName}
         onChange={(e) => setRegionName(e.target.value)}
       />

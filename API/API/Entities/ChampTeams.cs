@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace API.Entities
 {
@@ -10,5 +11,10 @@ namespace API.Entities
         public virtual Championship Championship { get; set; }
         public int TeamId { get; set; }
         public virtual Team Team { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<UserChampBet> UserChampBets { get; set; }
+        public ChampTeams() { 
+            UserChampBets = new List<UserChampBet>();
+        }
     }
 }

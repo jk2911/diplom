@@ -23,7 +23,7 @@ namespace API.Controllers
             _mapper = mapper;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost("Refill/{userId:int}-{sum:float}")]
         public async Task<ActionResult<float>> Refill(int userId, float sum)
         {
@@ -37,11 +37,14 @@ namespace API.Controllers
 
             _unitOfWork.User.Update(user);
 
-            return Ok(user.Money);
+            if(await _unitOfWork.Complete())
+                return Ok(user.Money);
+
+            return BadRequest("Не удалось положить деньги на счет");
         }
 
 
-        [Authorize]
+        //[Authorize]
         [HttpPut("ChangePassword")]
         public async Task<ActionResult<UserDto>> ChangePassword(ChangePassword item)
         {
@@ -69,6 +72,27 @@ namespace API.Controllers
             var users = await _unitOfWork.User.GetAll();
 
             return _mapper.Map<IEnumerable<UserDto>>(users);
-        }            
+        }
+
+        [HttpPut("ChangeRole/{id:int}/{role}")]
+        public async Task<ActionResult> ChangeRole(int id, string role)
+        {
+            var user = await _unitOfWork.User.Get(id);
+
+            if (user == null) return BadRequest("Пользователь не найден");
+
+            if (!(role == "admin" || role == "bukmeker" || role == "user"))    
+                return BadRequest("Нет такой роли");
+
+
+            user.Role = role;
+
+            _unitOfWork.User.Update(user);
+
+            if (await _unitOfWork.Complete())
+                return Ok("Роль изменена");
+
+            return BadRequest("Не удалось изменить роль");
+        }
     }
 }

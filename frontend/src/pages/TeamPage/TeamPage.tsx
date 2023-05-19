@@ -80,7 +80,7 @@ const Content = styled.div`
   margin-top: 60px;
   padding: 20px;
   border-radius: 16px;
-  width: 1600px;
+  width: 80vw;
   /* height: 850px; */
   background-color: whitesmoke;
 `;

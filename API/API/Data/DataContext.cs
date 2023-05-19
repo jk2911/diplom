@@ -18,6 +18,7 @@ namespace API.Data
         public virtual DbSet<BetValue> BetValue { get; set; }
         public virtual DbSet<UserBet> UserBets { get; set; }
         public virtual DbSet<HistoryBankAccount> HistoryBankAccounts { get; set; }
+        public virtual DbSet<UserChampBet> UserChampBets { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
@@ -26,18 +27,18 @@ namespace API.Data
         }
         public DataContext()
         {
-            //AddInfoInDatabase();
-            //Spain();
-            //Germany();
-            //England();
-            //Portugal();
-            //Denmark();
+            AddInfoInDatabase();
+            Spain();
+            Germany();
+            England();
+            Portugal();
+            Denmark();
         }
 
         public void AddInfoInDatabase()
         {
-            Database.EnsureDeletedAsync().Wait();
-            Database.EnsureCreatedAsync().Wait();
+            //Database.EnsureDeletedAsync().Wait();
+            //Database.EnsureCreatedAsync().Wait();
 
             IHashPassword hash = new HashPasswordService();
 

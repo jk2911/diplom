@@ -3,6 +3,7 @@ using API.DTOs;
 using API.Entities;
 using API.Interfaces;
 using AutoMapper;
+using Azure.Core;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Mvc;
 
@@ -108,15 +109,32 @@ namespace API.Controllers
             if (name.Length < 3)
                 return BadRequest("Длина названия должна быть минимум 3 символа");
 
-            if(name!=null)
+            if (region.Name != name)
+            {
+
+                var regionExists = await _unitOfWork.Region.GetRegionByName(name);
+
+                if (regionExists != null)
+                    return BadRequest("Такой регион уже существует");
+            }
+
+            if(name != null)
                 region.Name = name;
 
-            if(image!= null)
+            if (image != null)
+            {
+                if(region.Image != null)
+                    _photoService.RemovePhoto(region.Image.Replace(Request.Scheme + "://" + Request.Host.ToUriComponent() + "/", ""));
+
                 region.Image = _photoService.AddPhoto(Request, "images/regions/" + image.FileName, image);
+            }
 
             _unitOfWork.Region.Update(region);
 
-            return Ok("Регион изменен");
+            if(await _unitOfWork.Complete())
+                return Ok("Регион изменен");
+
+            return BadRequest("Не удалось изменить регион");
         }
     }
 }

@@ -7,6 +7,7 @@ import axios, { AxiosError } from "axios";
 
 export function Login(active: boolean, setActive: any) {
   const [email, setEmail] = useState("");
+  const [button, setButton] = useState("Войти");
   const [password, setPassword] = useState("");
   //const { user, loading, error } = useTypesSelector((state) => state.user);
   const [error, setError]=useState("");
@@ -14,21 +15,32 @@ export function Login(active: boolean, setActive: any) {
   const dispatch = useDispatch();
 
   const Login = async () => {
+    setButton("Вход...")
     try {
       const response = await axios.post(
         "https://localhost:7167/api/Account/Login",
         { email, password }
       );
       localStorage.setItem("token", response.data.token);
+      if(response.data.role == "admin")
+        window.location.assign("/admin")
+
+      if(response.data.role == "user")
       window.location.assign("/")
+
+      if(response.data.role == "bukmeker")
+      window.location.assign("/")
+
     } catch (e: unknown) {
       const error = e as AxiosError;
       // console.log(error.message);
       // console.log(error.response?.data);
       const message = error.response?.data as String;
       setError(message.toString());
+      console.log(message)
       //setErrorCreate(message.toString());
     }
+    setButton("Войти")
   };
 
   // useEffect(() => {
