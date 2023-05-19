@@ -55,5 +55,18 @@ namespace API.Data
             //return await _context.User.AddAsync(user);
             return null;
         }
+
+        public void DoBet(int userId, float amount)
+        {
+            var history = new HistoryBankAccount
+            {
+                Status = "Ставка",
+                Date = DateTime.Now,
+                UserId = userId,
+                Money = amount
+            };
+
+            _context.HistoryBankAccounts.Add(history);
+        }
     }
 }

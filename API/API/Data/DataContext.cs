@@ -27,18 +27,18 @@ namespace API.Data
         }
         public DataContext()
         {
-            AddInfoInDatabase();
-            Spain();
-            Germany();
-            England();
-            Portugal();
-            Denmark();
+            //AddInfoInDatabase();
+            //Spain();
+            //Germany();
+            //England();
+            //Portugal();
+            //Denmark();
         }
 
         public void AddInfoInDatabase()
         {
-            //Database.EnsureDeletedAsync().Wait();
-            //Database.EnsureCreatedAsync().Wait();
+            Database.EnsureDeletedAsync().Wait();
+            Database.EnsureCreatedAsync().Wait();
 
             IHashPassword hash = new HashPasswordService();
 

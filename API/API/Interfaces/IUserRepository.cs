@@ -8,5 +8,6 @@ namespace API.Interfaces
         Task<bool> UserExists(string email); 
         Task<User> GetUserByEmail(string email);
         Task<User> CreateAsync(User user);
+        void DoBet(int userId, float amount);
     }
 }

@@ -14,10 +14,16 @@ export function DoBet({ bet }: Props) {
 
     const token = localStorage.getItem("token");
     var money = 0;
+    var userId = 0;
+    var email = "";
+    var password = "";
 
     if (token != null) {
         const user: any = jwtDecode(token);
         money = user.money;
+        userId = user.id;
+        email = user.email;
+        password = user.password;
     }
 
     async function DoBet() {
@@ -32,10 +38,19 @@ export function DoBet({ bet }: Props) {
         }
 
         try {
+            console.log(amount)
             const response = await axios.post(
-                "https://localhost:7167/api/Account/Login"
+                "https://localhost:7167/api/Bet/DoBet/" + bet.betId + "-" + userId + "-" + amount
             );
-            localStorage.setItem("token", response.data.token);
+
+            const response1 = await axios.post(
+                "https://localhost:7167/api/User/GetToken?email=" + email
+            );
+                //console.log(response1.data);
+
+            localStorage.setItem("token",response1.data)
+
+            window.location.assign("");
 
         } catch (e: unknown) {
             const error = e as AxiosError;
@@ -52,7 +67,7 @@ export function DoBet({ bet }: Props) {
                 <input
                     type="number"
                     value={amount}
-                    placeholder="E-mail"
+                    placeholder="Сумма"
                     onChange={(e) => setAmount(Number(e.target.value))}
                 />
             </div>

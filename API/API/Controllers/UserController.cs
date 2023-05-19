@@ -43,6 +43,15 @@ namespace API.Controllers
             return BadRequest("Не удалось положить деньги на счет");
         }
 
+        [HttpPost("GetToken")]
+        public async Task<ActionResult> GetToken(string email)
+        {
+            var user = await _unitOfWork.User.GetUserByEmail(email);
+
+            var token = await _tokenService.CreateToken(user);
+
+            return Ok(token);
+        }
 
         //[Authorize]
         [HttpPut("ChangePassword")]

@@ -6,12 +6,12 @@ namespace API.Entities
     {
         [Key]
         public int Id { get; set; }
-        public int UserId;
+        public int UserId { get; set; }
         public virtual User User { get; set; }
 
         public int BetValueId { get; set; }
         public virtual BetValue BetValue { get; set; }
 
-        public float Money;
+        public float Money { get; set; }
     }
 }

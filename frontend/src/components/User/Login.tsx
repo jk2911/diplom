@@ -29,7 +29,7 @@ export function Login(active: boolean, setActive: any) {
       window.location.assign("/")
 
       if(response.data.role == "bukmeker")
-      window.location.assign("/")
+      window.location.assign("/bukmeker")
 
     } catch (e: unknown) {
       const error = e as AxiosError;

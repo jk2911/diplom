@@ -45,6 +45,32 @@ namespace API.Controllers
 
             return BadRequest("Не удалось создать исход");
         }
+        [HttpPost("DoBet/{betId:int}-{userId:int}-{amount:float}")]
+        public async Task<ActionResult> DoBet(int betId, int userId, float amount)
+        {
+            var user = await _unitOfWork.User.Get(userId);
+
+            if (user == null)
+                return BadRequest("");
+
+            var betValue = await _unitOfWork.Bet.GetBetValue(betId);
+
+            if (betValue == null)
+                return BadRequest("");
+
+            _unitOfWork.Bet.DoBet(betId, userId, amount);
+
+            user.Money -= amount;
+
+            _unitOfWork.User.Update(user);
+
+            _unitOfWork.User.DoBet(userId, amount);
+
+            if (await _unitOfWork.Complete())
+                return Ok();
+
+            return BadRequest("Не удалось сделать ставку");
+        }
 
     }
 }

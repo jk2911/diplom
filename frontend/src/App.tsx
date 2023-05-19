@@ -11,6 +11,8 @@ import { TeamPage } from "./pages/TeamPage/TeamPage";
 import { Header } from "./components/Header/Header";
 import { MatchPageAdmin } from "./pages/AdminPage/MatchPage/MatchPageAdmin";
 import { UserMatchPage } from "./pages/UserMatchPage/UserMatchPage";
+import { BukmekerPage } from "./pages/Bukmeker/BukmekerPage";
+import { BukmekerChampionshipPage } from "./pages/Bukmeker/ChampionshipPage";
 
 function App() {
   return (
@@ -30,10 +32,14 @@ function App() {
         <Route path="/admin/championship/*" element={<ChampionshipPage />} />
 
         <Route path="/admin/team/*" element={<TeamPage />} />
-        
+
         <Route path="/admin/match/*" element={<MatchPageAdmin />} />
 
         <Route path="/match" element={<UserMatchPage />} />
+
+        <Route path="/bukmeker" element={<BukmekerPage />} />
+
+        <Route path="/bukmeker/championship" element={<BukmekerChampionshipPage />} />
       </Routes>
     </BrowserRouter>
   );

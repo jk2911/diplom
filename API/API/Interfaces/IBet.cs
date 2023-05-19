@@ -6,5 +6,7 @@ namespace API.Interfaces
     {
         void AddBet(Match match, string name, int count);
         Task<bool> IsOutcomeInMatch(Match match, string name);
+        Task<BetValue> GetBetValue(int id);
+        void DoBet(int betId, int userId, float amount);
     }
 }

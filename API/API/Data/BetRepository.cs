@@ -46,6 +46,26 @@ namespace API.Data
             _context.Bet.Remove(bet);
         }
 
+        public void DoBet(int betId, int userId, float amount)
+        {
+            var betValue = _context.BetValue.Find(betId);
+
+            if (betValue == null) { return; }
+
+            var user = _context.User.Find(userId);
+
+            if (user == null) { return; }
+
+            var userBet = new UserBet
+            {
+                UserId = userId,
+                BetValueId = betId,
+                Money = amount
+            };
+
+            _context.UserBets.Add(userBet);
+        }
+
         public async Task<Bet> Get(int id)
         {
             return await _context.Bet.FindAsync(id);
@@ -54,6 +74,11 @@ namespace API.Data
         public async Task<IEnumerable<Bet>> GetAll()
         {
             return await _context.Bet.ToListAsync();
+        }
+
+        public async Task<BetValue> GetBetValue(int id)
+        {
+            return await _context.BetValue.FindAsync(id);
         }
 
         public async Task<bool> IsOutcomeInMatch(Match match, string name)

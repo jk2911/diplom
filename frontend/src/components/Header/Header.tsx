@@ -4,7 +4,7 @@ import { useTypesSelector } from "../../hooks/useTypedSelector";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchUser } from "../../store/action-creators/user";
-import type {} from "redux-thunk/extend-redux";
+import type { } from "redux-thunk/extend-redux";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "../../modal/Modal";
 import { Login } from "../User/Login";
@@ -15,7 +15,7 @@ import { Registration } from "../User/Registration";
 export function Header() {
   const { user, error, loading } = useTypesSelector((state) => state.user);
   const dispatch = useDispatch();
-  const [decoded, setDecoded] = useState<IToken>({id:"",money:"",email:"",role:""});
+  const [decoded, setDecoded] = useState<IToken>({ id: "", money: "", email: "", role: "" });
 
   const [activeLogin, setActiveLogin] = useState(false);
   const [activeRegistration, setActiveRegistration] = useState(false);
@@ -23,7 +23,7 @@ export function Header() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      const i:IToken = jwt_decode(token);
+      const i: IToken = jwt_decode(token);
       console.log(i);
       setDecoded(i);
       console.log(decoded)
@@ -46,17 +46,25 @@ export function Header() {
   return (
     <>
       <HeaderContainer>
-        <button onClick={toMain}>Главная</button>
-        <button>Матчи</button>
-        <button>Чемпионаты</button>
         <>
           {decoded.email != "" ? (
             <>
               {decoded.role == "user" ? (
-                <> {decoded.money} {" "}</>
+                <> <button onClick={toMain}>Главная</button> <div>{decoded.money}</div> {" "}</>
               ) : (
                 <>
-                  <button onClick={toAdmin}>Панель Администрирования</button>
+                </>
+              )}
+              {decoded.role == "admin" ? (
+                <> <button onClick={toAdmin}>Панель Администрирования</button></>
+              ) : (
+                <>
+                </>
+              )}
+              {decoded.role == "bukmeker" ? (
+                <> </>
+              ) : (
+                <>
                 </>
               )}
               {decoded.email} {decoded.role}
