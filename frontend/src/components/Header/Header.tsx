@@ -43,6 +43,10 @@ export function Header() {
     window.location.assign("/");
   };
 
+  const toUser = () => {
+    window.location.assign("/user");
+  };
+
   return (
     <>
       <HeaderContainer>
@@ -68,6 +72,13 @@ export function Header() {
                 </>
               )}
               {decoded.email} {decoded.role}
+
+              {decoded.role == "user" ? (
+                <> <button onClick={toUser}>Личный кабинет</button> </>
+              ) : (
+                <>
+                </>
+              )}
               <button onClick={exit}>Выйти</button>
             </>
           ) : (

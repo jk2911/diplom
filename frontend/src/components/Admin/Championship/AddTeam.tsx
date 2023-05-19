@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 interface Props {
   id: number;
-  setClose:any;
+  setClose: any;
 }
 
 export function AddTeamInChampionship({ id, setClose }: Props) {
@@ -22,6 +22,7 @@ export function AddTeamInChampionship({ id, setClose }: Props) {
       console.log(message.toString());
       //setErrorMessage(message.toString());
       setClose(true);
+      window.location.assign("/admin/championship/teams?id=" + id)
     } catch (e: unknown) {
       const error = e as AxiosError;
       // console.log(error.message);

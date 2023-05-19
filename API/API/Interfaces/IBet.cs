@@ -8,5 +8,6 @@ namespace API.Interfaces
         Task<bool> IsOutcomeInMatch(Match match, string name);
         Task<BetValue> GetBetValue(int id);
         void DoBet(int betId, int userId, float amount);
+        Task<IEnumerable<UserBet>> GetUserBets(int userId);
     }
 }

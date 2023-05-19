@@ -71,5 +71,30 @@ namespace API.Controllers
 
             return BadRequest("Не удалось сохранить");
         }
+        [HttpPost("CreateMatch")]
+        public async Task<ActionResult> CreateMatch()
+        {
+            var req = Request;
+            var date = getDate(req.Form["date"], req.Form["time"]);
+            var match = new Match
+            {
+                HomeId = Convert.ToInt32(req.Form["homeid"]),
+                AwayId = Convert.ToInt32(req.Form["awayid"]),
+                ChampionshipId = Convert.ToInt32(req.Form["championshipid"]),
+                DateTime = date,
+            };
+
+            _unitOfWork.Match.Create(match);
+
+            if(await _unitOfWork.Complete())
+                return Ok();
+
+            return BadRequest();
+        }
+        public static DateTime getDate(string date, string time)
+        {
+
+            return DateTime.Parse(date + " " + time);
+        }
     }
 }

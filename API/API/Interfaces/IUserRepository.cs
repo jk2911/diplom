@@ -9,5 +9,6 @@ namespace API.Interfaces
         Task<User> GetUserByEmail(string email);
         Task<User> CreateAsync(User user);
         void DoBet(int userId, float amount);
+        Task<IEnumerable<HistoryBankAccount>> GetHistoryBankAccounts(int userId);
     }
 }

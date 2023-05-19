@@ -14,6 +14,7 @@ import { UserMatchPage } from "./pages/UserMatchPage/UserMatchPage";
 import { BukmekerPage } from "./pages/Bukmeker/BukmekerPage";
 import { BukmekerChampionshipPage } from "./pages/Bukmeker/ChampionshipPage";
 import { BukmekerMatchPage } from "./pages/Bukmeker/MatchPage";
+import { UserPage } from "./pages/UserPage/UserPage";
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
           element={<Navigate to="/admin/regions" replace />}
         />
         <Route path="/admin/*" element={<AdminPage />} />
-        
+
         <Route path="/admin/region/*" element={<RegionPage />} />
 
         <Route path="/admin/championship/*" element={<ChampionshipPage />} />
@@ -43,6 +44,12 @@ function App() {
         <Route path="/bukmeker/championship/*" element={<BukmekerChampionshipPage />} />
 
         <Route path="/bukmeker/match/*" element={<BukmekerMatchPage />} />
+
+        <Route path="/user/*" element={<UserPage />} />
+
+        {/* <Route path="/user/bets/*" element={<UserPage />} />
+
+        <Route path="/user/history/*" element={<BukmekerMatchPage />} /> */}
 
 
       </Routes>

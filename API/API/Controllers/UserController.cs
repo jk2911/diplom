@@ -25,7 +25,7 @@ namespace API.Controllers
 
         //[Authorize]
         [HttpPost("Refill/{userId:int}-{sum:float}")]
-        public async Task<ActionResult<float>> Refill(int userId, float sum)
+        public async Task<ActionResult<string>> Refill(int userId, float sum)
         {
             if (sum < 2) return BadRequest("The money should not be less than 2");
 
@@ -38,7 +38,10 @@ namespace API.Controllers
             _unitOfWork.User.Update(user);
 
             if(await _unitOfWork.Complete())
-                return Ok(user.Money);
+            {
+                var token = await _tokenService.CreateToken(user);
+                return Ok(token);
+            }
 
             return BadRequest("Не удалось положить деньги на счет");
         }
@@ -83,6 +86,14 @@ namespace API.Controllers
             return _mapper.Map<IEnumerable<UserDto>>(users);
         }
 
+        [HttpGet("GetUser")]
+        public async Task<UserDto> GetUser(string email)
+        {
+            var user = await _unitOfWork.User.GetUserByEmail(email);
+
+            return _mapper.Map<UserDto>(user);
+        }
+
         [HttpPut("ChangeRole/{id:int}/{role}")]
         public async Task<ActionResult> ChangeRole(int id, string role)
         {
@@ -102,6 +113,11 @@ namespace API.Controllers
                 return Ok("Роль изменена");
 
             return BadRequest("Не удалось изменить роль");
+        }
+        [HttpGet("GetHistoryUser")]
+        public async Task<IEnumerable<HistoryBankAccount>> GetHistoryBankAccount(int id)
+        {
+            return await _unitOfWork.User.GetHistoryBankAccounts(id);
         }
     }
 }

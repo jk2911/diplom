@@ -81,6 +81,15 @@ namespace API.Data
             return await _context.BetValue.FindAsync(id);
         }
 
+        public async Task<IEnumerable<UserBet>> GetUserBets(int userId)
+        {
+            var userBets = await _context.UserBets.
+                Where(i=>i.UserId==userId).
+                ToListAsync();
+
+            return userBets;
+        }
+
         public async Task<bool> IsOutcomeInMatch(Match match, string name)
         {
             var bet = match.Bets.FirstOrDefault(b=>b.Name==name);

@@ -68,5 +68,14 @@ namespace API.Data
 
             _context.HistoryBankAccounts.Add(history);
         }
+
+        public async Task<IEnumerable<HistoryBankAccount>> GetHistoryBankAccounts(int userId)
+        {
+            var history = await _context.HistoryBankAccounts.
+                Where(h=>h.UserId==userId).
+                ToListAsync();
+
+            return history;
+        }
     }
 }

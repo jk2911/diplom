@@ -1,4 +1,5 @@
 ﻿using API.Controllers.Base;
+using API.Entities;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -70,6 +71,11 @@ namespace API.Controllers
                 return Ok();
 
             return BadRequest("Не удалось сделать ставку");
+        }
+        [HttpGet("GetUserBets")]
+        public async Task<IEnumerable<UserBet>> GetUserBets(int id)
+        {
+            return await _unitOfWork.Bet.GetUserBets(id);
         }
 
     }
