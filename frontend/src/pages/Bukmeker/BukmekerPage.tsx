@@ -8,7 +8,7 @@ export function BukmekerPage() {
     const navigate = useNavigate()
 
     function toChampionship(id: number) {
-        navigate("/bukmeker/championship?id=" + id)
+        navigate("/bukmeker/championship/calendar?id=" + id)
     }
 
     return (
@@ -68,4 +68,18 @@ const RowItem = styled(Row)`
   border: 1px #ccc solid;
   cursor: pointer;
   list-style: none;
+`;
+
+const TabElement = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  padding: 9px 20px;
+  font-size: 18px;
+  /* box-shadow: 2px 5px 25px -3px ${(props) => props.theme.textShadow}; */
+  border-radius: 10px;
+  /* background-color: ${(props) => props.theme.tabsBackColor};
+  color: ${(props) => props.theme.paginationButtonColor}; */
+  cursor: pointer;
 `;

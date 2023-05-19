@@ -55,7 +55,7 @@ export function Bet({ bet, removeBet, index }: BetProps) {
       {bet.values.map((bv) => (
         <div key={bv.id}>{BetValueInput(bv)}</div>
       ))}
-      <button onClick={() => removeBet(index)}> Удалить исход</button>
+      {/* <button onClick={() => removeBet(index)}> Удалить исход</button> */}
     </div>
   );
 }
