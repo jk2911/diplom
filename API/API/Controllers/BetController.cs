@@ -89,9 +89,14 @@ namespace API.Controllers
 
             var bets = _mapper.Map<IEnumerable<Bet>>(matchDto.Bets);
 
-            _unitOfWork.Bet.SaveBetsMatch(bets);
+            _unitOfWork.Bet.SaveBetsResultMatch(bets);
 
-            if(await  _unitOfWork.Complete())
+            if (!await _unitOfWork.Complete())
+                return BadRequest("Не удалось сохранить результаты ставок");
+
+            _unitOfWork.Bet.DefineUserBets(match.Id);
+
+            if (await _unitOfWork.Complete())
                 return Ok("Сохранено");
 
             return BadRequest("Не удалось сохранить");

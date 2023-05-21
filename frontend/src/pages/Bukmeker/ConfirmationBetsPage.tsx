@@ -10,6 +10,7 @@ import { useState } from "react";
 import axios, { AxiosError } from "axios";
 
 export function ConfirmationBetsPage() {
+    const [saveButton, setSaveButton] = useState("Сохранить");
     const [params, setParams] = useSearchParams();
 
     const id = params.get("id");
@@ -20,18 +21,19 @@ export function ConfirmationBetsPage() {
         <Content>
             {loading && <div>Загрузка</div>}
             {match && (
-                <>{Match(match)}</>)}
+                <>{Match(match, setSaveButton, saveButton)}</>)}
         </Content>
     </Container>)
 }
 
 
 
-function Match(match: IMatch) {
+function Match(match: IMatch, setSaveButton: any, saveButton: string) {
+
     match.dateTime = new Date(match.dateTime);
 
     async function SaveBets() {
-        console.log("saving")
+        setSaveButton("Сохранение...");
         try {
             const response = await axios.put(
                 "https://localhost:7167/api/Bet/SaveConfirmBets",
@@ -42,6 +44,7 @@ function Match(match: IMatch) {
             const error = e as AxiosError;
             const message = error.response?.data as String;
         }
+        setSaveButton("Сохранить");
     }
 
     return (
@@ -58,7 +61,7 @@ function Match(match: IMatch) {
                     src={match.away.image != null ? match.away.image : image}
                     style={{ minHeight: 10, maxHeight: 70, minWidth: 10, maxWidth: 70 }}
                 />
-                <button style={{ width: "150px" }} onClick={SaveBets}>Сохранить</button>
+                <button style={{ width: "150px" }} onClick={SaveBets}>{saveButton}</button>
             </Row>
             <Row>
                 <div>

@@ -41,6 +41,45 @@ namespace API.Data
             _context.Bet.Add(item);
         }
 
+        public void DefineUserBets(int matchId)
+        {
+            var match = _context.Match.Find(matchId);
+
+            if (match == null) return;
+
+            foreach(var bet in match.Bets)
+            {
+                foreach(var betValue in bet.Values)
+                {
+                    var userBets = _context.UserBets.
+                        Where(b => b.BetValueId == betValue.Id);
+
+                    foreach (var userBet in userBets)
+                    {
+                        var user = _context.User.
+                            FirstOrDefault(u => u.Id == userBet.UserId);
+
+                        if (user != null)
+                        {
+                            if (betValue.IsConfirm == true && userBet.IsWin == null)
+                            {
+                                user.Money += userBet.Money * userBet.Value;
+
+                                userBet.IsWin = true;
+                            }
+                            else if (betValue.IsConfirm == false && userBet.IsWin == null)
+                            {
+                                userBet.IsWin = false;
+                            }
+
+                            _context.Entry(userBet).State = EntityState.Modified;
+                            _context.Entry(user).State = EntityState.Modified;
+                        }
+                    }
+                }
+            }
+        }
+
         public void Delete(Bet bet)
         {
             _context.Bet.Remove(bet);
@@ -60,7 +99,8 @@ namespace API.Data
             {
                 UserId = userId,
                 BetValueId = betId,
-                Money = amount
+                Money = amount, 
+                Value = betValue.Value
             };
 
             _context.UserBets.Add(userBet);
@@ -92,16 +132,16 @@ namespace API.Data
 
         public async Task<bool> IsOutcomeInMatch(Match match, string name)
         {
-            var bet = match.Bets.FirstOrDefault(b=>b.Name==name);
-             
-            if (bet==null)
+            var bet = match.Bets.FirstOrDefault(b => b.Name == name);
+
+            if (bet == null)
             {
                 return false;
             }
             return true;
         }
 
-        public void SaveBetsMatch(IEnumerable<Bet> bets)
+        public void SaveBetsResultMatch(IEnumerable<Bet> bets)
         {
             foreach(var bet in bets)
             {
@@ -114,7 +154,7 @@ namespace API.Data
 
         public void Update(Bet item)
         {
-            _context.Entry(item).State= EntityState.Modified;
+            _context.Entry(item).State = EntityState.Modified;
         }
     }
 }

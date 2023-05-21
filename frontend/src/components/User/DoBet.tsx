@@ -40,7 +40,7 @@ export function DoBet({ bet }: Props) {
         try {
             console.log(amount)
             const response = await axios.post(
-                "https://localhost:7167/api/Bet/DoBet/" + bet.betId + "-" + userId + "-" + amount
+                "https://localhost:7167/api/Bet/DoBet/" + bet.id + "-" + userId + "-" + amount
             );
 
             const response1 = await axios.post(

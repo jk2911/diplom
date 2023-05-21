@@ -53,13 +53,14 @@ namespace API.Data
             {
                 Email = "444",
                 Password = hash.CreateHash("444"),
-                Role = "user"
+                Role = "user",
+                Money = 200
             };
 
             User user2 = new User
             {
                 Email = "555",
-                Password = hash.CreateHash("444"),
+                Password = hash.CreateHash("555"),
                 Role = "bukmeker"
             };
 

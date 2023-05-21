@@ -7,5 +7,6 @@ export interface IUserBet {
     user: IUser,
     betValueId: number,
     betValue: IBetValue,
-    money: number
+    money: number,
+    isWin: boolean
 }
