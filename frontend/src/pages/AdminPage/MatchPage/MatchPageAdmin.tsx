@@ -323,7 +323,6 @@ export function MatchPageAdmin() {
                   </div>
                 </div>
                 <button onClick={() => setAddBet(true)}>Добавить</button>
-                {/* <button onClick={Save}>Сохранить</button> */}
                 <BetsValue bets={bets} removeBet={RemoveBet} setBets={() => setBets} />
               </div>
 

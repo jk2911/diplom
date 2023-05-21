@@ -9,5 +9,6 @@ namespace API.Interfaces
         Task<BetValue> GetBetValue(int id);
         void DoBet(int betId, int userId, float amount);
         Task<IEnumerable<UserBet>> GetUserBets(int userId);
+        void SaveBetsMatch(IEnumerable<Bet> bets);
     }
 }

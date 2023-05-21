@@ -101,6 +101,17 @@ namespace API.Data
             return true;
         }
 
+        public void SaveBetsMatch(IEnumerable<Bet> bets)
+        {
+            foreach(var bet in bets)
+            {
+                foreach (var betValue in bet.Values)
+                {
+                    _context.Entry(betValue).State = EntityState.Modified;
+                }
+            }
+        }
+
         public void Update(Bet item)
         {
             _context.Entry(item).State= EntityState.Modified;

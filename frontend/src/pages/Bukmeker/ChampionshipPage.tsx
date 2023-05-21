@@ -6,6 +6,7 @@ import { ChampionshipTeams } from "../ChampionshipPage/ChampionshipTeams";
 import { MatchCalendar } from "../ChampionshipPage/MatchCalendar";
 import { ResultsMatch } from "../ChampionshipPage/ResultsMatch";
 import { BukmekerCalendarMatches } from "./CalendarMatches";
+import { BukmekerResultsMatch } from "./ResultsMatch";
 
 export function BukmekerChampionshipPage() {
     const [params, setParams] = useSearchParams();
@@ -44,7 +45,7 @@ export function BukmekerChampionshipPage() {
                         />
                         <Route
                             path="/results"
-                            element={<BukmekerCalendarMatches id={championship.id} />}
+                            element={<BukmekerResultsMatch id={championship.id} />}
                         />
                     </Routes>
                 </div>

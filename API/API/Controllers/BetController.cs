@@ -1,4 +1,5 @@
 ﻿using API.Controllers.Base;
+using API.DTOs;
 using API.Entities;
 using API.Interfaces;
 using AutoMapper;
@@ -76,6 +77,24 @@ namespace API.Controllers
         public async Task<IEnumerable<UserBet>> GetUserBets(int id)
         {
             return await _unitOfWork.Bet.GetUserBets(id);
+        }
+
+        [HttpPut("SaveConfirmBets")]
+        public async Task<ActionResult> SaveConfirmBets(MatchDTO matchDto)
+        {
+            var match = await _unitOfWork.Match.Get(matchDto.Id);
+
+            if (match == null)
+                return BadRequest("Матч не найден");
+
+            var bets = _mapper.Map<IEnumerable<Bet>>(matchDto.Bets);
+
+            _unitOfWork.Bet.SaveBetsMatch(bets);
+
+            if(await  _unitOfWork.Complete())
+                return Ok("Сохранено");
+
+            return BadRequest("Не удалось сохранить");
         }
 
     }

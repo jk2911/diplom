@@ -16,6 +16,7 @@ const newBetValue: IBetValue = {
   name: "",
   value: 1,
   betId: 1,
+  isConfirm: undefined
 };
 
 export function UserMatchPage() {
@@ -29,7 +30,7 @@ export function UserMatchPage() {
 
   const { match, error, loading } = useMatch(id);
 
-  function modalBet(newBet:IBetValue){
+  function modalBet(newBet: IBetValue) {
     setBet(newBet);
     setActiveBet(true);
   }
@@ -64,7 +65,7 @@ export function UserMatchPage() {
             </div>
             <MatchBets bets={match.bets} setBet={modalBet} />
             <Modal active={activeBet} setActive={setActiveBet}>
-              <DoBet bet={bet}/>
+              <DoBet bet={bet} />
             </Modal>
           </div>
         )}

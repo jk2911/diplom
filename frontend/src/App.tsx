@@ -15,6 +15,7 @@ import { BukmekerPage } from "./pages/Bukmeker/BukmekerPage";
 import { BukmekerChampionshipPage } from "./pages/Bukmeker/ChampionshipPage";
 import { BukmekerMatchPage } from "./pages/Bukmeker/MatchPage";
 import { UserPage } from "./pages/UserPage/UserPage";
+import { ConfirmationBetsPage } from "./pages/Bukmeker/ConfirmationBetsPage";
 
 function App() {
   return (
@@ -44,6 +45,8 @@ function App() {
         <Route path="/bukmeker/championship/*" element={<BukmekerChampionshipPage />} />
 
         <Route path="/bukmeker/match/*" element={<BukmekerMatchPage />} />
+
+        <Route path="/bukmeker/resultsMatch/*" element={<ConfirmationBetsPage />} />
 
         <Route path="/user/*" element={<UserPage />} />
 

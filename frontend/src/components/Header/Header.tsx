@@ -24,9 +24,7 @@ export function Header() {
     const token = localStorage.getItem("token");
     if (token) {
       const i: IToken = jwt_decode(token);
-      console.log(i);
       setDecoded(i);
-      console.log(decoded)
     }
   }, []);
 
