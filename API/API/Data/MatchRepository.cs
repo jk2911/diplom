@@ -15,7 +15,24 @@ namespace API.Data
 
         public void Create(Match item)
         {
+            var bets = item.Bets.ToList();
+
             _context.Match.Add(item);
+
+            foreach(var bet in bets)
+            {
+                var betValues = bet.Values.ToList();
+
+                bet.MatchId = item.Id;
+
+                _context.Bet.Add(bet);
+
+                foreach(var i in betValues){
+                    i.BetId = bet.Id;
+
+                    _context.BetValue.Add(i);
+                }
+            }
         }
 
         public void Delete(Match item)

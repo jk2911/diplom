@@ -66,11 +66,7 @@ export function Login(active: boolean, setActive: any) {
         value={error ? error : ""}
         onChange={(e) => setPassword(e.target.value)} 
       /> */}
-      <StyledInput
-        type="text"
-        placeholder="password"
-        value={error}
-      />
+      <div>{error}</div>
       <button onClick={Login}>Войти</button>
     </Form>
   );

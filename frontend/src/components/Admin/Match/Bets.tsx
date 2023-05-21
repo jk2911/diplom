@@ -24,7 +24,7 @@ const newBetValue: IBetValue = {
 
 export function BetsValue({ bets, setBets, removeBet }: Props) {
   return (
-    <div>
+    <div style={{ margin: "20px" }}>
       {bets.map((bet, index) => (
         <Bet bet={bet} key={bet.id} removeBet={removeBet} index={index} />
       ))}
@@ -50,7 +50,7 @@ export function Bet({ bet, removeBet, index }: BetProps) {
   }
 
   return (
-    <div>
+    <div style={{ margin: "20px" }}>
       <input type="text" value={name} onChange={(e) => SetName(e)} />
       {bet.values.map((bv) => (
         <div key={bv.id}>{BetValueInput(bv)}</div>

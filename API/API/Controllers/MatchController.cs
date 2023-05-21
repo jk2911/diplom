@@ -11,11 +11,13 @@ namespace API.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly ICreatingBet _creatingBet;
 
-        public MatchController(IUnitOfWork unitOfWork, IMapper mapper)
+        public MatchController(IUnitOfWork unitOfWork, IMapper mapper, ICreatingBet creatingBet)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _creatingBet = creatingBet;
         }
 
         [HttpGet("GetUpcomingMatches")]
@@ -59,7 +61,7 @@ namespace API.Controllers
         {
             return await _unitOfWork.Match.Get(id);
         }
-        [HttpPost("EditMatch")]
+        [HttpPut("EditMatch")]
         public async Task<ActionResult> EditMatch(MatchDTO matchDTO)
         {
             var match = _mapper.Map<Match>(matchDTO);
@@ -82,6 +84,7 @@ namespace API.Controllers
                 AwayId = Convert.ToInt32(req.Form["awayid"]),
                 ChampionshipId = Convert.ToInt32(req.Form["championshipid"]),
                 DateTime = date,
+                Bets = _creatingBet.CreateBet()
             };
 
             _unitOfWork.Match.Create(match);

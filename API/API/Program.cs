@@ -30,11 +30,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-//builder.Services.AddTransient<IUserRepository ,UserRepository>();
 builder.Services.AddTransient<IHashPassword, HashPasswordService>();
 builder.Services.AddTransient<ITokenService, TokenService>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<IPhotoService, PhotoService>();
+builder.Services.AddTransient<ICreatingBet, CreatingBet>();
 
 
 builder.Services.AddControllers();

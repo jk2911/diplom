@@ -27,6 +27,8 @@ const newBet: IBet = {
 };
 
 export function MatchPageAdmin() {
+  const [buttonSave, setButtonSave] = useState("Сохранить");
+
   const [homeGoal, setGoalHome] = useState(0);
   const [awayGoal, setGoalAway] = useState(0);
 
@@ -106,10 +108,11 @@ export function MatchPageAdmin() {
   }
 
   async function Save() {
+    setButtonSave("Сохранение...")
     try {
       setMatchStatistic();
       console.log(match)
-      const response = await axios.post(
+      const response = await axios.put(
         "https://localhost:7167/api/Match/EditMatch",
         // JSON.stringify(match)
         match
@@ -125,6 +128,7 @@ export function MatchPageAdmin() {
       console.log(message.toString());
       console.log(error.response?.data)
     }
+    setButtonSave("Сохранить");
   }
 
   const setStatistics = () => {
@@ -181,22 +185,12 @@ export function MatchPageAdmin() {
                   maxWidth: 70,
                 }}
               />
-              <button onClick={Save}>Сохранить</button>
+              <button onClick={Save}>{buttonSave}</button>
             </div>
 
-            <div className="tabs">
-              <input
-                type="radio"
-                name="tab-btn"
-                id="tab-btn-1"
-                value=""
-                checked
-              />
-              <label htmlFor="tab-btn-1">Статистика</label>
-              <input type="radio" name="tab-btn" id="tab-btn-2" value="" />
-              <label htmlFor="tab-btn-2">Ставки</label>
-              <div id="content-1">
-                <div id="content-2">
+            <div>
+              <div>
+                <div>
                   <div>
                     <>Голы</>
                     <input
