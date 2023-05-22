@@ -61,11 +61,22 @@ namespace API.Data
 
                         if (user != null)
                         {
+
                             if (betValue.IsConfirm == true && userBet.IsWin == null)
                             {
+                                var history = new HistoryBankAccount
+                                {
+                                    Status = "Выигрыш",
+                                    Date = DateTime.Now,
+                                    UserId = user.Id
+                                };
+
+                                history.Money = userBet.Money * userBet.Value;
                                 user.Money += userBet.Money * userBet.Value;
 
                                 userBet.IsWin = true;
+
+                                _context.HistoryBankAccounts.Add(history);
                             }
                             else if (betValue.IsConfirm == false && userBet.IsWin == null)
                             {

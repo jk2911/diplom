@@ -58,7 +58,10 @@ namespace API.Controllers
             var betValue = await _unitOfWork.Bet.GetBetValue(betId);
 
             if (betValue == null)
-                return BadRequest("");
+                return BadRequest("Ставка не найдена");
+
+            if (amount > user.Money)
+                return BadRequest("Сумма ставки превышает количество денег на игровом счету");
 
             _unitOfWork.Bet.DoBet(betId, userId, amount);
 

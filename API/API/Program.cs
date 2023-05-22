@@ -4,6 +4,9 @@ using API.Interfaces;
 using API.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Stripe;
+using Stripe.BillingPortal;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions { WebRootPath = "images" });
 
@@ -31,7 +34,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 builder.Services.AddTransient<IHashPassword, HashPasswordService>();
-builder.Services.AddTransient<ITokenService, TokenService>();
+builder.Services.AddTransient<ITokenService, API.Service.TokenService>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<IPhotoService, PhotoService>();
 builder.Services.AddTransient<ICreatingBet, CreatingBet>();
@@ -49,6 +52,8 @@ builder.Services.AddCors();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 
 var app = builder.Build();
+
+StripeConfiguration.ApiKey = "pk_test_51NARb7Gz5uGo5QlBiaipOfWWZsSEdmBVLCzgIc2egWJnA6ejh0XbglOAKHrjagDkyoFc5rWj6YvuxWOEsjOYakg600sx98j5Ow";
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

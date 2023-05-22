@@ -5,6 +5,7 @@ using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Stripe.Checkout;
 
 namespace API.Controllers
 {
@@ -31,7 +32,7 @@ namespace API.Controllers
 
             User user = await _unitOfWork.User.Get(userId);
 
-            if (user == null) return NotFound("User not found");
+            if (user == null) return NotFound("Пользователь не найден");
 
             user.Money += sum;
 

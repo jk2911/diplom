@@ -52,7 +52,7 @@ export function Header() {
           {decoded.email != "" ? (
             <>
               {decoded.role == "user" ? (
-                <> <button onClick={toMain}>Главная</button> <div>{decoded.money}</div> {" "}</>
+                <> <button onClick={toMain}>Главная</button> <div>{decoded.money}{": BYN"}</div> {" "}</>
               ) : (
                 <>
                 </>
@@ -69,7 +69,7 @@ export function Header() {
                 <>
                 </>
               )}
-              {decoded.email} {decoded.role}
+              {decoded.email} 
 
               {decoded.role == "user" ? (
                 <> <button onClick={toUser}>Личный кабинет</button> </>
