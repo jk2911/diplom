@@ -4,7 +4,7 @@ import { useTypesSelector } from "../../hooks/useTypedSelector";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchUser } from "../../store/action-creators/user";
-import type {} from "redux-thunk/extend-redux";
+import type { } from "redux-thunk/extend-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { Modal } from "../../modal/Modal";
 import { Login } from "../User/Login";
@@ -68,7 +68,10 @@ export function Header() {
           {decoded.email != "" ? (
             <ItemContainer>
               {decoded.role == "admin" && <><Item onClick={toAdmin}>Главная</Item></>}
-              {decoded.role == "user" && <><Item onClick={toMain}>Главная</Item><Item>Кабинет</Item></>}
+              {decoded.role == "user" && <><Item onClick={toMain}>Главная</Item><Item onClick={toUser}>Личный кабинет</Item>
+                <Item>
+                  {decoded.money} :BYN
+                </Item></>}
               {decoded.role == "bukmeker" && <><Item onClick={toBukmeker}>Главная</Item></>}
               <Item onClick={exit}>Выйти</Item>
             </ItemContainer>
@@ -104,7 +107,8 @@ const Container = styled.div`
   height: 50px;
   color: #10a110;
 
-  background-color: #10a110;
+  //background-color: #10a110;
+  background-color:blue;
   transition: all 0.5s ease;
 `;
 

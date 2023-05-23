@@ -1,8 +1,8 @@
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
-import { Form } from "react-router-dom";
-import { CardElement } from "@stripe/react-stripe-js";
-import { Card } from "react-bootstrap";
+import { useUserCards } from "../../hooks/card";
+import { Modal } from "../../modal/Modal";
+import { AddNewCard } from "./AddNewCard";
 
 interface Props {
   id: number;
@@ -12,14 +12,21 @@ export function AddMoney({ id }: Props) {
   const [button, setButton] = useState("Положить");
   const [amount, setAmount] = useState(2);
   const [error, setError] = useState("");
+  const [card, setCard] = useState(0);
+  const [activeAddCard, setActiveAddCard] = useState(false);
+  const { cards, error: errorCards, loading } = useUserCards(id);
 
   const Add = async () => {
+    if (card == 0) {
+      setActiveAddCard(true);
+      return;
+    }
+
     setButton("...");
 
     try {
       const response = await axios.post(
-        //"https://localhost:7167/api/User/Refill/" + id + "-" + amount
-        "https://localhost:7167/api/User/exa"
+        "https://localhost:7167/api/User/Refill/" + id + "-" + amount
       );
       const user = response.data;
       console.log(user);
@@ -35,16 +42,24 @@ export function AddMoney({ id }: Props) {
 
   return (
     <div>
+      <select onChange={e => setCard(Number(e.target.value))}>
+        <option value={0}>Добавить новую карту</option>
+        {loading && <>Загрузка</>}
+        {cards.map((c) => (<option value={c.id} key={c.id}>{c.number}</option>))}
+      </select>
       <input
-                type="number"
-                value={amount}
-                placeholder="E-mail"
-                onChange={(e) => setAmount(Number(e.target.value))}
-            />
-            <div style={{ height: 30, width: 120 }}>{error}</div>
-    
-    
+        type="number"
+        value={amount}
+        placeholder="E-mail"
+        onChange={(e) => setAmount(Number(e.target.value))}
+      />
+      <div style={{ height: 30, width: 120 }}>{error}</div>
+
+
       <button onClick={Add}>{button}</button>
+      <Modal active={activeAddCard} setActive={setActiveAddCard}>
+        <AddNewCard id={id} amount={amount} />
+      </Modal>
     </div>
   );
 }

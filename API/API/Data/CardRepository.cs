@@ -32,6 +32,13 @@ namespace API.Data
             return await _context.Cards.ToListAsync();
         }
 
+        public async Task<IEnumerable<Card>> GetUserCards(int userId)
+        {
+            return await _context.Cards.
+                Where(c => c.UserId == userId).
+                ToListAsync();
+        }
+
         public void Update(Card item)
         {
             _context.Entry(item).State = EntityState.Modified;
