@@ -23,8 +23,6 @@ export function RegionsUpcomingMatches({
   //   dispatch(fetchUser("333", "333"))
   // },[])
 
-  console.log(user);
-
   return (
     <Row>
       {loading && <>Загрузка</>}

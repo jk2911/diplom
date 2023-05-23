@@ -17,7 +17,6 @@ export function useRegionsUpcomingMatches() {
       );
       setRegions(response.data);
       setLoading(false);
-      console.log(response.data)
     } catch (e: unknown) {
       const error = e as AxiosError;
       setLoading(false);

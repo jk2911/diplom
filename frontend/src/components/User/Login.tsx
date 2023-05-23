@@ -61,16 +61,28 @@ export function Login(active: boolean, setActive: any) {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-       {/* <StyledInput
-        type="text"
-        value={error ? error : ""}
-        onChange={(e) => setPassword(e.target.value)} 
-      /> */}
       <div>{error}</div>
-      <button onClick={Login}>Войти</button>
+      <StyledButton onClick={Login}>Войти</StyledButton>
     </Form>
   );
 }
+
+const StyledButton = styled.button`
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 56px;
+  padding-left: 60px;
+  padding-right: 60px;
+  font-size: 18px;
+  font-family: 'Montserrat-Bold';
+  text-align: center;
+  border: none;
+  :hover {
+    cursor: pointer;
+  }
+  transition-duration: 0.4s;
+`
 
 export const Container = styled.div`
   position: fixed;
@@ -100,7 +112,7 @@ export const Form = styled.div`
   padding: 20px;
   border-radius: 16px;
   background-color: ${(props) => props.theme.loginForm};
-  box-shadow: 2px 5px 25px -3px ${(props) => props.theme.textShadow};
+  /* box-shadow: 2px 5px 25px -3px ${(props) => props.theme.textShadow}; */
 `;
 
 const StyledInput = styled.input`
@@ -108,6 +120,7 @@ const StyledInput = styled.input`
   width: 400px;
   height: 49.48px;
   padding-left: 25px;
+  margin-bottom: 20px;
   font-family: "Poppins";
   font-style: normal;
   font-weight: 400;

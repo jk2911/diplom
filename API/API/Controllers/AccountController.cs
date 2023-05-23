@@ -26,7 +26,7 @@ namespace API.Controllers
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
             if (await _unitOfWork.User.UserExists(registerDto.Email))
-                return BadRequest("User is taken");
+                return BadRequest("Пользователь уже существует");
 
             User user = _mapper.Map<User>(registerDto);
 
@@ -40,7 +40,7 @@ namespace API.Controllers
 
                 return userDto;
 
-            return BadRequest("Failed to create user");
+            return BadRequest("Не удалось создать аккаунт");
         }
         [HttpPost("Login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginUser)
@@ -48,10 +48,10 @@ namespace API.Controllers
             var user = await _unitOfWork.User.
                 GetUserByEmail(loginUser.Email);
 
-            if (user is null) return BadRequest("Invalid email");
+            if (user is null) return BadRequest("E-mail не найден");
 
             if (user.Password != _hashPassword.CreateHash(loginUser.Password))
-                return BadRequest("Invalid password");
+                return BadRequest("Неверный пароль");
 
             return new UserDto
             {

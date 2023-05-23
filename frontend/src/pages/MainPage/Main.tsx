@@ -3,6 +3,7 @@ import { Col, Row } from "react-bootstrap";
 import { RegionsUpcomingMatches } from "../../components/Main/regions upcoming matches";
 import { UpcomingMatchesSortedByRegion } from "../../components/Main/upcoming matches sorted by regions";
 import styled from "styled-components";
+import { Header } from "../../components/Header/Header";
 
 export function MainPage() {
   const [championship, setChampionship] = useState(0);
@@ -40,7 +41,8 @@ const Container = styled.div`
   background-repeat: no-repeat;
   background-position: 50%;
   background-size: cover;
-  background-image: url("https://s1.1zoom.ru/big3/335/Footbal_Men_Ball_Legs_493200.jpg");
+  //background-image: url("https://s1.1zoom.ru/big3/335/Footbal_Men_Ball_Legs_493200.jpg");
+  background-color: #10a110;
 `;
 
 const Content = styled.div`

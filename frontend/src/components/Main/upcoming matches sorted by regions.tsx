@@ -9,7 +9,7 @@ import { IMatch } from "../../entity/Match";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 // import image from "D:/bstu/diplom/frontend/src/assets/main_matches.jpg";
-import image from "../../assets/main_matches.jpg"
+import image from "../../assets/main_matches.jpg";
 
 interface Props {
   championship: number;
@@ -45,34 +45,37 @@ export function UpcomingMatchesSortedByRegion({
     setSelectedChampionhships(
       championships.filter((c) => c.championship.id == championship)
     );
-
-    console.log(selectedChampionships);
   };
 
   return (
     <Row>
       {/* <img src={image} style={{ minHeight: 80, minWidth: 40 }} /> */}
       <ButtonCon onClick={() => setChampionship(0)}>Все</ButtonCon>
-      <table>
-        {loading && <>Загрузка</>}
-        {selectedChampionships.map((ch) => (
-          <div key={ch.id}>
-            <ChampionshipTr>
-              <img
-                src={ch.championship.image}
-                style={{
-                  minHeight: 10,
-                  minWidth: 10,
-                  maxHeight: 20,
-                  maxWidth: 20,
-                }}
-              />
-              {ch.championship.region.name}.{ch.championship.name}
-            </ChampionshipTr>
-            <tr>{ch.matches.map((match) => Match(match))}</tr>
-          </div>
-        ))}
-      </table>
+
+      {loading && <>Загрузка</>}
+      {selectedChampionships.map((ch) => (
+        <div key={ch.id}>
+          <ChampionshipTr>
+            <img
+              src={ch.championship.image}
+              style={{
+                minHeight: 10,
+                minWidth: 10,
+                maxHeight: 20,
+                maxWidth: 20,
+              }}
+            />
+            {ch.championship.region.name}.{ch.championship.name}
+          </ChampionshipTr>
+          <table>
+            <tr>
+              {ch.matches.map((match) => (
+                <Match match={match} key={match.id} />
+              ))}
+            </tr>
+          </table>
+        </div>
+      ))}
     </Row>
   );
 }
@@ -87,15 +90,22 @@ function Championship(championship: IChampionship, regionName: string) {
         />
         {championship.name}.{regionName}
       </ChampionshipTr>
-      <tr>{championship.matches.map((match) => Match(match))}</tr>
+      <tr>
+        {championship.matches.map((match) => (
+          <Match match={match} key={match.id} />
+        ))}
+      </tr>
     </>
   );
 }
 
-function Match(match: IMatch) {
+interface MatchProps {
+  match: IMatch;
+}
 
+function Match({ match }: MatchProps) {
   function toMatch(id: number) {
-    window.location.assign("/match?id=" + id)
+    window.location.assign("/match?id=" + id);
   }
 
   const Issue = match.bets.find((x) => x.name == "Исход");
@@ -142,10 +152,16 @@ function Match(match: IMatch) {
 
 const ButtonCon = styled.button`
   width: 100px;
-`
+`;
 
 const TeamsTd = styled.td`
-  width: 500px;
+  width: 40vb;
+  height: 20px;
+  min-height: 20px;
+  min-width: 40vb;
+  max-height: 20px;
+  max-width: 40vb;
+  margin-top: 50px;
   text-align: left;
   top: 0;
   left: 0;
@@ -154,17 +170,34 @@ const ValueTd = styled.td`
   text-align: center;
   width: 50px;
   height: 20px;
+  min-height: 20px;
+  min-width: 50px;
+  max-height: 20px;
+  max-width: 50px;
   border: 1px solid gray;
   padding-right: 0px;
 `;
 
 const ChampionshipTr = styled.td`
   background-color: #dcdcdc;
-  margin-top: 100px;
+  width: 100vb;
+  height: 20px;
+  min-height: 20px;
+  min-width: 100vb;
+  max-height: 20px;
+  max-width: 100vb;
+  margin-top: 50px;
+  //padding-top: 50px;
 `;
 
 const DateTd = styled.td`
-  width: 200px;
+  width: 17vb;
+  height: 20px;
+  min-height: 20px;
+  min-width: 17vb;
+  max-height: 20px;
+  max-width: 17vb;
+  margin-top: 500px;
 `;
 
 export function NormalDate(num: number): string {
