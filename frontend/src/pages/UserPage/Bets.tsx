@@ -27,7 +27,7 @@ interface BetProps {
 function Bet({ b }: BetProps) {
     console.log(b.id, b.isWin)  
     return (<div>
-        {b.id} {" "}{b.betValue.name} {" "} {b.money}{" "} {b.isWin == null && <>Играется</>}{" "}
+        {b.betValue.name} {" "} {b.money}{" "} {b.isWin == null && <>Играется</>}{" "}
         {b.isWin == true && <>Выиграна</>}{" "}
         {b.isWin == false && <>Проиграна</>}{" "}
     </div>)

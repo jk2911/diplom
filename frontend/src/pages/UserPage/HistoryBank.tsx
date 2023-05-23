@@ -36,6 +36,9 @@ function History({ h }: HisProps) {
     h.date = new Date(h.date);
     return (
         <div>
-            {NormalDate(h.date.getDate())}{" "}{NormalDate(h.date.getMonth())}{" "}{h.status}{" "}{" "}{h.money}
+            {NormalDate(h.date.getDate())}{"."}{NormalDate(h.date.getMonth() + 1)}{"."}
+            {NormalDate(h.date.getFullYear())}{" "}
+            {NormalDate(h.date.getHours())}{":"}{NormalDate(h.date.getMinutes())}{" "}
+            {h.status}{" "}{" "}{h.money}
         </div>)
 }

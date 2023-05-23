@@ -58,7 +58,7 @@ export function Registration(active: boolean, setActive: any) {
         onChange={(e) => setPasswordAgaion(e.target.value)}
       />
       <div style={{ height: 30, width: 120 }}>{error}</div>
-      <button onClick={Registration}>{button}</button>
+      <StyledButton onClick={Registration}>{button}</StyledButton>
     </Form>
   );
 }
@@ -90,8 +90,6 @@ export const Form = styled.div`
     align-items: center;
     padding: 20px;
     border-radius: 16px;
-    background-color: ${(props) => props.theme.loginForm};
-    box-shadow: 2px 5px 25px -3px ${(props) => props.theme.textShadow};
   `;
 
 const StyledInput = styled.input`
@@ -99,6 +97,7 @@ const StyledInput = styled.input`
     width: 400px;
     height: 49.48px;
     padding-left: 25px;
+    margin-bottom: 20px;
     font-family: "Poppins";
     font-style: normal;
     font-weight: 400;
@@ -115,3 +114,20 @@ const StyledInput = styled.input`
     font-size: 20px;
   } */
   `;
+
+  const StyledButton = styled.button`
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 56px;
+  padding-left: 60px;
+  padding-right: 60px;
+  font-size: 18px;
+  font-family: 'Montserrat-Bold';
+  text-align: center;
+  border: none;
+  :hover {
+    cursor: pointer;
+  }
+  transition-duration: 0.4s;
+`

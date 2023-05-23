@@ -7,7 +7,7 @@ namespace API.Data
         private readonly DataContext _context = new DataContext();
         public UnitOfWork() { }
 
-        public IUserRepository User => new UserRepository(_context);
+        public IUser User => new UserRepository(_context);
 
         public IBet Bet => new BetRepository(_context);
 

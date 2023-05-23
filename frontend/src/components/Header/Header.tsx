@@ -54,7 +54,7 @@ export function Header() {
   };
 
   const toUser = () => {
-    window.location.assign("/user/bets");
+    window.location.assign("/user");
   };
 
   const toBukmeker = () => {
@@ -70,7 +70,7 @@ export function Header() {
               {decoded.role == "admin" && <><Item onClick={toAdmin}>Главная</Item></>}
               {decoded.role == "user" && <><Item onClick={toMain}>Главная</Item><Item onClick={toUser}>Личный кабинет</Item>
                 <Item>
-                  {decoded.money} :BYN
+                  {decoded.money} BYN
                 </Item></>}
               {decoded.role == "bukmeker" && <><Item onClick={toBukmeker}>Главная</Item></>}
               <Item onClick={exit}>Выйти</Item>

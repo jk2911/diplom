@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : IUser
     {
         private DataContext _context;
         public UserRepository(DataContext context)
@@ -56,11 +56,18 @@ namespace API.Data
             return null;
         }
 
-        public void DoBet(int userId, float amount)
+        public void DoBet(int userId, int betId, float amount)
         {
+            var betValue = _context.BetValue.Find(betId);
+
+            var name = "Ставка " + betValue.Bet.Match.Home.Name + " - "
+                + betValue.Bet.Match.Away.Name + " " 
+                + betValue.Bet.Name + ": "
+                + betValue.Name + " " + betValue.Value;
+
             var history = new HistoryBankAccount
             {
-                Status = "Ставка",
+                Status = name,
                 Date = DateTime.Now,
                 UserId = userId,
                 Money = amount

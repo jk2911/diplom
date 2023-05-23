@@ -69,7 +69,7 @@ namespace API.Controllers
 
             _unitOfWork.User.Update(user);
 
-            _unitOfWork.User.DoBet(userId, amount);
+            _unitOfWork.User.DoBet(userId, betId, amount);
 
             if (await _unitOfWork.Complete())
                 return Ok();

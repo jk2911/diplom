@@ -32,7 +32,7 @@ export function UserPage() {
                     <Modal active={activeModal} setActive={setActiveModal}>
                         <AddMoney id={user.id} />
                     </Modal>
-                    <div>{user.email} {" "}{user.role}</div><div><button onClick={() => setActiveModal(true)}>Пополнить счет</button></div>
+                    <div>{user.email}</div><div><button onClick={() => setActiveModal(true)}>Пополнить счет</button></div>
                     <div>
                         <TabsContainer>
                             <TabElement>

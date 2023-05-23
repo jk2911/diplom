@@ -2,7 +2,7 @@
 {
     public interface IUnitOfWork
     {
-        IUserRepository User { get; }
+        IUser User { get; }
         IBet Bet { get; }
         IChampionship Championship { get; }
         IRegion Region { get; }
