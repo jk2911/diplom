@@ -19,6 +19,7 @@ namespace API.Data
         public virtual DbSet<UserBet> UserBets { get; set; }
         public virtual DbSet<HistoryBankAccount> HistoryBankAccounts { get; set; }
         public virtual DbSet<UserChampBet> UserChampBets { get; set; }
+        public virtual DbSet<Card> Cards { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
@@ -67,6 +68,16 @@ namespace API.Data
             User.AddAsync(user);
             User.AddAsync(user1);
             User.AddAsync(user2);
+
+            SaveChangesAsync().Wait();
+
+            var card = new Card
+            {
+                Number = "1234********1234",
+                UserId = user1.Id,
+            };
+
+            Cards.AddAsync(card);
 
             SaveChangesAsync().Wait();
 

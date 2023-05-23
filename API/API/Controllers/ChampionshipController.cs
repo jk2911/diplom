@@ -35,18 +35,18 @@ namespace API.Controllers
 
             Championship championship = await _unitOfWork.Championship.Get(championshipId);
 
-            if (team == null) return NotFound("Team not founded");
+            if (team == null) return NotFound("Команда не найдена");
 
-            if(championship == null) return NotFound("Championship not founded");
+            if(championship == null) return NotFound("Чемпионат не найден");
 
             var IsTeamInChampionship = await _unitOfWork.Championship.TeamExistsInChampionship(championship.Id, team.Id);
 
-            if (IsTeamInChampionship) return BadRequest("Team is already in the championship");
+            if (IsTeamInChampionship) return BadRequest("Команда уже в чемпионате");
 
             _unitOfWork.Championship.AddTeamInChampionship(championship.Id, team.Id);
 
             if(await _unitOfWork.Complete())
-                return Ok("Team is added to the championship");
+                return Ok("Команда добавлена в чемпионат");
 
             return BadRequest("Failed to add team in championship");
         }
@@ -80,14 +80,14 @@ namespace API.Controllers
         {
             Championship championship = await _unitOfWork.Championship.Get(championshipId);
 
-            if (championship == null) return NotFound("Championship not founded");
+            if (championship == null) return NotFound("Чемпионат не найден");
 
             _unitOfWork.Championship.Delete(championship);
 
             if (await _unitOfWork.Complete())
-                return Ok("Championship delete");
+                return Ok("Чемпионат удален");
 
-            return BadRequest("Failed to delete championship");
+            return BadRequest("Не удалось удалить чемпионат");
         }
 
         [HttpPost("CreateChampionship")]

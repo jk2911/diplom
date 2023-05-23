@@ -63,10 +63,10 @@ namespace API.Controllers
         {
             var user = await _unitOfWork.User.Get(item.Id);
 
-            if (user == null) return BadRequest("The user does not find");
+            if (user == null) return BadRequest("Пользователь не найден");
 
             if (!_hashPassword.CreateHash(item.OldPassword).Equals(user.Password))
-                return BadRequest("Invalid password");
+                return BadRequest("Неверный пароль");
 
             user.Password=_hashPassword.CreateHash(item.NewPassword);
 

@@ -32,7 +32,7 @@ namespace API.Controllers
 
             var team = await _unitOfWork.Team.Get(teamId);
 
-            if (team == null) return NotFound("Team not found");
+            if (team == null) return NotFound("Команда не найдена");
 
             var path = "images/teams/" + team.Name + ".png";
 

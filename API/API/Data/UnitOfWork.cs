@@ -19,6 +19,8 @@ namespace API.Data
 
         public IMatch Match => new MatchRepository(_context);
 
+        public ICard Card => new CardRepository(_context);
+
         public async Task<bool> Complete()
         {
             return await _context.SaveChangesAsync() > 0;
