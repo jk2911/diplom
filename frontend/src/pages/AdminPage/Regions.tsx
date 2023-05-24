@@ -45,8 +45,8 @@ export function AllRegions() {
         <CreateRegion />
       </Modal>
       <select onChange={(e) => sortRegions(e.target.value)}>
-        <option value="1">id</option>
         <option value="2">названию</option>
+        <option value="1">id</option>
       </select>
       <button style={{ marginLeft: "20px" }} onClick={() => setCreateModalActive(true)}>Создать регион</button>
       {loading && <>Загрузка</>}

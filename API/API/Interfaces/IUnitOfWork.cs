@@ -9,6 +9,7 @@
         ITeam Team { get; }
         IMatch Match { get; }
         ICard Card { get; }
+        IHistoryBankAccount History { get; }
         Task<bool> Complete();
         bool HasChanges();
     }

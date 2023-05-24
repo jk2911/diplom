@@ -18,7 +18,6 @@ namespace API.Data
         public virtual DbSet<BetValue> BetValue { get; set; }
         public virtual DbSet<UserBet> UserBets { get; set; }
         public virtual DbSet<HistoryBankAccount> HistoryBankAccounts { get; set; }
-        public virtual DbSet<UserChampBet> UserChampBets { get; set; }
         public virtual DbSet<Card> Cards { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

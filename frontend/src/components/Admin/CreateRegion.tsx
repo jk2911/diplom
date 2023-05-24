@@ -24,6 +24,7 @@ export function CreateRegion() {
       );
       const message = response.data as String;
       setErrorCreate(message.toString());
+      window.location.assign("/admin/regions")
     } catch (e: unknown) {
       const error = e as AxiosError;
       // console.log(error.message);

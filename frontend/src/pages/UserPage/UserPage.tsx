@@ -8,13 +8,15 @@ import { useState } from "react";
 import { Modal } from "../../modal/Modal";
 import { AddMoney } from "../../components/User/AddMoney";
 import { AddNewCard } from "../../components/User/AddNewCard";
+import { Withdrawal } from "../../components/User/Withdrawal";
 
 export function UserPage() {
     const [activeModal, setActiveModal] = useState(false);
     const [activeAddCard, setActiveAddCard] = useState(false);
+    const [activeWithdrawal, setActiveWithdrawal] = useState(false);
     const [amount, setAmount] = useState(2);
 
-    function AddNewCardModal(active:boolean){
+    function AddNewCardModal(active: boolean) {
         setActiveModal(false);
         setActiveAddCard(true);
     }
@@ -43,7 +45,11 @@ export function UserPage() {
                     <Modal active={activeAddCard} setActive={setActiveAddCard}>
                         <AddNewCard id={user.id} amount={amount} />
                     </Modal>
+                    <Modal active={activeWithdrawal} setActive={setActiveWithdrawal}>
+                        <Withdrawal id={user.id} />
+                    </Modal>
                     <div>{user.email}</div><div><button onClick={() => setActiveModal(true)}>Пополнить счет</button></div>
+                    <div><button onClick={() => setActiveWithdrawal(true)}>Вывод средств</button></div>
                     <div>
                         <TabsContainer>
                             <TabElement>

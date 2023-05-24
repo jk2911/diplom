@@ -8,5 +8,6 @@ export interface IUserBet {
     betValueId: number,
     betValue: IBetValue,
     money: number,
-    isWin: boolean
+    isWin: boolean,
+    match: string
 }

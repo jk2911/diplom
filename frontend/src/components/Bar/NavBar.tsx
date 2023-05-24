@@ -29,7 +29,7 @@ const TabElement = styled.div`
   /* box-shadow: 2px 5px 25px -3px ${(props) => props.theme.textShadow}; */
   border-radius: 10px;
   /* background-color: ${(props) => props.theme.tabsBackColor};
-  //color: ${(props) => props.theme.paginationButtonColor}; */
+  //  color: ${(props) => props.theme.paginationButtonColor}; */
   cursor: pointer;
 `;
 

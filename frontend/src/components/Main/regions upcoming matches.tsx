@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useTypesSelector } from "../../hooks/useTypedSelector";
 import { useDispatch } from "react-redux";
 import { fetchUser } from "../../store/action-creators/user";
+import styled from "styled-components";
 
 interface Props {
   championship: number;
@@ -16,16 +17,10 @@ export function RegionsUpcomingMatches({
 }: Props) {
   const { regions, error, loading } = useRegionsUpcomingMatches();
 
-  const {user, error:r, loading:l} = useTypesSelector((state) => state.user);
-  const dispatch = useDispatch()
-
-  // useEffect(()=>{
-  //   dispatch(fetchUser("333", "333"))
-  // },[])
-
   return (
     <Row>
       {loading && <>Загрузка</>}
+      {regions.length != 0 && (<ButtonCon onClick={() => setChampionship(0)}>Все</ButtonCon>)}
       {regions.map((region) => (
         <Container key={region.id}>
           <details>
@@ -40,9 +35,6 @@ export function RegionsUpcomingMatches({
   );
 }
 
-/* <Row>
-            <details open>
-              <summary>Легенда</summary>
-              <p>Раскрывающийся текст</p>
-            </details>
-          </Row> */
+const ButtonCon = styled.button`
+  width: 100px;
+`;    

@@ -19,14 +19,11 @@ namespace API.Entities
         public virtual ICollection<UserBet> UserBets { get; set; }
         [JsonIgnore]
         public virtual ICollection<HistoryBankAccount> HistoryBankAccounts { get; set; }
-        [JsonIgnore]
-        public virtual ICollection<UserChampBet> UserChampBets { get; set; }
         public virtual ICollection<Card> Cards { get; set; }
         public User()
         {
             UserBets = new List<UserBet>();
             HistoryBankAccounts = new List<HistoryBankAccount>();
-            UserChampBets = new List<UserChampBet>();
             Cards = new List<Card>();
         }
     }

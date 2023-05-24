@@ -38,6 +38,16 @@ namespace API.Controllers
 
             _unitOfWork.User.Update(user);
 
+            var history = new HistoryBankAccount
+            {
+                Date = DateTime.Now,
+                Status = "Пополнение средств",
+                Money = sum,
+                UserId = user.Id,
+            };
+
+            _unitOfWork.History.Create(history);
+
             if(await _unitOfWork.Complete())
             {
                 var token = await _tokenService.CreateToken(user);
@@ -59,6 +69,16 @@ namespace API.Controllers
             user.Money -= sum;
 
             _unitOfWork.User.Update(user);
+
+            var history = new HistoryBankAccount
+            {
+                Date = DateTime.Now,
+                Status = "Вывод средств",
+                Money = sum,
+                UserId = user.Id,
+            };
+
+            _unitOfWork.History.Create(history);
 
             if (await _unitOfWork.Complete()) 
                 return Ok(await _tokenService.CreateToken(user));

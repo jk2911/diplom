@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import { NormalDate } from "../../components/Main/upcoming matches sorted by regions";
 import { IHistoryUser } from "../../entity/HistoryUser";
 import { useHistoryUser } from "../../hooks/user"
@@ -35,10 +36,14 @@ interface HisProps {
 function History({ h }: HisProps) {
     h.date = new Date(h.date);
     return (
-        <div>
+        <HistoryItem>
             {NormalDate(h.date.getDate())}{"."}{NormalDate(h.date.getMonth() + 1)}{"."}
             {NormalDate(h.date.getFullYear())}{" "}
             {NormalDate(h.date.getHours())}{":"}{NormalDate(h.date.getMinutes())}{" "}
-            {h.status}{" "}{" "}{h.money}
-        </div>)
+            {h.status}{" "}{" "}{h.money} BYN
+        </HistoryItem>)
 }
+
+const HistoryItem = styled.div`
+    font-size: 20px;
+`

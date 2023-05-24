@@ -20,6 +20,7 @@ namespace API.Data
         public IMatch Match => new MatchRepository(_context);
 
         public ICard Card => new CardRepository(_context);
+        public IHistoryBankAccount History => new HistoryBankAccountRepository(_context);
 
         public async Task<bool> Complete()
         {
