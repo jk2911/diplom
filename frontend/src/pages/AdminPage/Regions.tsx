@@ -48,7 +48,7 @@ export function AllRegions() {
         <option value="1">id</option>
         <option value="2">названию</option>
       </select>
-      <button onClick={() => setCreateModalActive(true)}>Создать регион</button>
+      <button style={{ marginLeft: "20px" }} onClick={() => setCreateModalActive(true)}>Создать регион</button>
       {loading && <>Загрузка</>}
       {sortRegionsList.map((region) => (
         <RowItem key={region.id} onClick={() => toRegion(region.id)}>

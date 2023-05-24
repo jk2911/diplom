@@ -27,7 +27,7 @@ export function AllUsers() {
     {users.map((user) => (
       <div>
         <RowItem key={user.id}>
-          {user.id} {user.email} {user.role} <button style={{ width: "200px" }} onClick={() => Change(user)}>Изменить роль</button>
+          {user.id} {user.email} {user.role} <button style={{ width: "200px", marginLeft:"20px" }} onClick={() => Change(user)}>Изменить роль</button>
         </RowItem>
       </div>
     ))}

@@ -60,7 +60,7 @@ export function AllChampionships() {
         <option value="2">названию</option>
         <option value="3">региону</option>
       </select>
-      <button onClick={() => setCreateModalActive(true)}>
+      <button style={{ marginLeft: "20px" }} onClick={() => setCreateModalActive(true)}>
         Создать чемпионат
       </button>
       {loading && <>Загрузка епта</>}

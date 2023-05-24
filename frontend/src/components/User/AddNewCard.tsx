@@ -34,11 +34,29 @@ export function AddNewCard({ id, amount }: Props) {
     return (
         <div>
             <input
+                style={{ marginRight: "20px", marginTop: "20px" }}
                 type="text"
                 value={number}
                 placeholder="XXXX-XXXX-XXXX-XXXX"
                 onChange={(e) => setNumber(e.target.value)}
             />
+
+            <input
+                type="password"
+                placeholder="CVC"
+            />
+
+            <div>
+                <input
+                    style={{ marginRight: "20px", marginTop: "20px" }}
+                    type="number"
+                    placeholder="MM"
+                />
+                <input
+                    type="number"
+                    placeholder="YY"
+                />
+            </div>
 
             <div style={{ height: 30, width: 120 }}>{error}</div>
 

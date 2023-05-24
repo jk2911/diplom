@@ -49,6 +49,7 @@ export function AddMoney({ id, setActiveAddCard, amount, setAmount }: Props) {
         {cards.map((c) => (<option value={c.id} key={c.id}>{c.number}</option>))}
       </select>
       <input
+      style={{marginLeft:"20px"}}
         type="number"
         value={amount}
         placeholder="E-mail"
