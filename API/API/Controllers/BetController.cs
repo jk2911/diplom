@@ -31,6 +31,9 @@ namespace API.Controllers
             if (count == 0)
                 return BadRequest("Количество исходов равно 0");
 
+            if (count > 10)
+                return BadRequest("Количество исходов не должно быть больше 10");
+
             var match = await _unitOfWork.Match.Get(matchId);
 
             if (match == null)

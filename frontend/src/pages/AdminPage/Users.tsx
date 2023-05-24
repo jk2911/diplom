@@ -27,7 +27,14 @@ export function AllUsers() {
     {users.map((user) => (
       <div>
         <RowItem key={user.id}>
-          {user.id} {user.email} {user.role} <button style={{ width: "200px", marginLeft: "20px" }} onClick={() => Change(user)}>Изменить роль</button>
+          <div style={{width:"5%"}}>{user.id}</div>
+           <div style={{width:"40%"}}>{user.email}</div> 
+           <div style={{width:"20%"}}>
+            {user.role=="admin" &&<>Администратор</>}
+            {user.role=="user" &&<>Пользователь</>}
+            {user.role=="bukmeker" &&<>Букмекер</>}
+            </div> 
+           <button style={{ width: "200px", marginLeft: "20px",borderRadius:"3px" }} onClick={() => Change(user)}>Изменить роль</button>
         </RowItem>
       </div>
     ))}
@@ -38,10 +45,13 @@ export function AllUsers() {
 }
 
 const RowItem = styled(Row)`
+  margin-left: 5px;
+  margin-top: 5px;
   padding: 5px;
   background-color: #eee;
   color: #333;
   border: 1px #ccc solid;
   cursor: pointer;
   list-style: none;
+  border-radius: 3px;
 `;

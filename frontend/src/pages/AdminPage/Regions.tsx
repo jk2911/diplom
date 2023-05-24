@@ -48,7 +48,7 @@ export function AllRegions() {
         <option value="2">названию</option>
         <option value="1">id</option>
       </select>
-      <button style={{ marginLeft: "20px" }} onClick={() => setCreateModalActive(true)}>Создать регион</button>
+      <button style={{ marginLeft: "20px", borderRadius:"3px" }} onClick={() => setCreateModalActive(true)}>Создать регион</button>
       {loading && <>Загрузка</>}
       {sortRegionsList.map((region) => (
         <RowItem key={region.id} onClick={() => toRegion(region.id)}>
@@ -63,24 +63,15 @@ export function AllRegions() {
   );
 }
 
-{
-  /* <details>
-            <summary>{region.id} {region.name}</summary>
-            <>
-                {region.championships.map((ch)=>(
-                    <Row>
-                        {ch.id} {ch.name}
-                    </Row>
-                ))}
-            </>
-        </details> */
-}
+
 
 const RowItem = styled(Row)`
+margin-top: 5px;
   padding: 5px;
   background-color: #eee;
   color: #333;
   border: 1px #ccc solid;
   cursor: pointer;
   list-style: none;
+  border-radius: 5px;
 `;

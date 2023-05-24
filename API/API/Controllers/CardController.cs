@@ -4,6 +4,7 @@ using API.Entities;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
 
 namespace API.Controllers
 {
@@ -36,7 +37,20 @@ namespace API.Controllers
         {
             var amount = cardDTO.Amount;
 
+            if (cardDTO.Number.Length != 16)
+                return BadRequest("В номере карты должны быть 16 цифр");
+
             var card = _mapper.Map<Card>(cardDTO);
+
+            StringBuilder stringBuilder = new StringBuilder(card.Number);
+
+            for(int i = 0; i < 16; i++)
+            {
+                if (i > 3 && i < 12)
+                    stringBuilder[i] = '*';
+            }
+
+            card.Number = stringBuilder.ToString();
 
             var user = await _unitOfWork.User.Get(card.UserId);
 

@@ -29,14 +29,9 @@ export function Header() {
 
   useEffect(() => {
     token = localStorage.getItem("token");
-    console.log(token);
-    console.log(token == null);
     if (token != null) {
       const i: IToken = jwt_decode(token);
       setDecoded(i);
-      console.log(i.role);
-      console.log(token == null);
-      console.log(token != null);
     }
   }, []);
 

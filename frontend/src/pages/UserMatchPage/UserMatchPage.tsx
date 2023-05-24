@@ -10,6 +10,8 @@ import { useMatch } from "../../hooks/match";
 import { MatchBets } from "../../components/User/MatchBets";
 import { Modal } from "../../modal/Modal";
 import { DoBet } from "../../components/User/DoBet";
+import { NormalDate } from "../../components/Main/upcoming matches sorted by regions";
+import { IMatch } from "../../entity/Match";
 
 const newBetValue: IBetValue = {
   id: 0,
@@ -20,9 +22,6 @@ const newBetValue: IBetValue = {
 };
 
 export function UserMatchPage() {
-  //const [stage, setStage] = useState("");
-  const [bet, setBet] = useState(newBetValue);
-  const [activeBet, setActiveBet] = useState(false);
 
   const [params, setParams] = useSearchParams();
 
@@ -30,48 +29,63 @@ export function UserMatchPage() {
 
   const { match, error, loading } = useMatch(id);
 
-  function modalBet(newBet: IBetValue) {
-    setBet(newBet);
-    setActiveBet(true);
-  }
 
   return (
     <Container>
       <Content>
         {match && (
-          <div>
-            <div style={{ display: "flex", justifyContent: "center", height: "60px" }}>
-              <div>
-                <img
-                  src={match.home.image != null ? match.home.image : image}
-                  style={{
-                    minHeight: 10,
-                    maxHeight: 70,
-                    minWidth: 10,
-                    maxWidth: 70,
-                  }}
-                />{" "}
-                {match.home.name}{"   "} {match.away.name}{" "}
-                <img
-                  src={match.away.image != null ? match.away.image : image}
-                  style={{
-                    minHeight: 10,
-                    maxHeight: 70,
-                    minWidth: 10,
-                    maxWidth: 70,
-                  }}
-                />
-              </div>
-            </div>
-            <MatchBets bets={match.bets} setBet={modalBet} />
-            <Modal active={activeBet} setActive={setActiveBet}>
-              <DoBet bet={bet} />
-            </Modal>
-          </div>
+          <Match match={match}/>
         )}
       </Content>
     </Container>
   );
+}
+
+interface MProps {
+  match: IMatch
+}
+
+function Match({ match }: MProps) {
+  match.dateTime = new Date(match.dateTime);
+
+  const [bet, setBet] = useState(newBetValue);
+  const [activeBet, setActiveBet] = useState(false);
+
+  function modalBet(newBet: IBetValue) {
+    setBet(newBet);
+    setActiveBet(true);
+  }
+
+  return (<div>
+    <div style={{ display: "flex", justifyContent: "center", height: "60px", fontSize:"18px" }}>
+      <div>
+        {match.home.name}
+        <img
+          src={match.home.image != null ? match.home.image : image}
+          style={{
+            minHeight: 10,
+            maxHeight: 70,
+            minWidth: 10,
+            maxWidth: 70,
+          }}
+        />{" "}{NormalDate(match.dateTime.getDate())}.{NormalDate(match.dateTime.getMonth() + 1)}{" | "}
+        {NormalDate(match.dateTime.getHours())}.{NormalDate(match.dateTime.getMinutes() + 1)}{" "}
+        <img
+          src={match.away.image != null ? match.away.image : image}
+          style={{
+            minHeight: 10,
+            maxHeight: 70,
+            minWidth: 10,
+            maxWidth: 70,
+          }}
+        />{match.away.name}
+      </div>
+    </div>
+    <MatchBets bets={match.bets} setBet={modalBet} />
+    <Modal active={activeBet} setActive={setActiveBet}>
+      <DoBet bet={bet} />
+    </Modal>
+  </div>)
 }
 
 const Container = styled.div`

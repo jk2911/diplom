@@ -53,7 +53,7 @@ export function UpcomingMatchesSortedByRegion({
 
       {loading && <>Загрузка</>}
       {selectedChampionships.map((ch) => (
-        <div key={ch.id}>
+        <div key={ch.id} style={{marginTop:"9px"}}>
           <ChampionshipTr>
             <img
               src={ch.championship.image}
@@ -175,12 +175,12 @@ const ValueTd = styled.td`
 
 const ChampionshipTr = styled.td`
   background-color: #dcdcdc;
-  width: 100vb;
+  width: 100%;
   height: 20px;
   min-height: 20px;
-  min-width: 100vb;
+  min-width: 100%;
   max-height: 20px;
-  max-width: 100vb;
+  max-width: 100%;
   margin-top: 50px;
   //padding-top: 50px;
 `;

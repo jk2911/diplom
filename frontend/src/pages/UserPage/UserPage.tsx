@@ -48,8 +48,15 @@ export function UserPage() {
                     <Modal active={activeWithdrawal} setActive={setActiveWithdrawal}>
                         <Withdrawal id={user.id} />
                     </Modal>
-                    <div>{user.email}</div><div><button onClick={() => setActiveModal(true)}>Пополнить счет</button></div>
-                    <div><button onClick={() => setActiveWithdrawal(true)}>Вывод средств</button></div>
+                    <div style={{display:"flex", justifyContent:"flex-start", fontSize:"20px"}}>
+                        <div style={{marginLeft:"15px", marginRight:"15px"}}>Пользователь: {user.email}</div>
+                        <div style={{marginRight:"15px"}}>
+                            <button style={{borderRadius:"3px"}}  onClick={() => setActiveModal(true)}>Пополнить счет</button>
+                        </div>
+                        <div>
+                            <button style={{borderRadius:"3px"}} onClick={() => setActiveWithdrawal(true)}>Вывод средств</button>
+                        </div>
+                    </div>
                     <div>
                         <TabsContainer>
                             <TabElement>

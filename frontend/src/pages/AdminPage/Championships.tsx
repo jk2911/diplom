@@ -60,7 +60,7 @@ export function AllChampionships() {
         <option value="2">названию</option>
         <option value="3">региону</option>
       </select>
-      <button style={{ marginLeft: "20px" }} onClick={() => setCreateModalActive(true)}>
+      <button style={{ marginLeft: "20px", borderRadius:"3px" }} onClick={() => setCreateModalActive(true)}>
         Создать чемпионат
       </button>
       {loading && <>Загрузка епта</>}
@@ -78,10 +78,12 @@ export function AllChampionships() {
 }
 
 const RowItem = styled(Row)`
+margin-top: 5px;
   padding: 5px;
   background-color: #eee;
   color: #333;
   border: 1px #ccc solid;
   cursor: pointer;
   list-style: none;
+  border-radius: 5px;
 `;

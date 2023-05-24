@@ -19,12 +19,7 @@ export function AllTeams() {
       <Modal active={createModalActive} setActive={setCreateModalActive}>
         <CreateTeam />
       </Modal>
-      {/* <select onChange={(e) => sortRegions(e.target.value)}>
-        <option value="1">id</option>
-        <option value="2">названию</option>
-        <option value="3">региону</option>
-      </select> */}
-      <button onClick={() => setCreateModalActive(true)}>
+      <button style={{borderRadius:"3px"}} onClick={() => setCreateModalActive(true)}>
         Создать команду
       </button>
       {error && <>Ошибка</>}
@@ -43,10 +38,12 @@ export function AllTeams() {
 }
 
 const RowItem = styled(Row)`
+margin-top: 5px;
   padding: 5px;
   background-color: #eee;
   color: #333;
   border: 1px #ccc solid;
   cursor: pointer;
   list-style: none;
+  border-radius: 5px;
 `;

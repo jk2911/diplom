@@ -41,6 +41,7 @@ export function Registration(active: boolean, setActive: any) {
 
   return (
     <Form>
+      <RegDiv>Регистрация</RegDiv>
       <StyledInput
         type="email"
         value={email}
@@ -67,6 +68,14 @@ export function Registration(active: boolean, setActive: any) {
     </Form>
   );
 }
+
+const RegDiv = styled.div`
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-family: 'Montserrat-Bold';
+  font-size: 18px;
+`
 
 export const Container = styled.div`
     position: fixed;

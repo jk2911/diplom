@@ -108,10 +108,8 @@ namespace API.Data
 
             if (user == null) { return; }
 
-            var status = "Ставка " + betValue.Bet.Match.Home.Name + " - "
-                + betValue.Bet.Match.Away.Name + " "
-                + betValue.Bet.Name + ": "
-                + betValue.Name + " " + betValue.Value;
+            var status = betValue.Bet.Match.Home.Name + " - " +
+                betValue.Bet.Match.Away.Name;
 
             var userBet = new UserBet
             {
