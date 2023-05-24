@@ -12,6 +12,10 @@ export function AddNewCard({ id, amount }: Props) {
     const [number, setNumber] = useState("");
 
     const Add = async () => {
+        if (number.length != 16) {
+            setError("Должно быть 16 цифр а не " + number.length);
+            return;
+        }
         setButton("...");
 
         try {

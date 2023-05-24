@@ -13,6 +13,7 @@ namespace API.Entities
         public string Password { get; set; }
         public string Role { get; set; } = "user";
         public float Money { get; set; } = 0;
+        //public bool isBlocked { get; set; } = false;
 
         [JsonIgnore]
         public virtual ICollection<UserBet> UserBets { get; set; }

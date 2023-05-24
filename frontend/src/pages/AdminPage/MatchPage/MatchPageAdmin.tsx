@@ -11,6 +11,7 @@ import image from "../../../assets/club.png";
 import axios, { AxiosError } from "axios";
 import { Modal } from "../../../modal/Modal";
 import { AddBet } from "../../../components/Admin/Match/AddBet";
+import { DeleteMatch } from "../../../components/Admin/Match/DeleteMatch";
 
 const newBetValue: IBetValue = {
   id: 0,
@@ -49,7 +50,7 @@ export function MatchPageAdmin() {
   const [yellowCardAway, setYellowCardAway] = useState(0);
   const [redCardHome, setRedCardHome] = useState(0);
   const [redCardAway, setRedCardAway] = useState(0);
-  //const [stage, setStage] = useState("");
+  const [activeDelete, setActiveDelete] = useState(false);
 
   const [addBet, setAddBet] = useState(false);
 
@@ -165,6 +166,9 @@ export function MatchPageAdmin() {
             <Modal setActive={setAddBet} active={addBet}>
               <AddBet matchId={match.id} />
             </Modal>
+            <Modal setActive={setActiveDelete} active={activeDelete}>
+              <DeleteMatch id={match.id} />
+            </Modal>
             <div>
               <img
                 src={match.home.image != null ? match.home.image : image}
@@ -186,6 +190,7 @@ export function MatchPageAdmin() {
                 }}
               />
               <button onClick={Save}>{buttonSave}</button>
+              <button style={{ marginRight: "20px" }} onClick={() => setActiveDelete(true)}>Удалить матч</button>
             </div>
 
             <div>

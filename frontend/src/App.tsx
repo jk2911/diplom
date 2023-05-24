@@ -17,8 +17,31 @@ import { BukmekerMatchPage } from "./pages/Bukmeker/MatchPage";
 import { UserPage } from "./pages/UserPage/UserPage";
 import { ConfirmationBetsPage } from "./pages/Bukmeker/ConfirmationBetsPage";
 import { UserBets } from "./pages/UserPage/Bets";
+import jwtDecode from "jwt-decode";
+import axios, { AxiosError } from "axios";
 
 function App() {
+  // var token = localStorage.getItem("token");
+
+  // if(token != null){
+  //   try {
+  //     const response = await axios.post(
+  //       "https://localhost:7167/api/User/Refill/" + id + "-" + amount
+  //     );
+  //     const user = response.data;
+  //     console.log(user);
+  //     localStorage.setItem("token", user);
+  //     window.location.assign("/user/bets");
+  //   } catch (e: unknown) {
+  //     const error = e as AxiosError;
+  //     const message = error.response?.data as String;
+  //     console.log(message.toString());
+  //     setError(message.toString());
+  //   }
+  
+  // }
+
+
   return (
     <BrowserRouter>
       <Header />

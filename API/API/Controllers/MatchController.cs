@@ -94,6 +94,21 @@ namespace API.Controllers
 
             return BadRequest();
         }
+        [HttpDelete("DeleteMatch")]
+        public async Task<ActionResult> DeleteMatch(int id)
+        {
+            var match = await _unitOfWork.Match.Get(id);
+
+            if (match == null)
+                return BadRequest("Матч не найден");
+
+            _unitOfWork.Match.Delete(match);
+
+            if (await _unitOfWork.Complete())
+                return Ok("Матч удален");
+
+            return BadRequest("Не удалось удалить матч");
+        }
         public static DateTime getDate(string date, string time)
         {
 
