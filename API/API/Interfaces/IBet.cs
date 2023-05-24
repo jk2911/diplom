@@ -11,5 +11,6 @@ namespace API.Interfaces
         Task<IEnumerable<UserBet>> GetUserBets(int userId);
         void SaveBetsResultMatch(IEnumerable<Bet> bets);
         void DefineUserBets(int matchId);
+        Task<UserBet> GetUserBet(int userId, int betValueId);
     }
 }

@@ -6,14 +6,15 @@ import { AddNewCard } from "./AddNewCard";
 
 interface Props {
   id: number;
+  setActiveAddCard: (active: boolean) => void;
+  amount: number;
+  setAmount: (num: number) => void
 }
 
-export function AddMoney({ id }: Props) {
+export function AddMoney({ id, setActiveAddCard, amount, setAmount }: Props) {
   const [button, setButton] = useState("Положить");
-  const [amount, setAmount] = useState(2);
   const [error, setError] = useState("");
   const [card, setCard] = useState(0);
-  const [activeAddCard, setActiveAddCard] = useState(false);
   const { cards, error: errorCards, loading } = useUserCards(id);
 
   const Add = async () => {
@@ -57,9 +58,6 @@ export function AddMoney({ id }: Props) {
 
 
       <button onClick={Add}>{button}</button>
-      <Modal active={activeAddCard} setActive={setActiveAddCard}>
-        <AddNewCard id={id} amount={amount} />
-      </Modal>
     </div>
   );
 }

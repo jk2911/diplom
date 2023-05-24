@@ -7,9 +7,17 @@ import { HistoryUser } from "./HistoryBank";
 import { useState } from "react";
 import { Modal } from "../../modal/Modal";
 import { AddMoney } from "../../components/User/AddMoney";
+import { AddNewCard } from "../../components/User/AddNewCard";
 
 export function UserPage() {
     const [activeModal, setActiveModal] = useState(false);
+    const [activeAddCard, setActiveAddCard] = useState(false);
+    const [amount, setAmount] = useState(2);
+
+    function AddNewCardModal(active:boolean){
+        setActiveModal(false);
+        setActiveAddCard(true);
+    }
 
     const token = localStorage.getItem("token");
 
@@ -30,7 +38,10 @@ export function UserPage() {
             {user && (
                 <div>
                     <Modal active={activeModal} setActive={setActiveModal}>
-                        <AddMoney id={user.id} />
+                        <AddMoney id={user.id} setActiveAddCard={AddNewCardModal} amount={amount} setAmount={setAmount} />
+                    </Modal>
+                    <Modal active={activeAddCard} setActive={setActiveAddCard}>
+                        <AddNewCard id={user.id} amount={amount} />
                     </Modal>
                     <div>{user.email}</div><div><button onClick={() => setActiveModal(true)}>Пополнить счет</button></div>
                     <div>

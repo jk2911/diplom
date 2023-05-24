@@ -71,8 +71,10 @@ namespace API.Data
                                     UserId = user.Id
                                 };
 
-                                history.Money = userBet.Money * userBet.Value;
-                                user.Money += userBet.Money * userBet.Value;
+                                float money = (float)Math.Round(userBet.Money * userBet.Value, 2);
+
+                                history.Money = money;
+                                user.Money += money;
 
                                 userBet.IsWin = true;
 
@@ -130,6 +132,13 @@ namespace API.Data
         public async Task<BetValue> GetBetValue(int id)
         {
             return await _context.BetValue.FindAsync(id);
+        }
+
+        public async Task<UserBet?> GetUserBet(int userId, int betValueId)
+        {
+            return await _context.
+                UserBets.
+                FirstOrDefaultAsync(ub => ub.BetValueId == betValueId && ub.UserId == userId);
         }
 
         public async Task<IEnumerable<UserBet>> GetUserBets(int userId)

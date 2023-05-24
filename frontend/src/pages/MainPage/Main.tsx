@@ -41,9 +41,9 @@ const Container = styled.div`
   background-repeat: no-repeat;
   background-position: 50%;
   background-size: cover;
-  //background-image: url("https://s1.1zoom.ru/big3/335/Footbal_Men_Ball_Legs_493200.jpg");
+  background-image: url("https://s1.1zoom.ru/big3/335/Footbal_Men_Ball_Legs_493200.jpg");
   //background-color: #10a110;
-  background-color:red;
+  //background-color:red;
 `;
 
 const Content = styled.div`

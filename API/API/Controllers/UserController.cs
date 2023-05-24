@@ -47,6 +47,25 @@ namespace API.Controllers
             return BadRequest("Не удалось положить деньги на счет");
         }
 
+        [HttpPost("Withdrawal/{userId:int}-{sum:float}")]
+        public async Task<ActionResult> Withdrawal(int userId, float sum)
+        {
+            var user = await _unitOfWork.User.Get(userId);
+
+            if (user == null) return BadRequest("Пользователь не найден");
+
+            if (sum > user.Money) return BadRequest("Не хватает средств");
+
+            user.Money -= sum;
+
+            _unitOfWork.User.Update(user);
+
+            if (await _unitOfWork.Complete()) 
+                return Ok(await _tokenService.CreateToken(user));
+
+            return BadRequest("Не удалось вывести средства");
+        }
+
         [HttpPost("GetToken")]
         public async Task<ActionResult> GetToken(string email)
         {

@@ -11,11 +11,13 @@ namespace API.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly ITokenService _tokenService;
 
-        public BetController(IUnitOfWork unitOfWork, IMapper mapper)
+        public BetController(IUnitOfWork unitOfWork, IMapper mapper, ITokenService tokenService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _tokenService = tokenService;
         }
 
         [HttpPost("AddBet/{matchId:int}/{count:int}")]
@@ -63,6 +65,11 @@ namespace API.Controllers
             if (amount > user.Money)
                 return BadRequest("Сумма ставки превышает количество денег на игровом счету");
 
+            var userBet = await _unitOfWork.Bet.GetUserBet(userId, betId);
+
+            if (userBet != null)
+                return BadRequest("На этот матч уже сделана ставка");
+
             _unitOfWork.Bet.DoBet(betId, userId, amount);
 
             user.Money -= amount;
@@ -72,7 +79,7 @@ namespace API.Controllers
             _unitOfWork.User.DoBet(userId, betId, amount);
 
             if (await _unitOfWork.Complete())
-                return Ok();
+                return Ok(await _tokenService.CreateToken(user));
 
             return BadRequest("Не удалось сделать ставку");
         }

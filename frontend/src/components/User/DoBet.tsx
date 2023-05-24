@@ -43,12 +43,7 @@ export function DoBet({ bet }: Props) {
                 "https://localhost:7167/api/Bet/DoBet/" + bet.id + "-" + userId + "-" + amount
             );
 
-            const response1 = await axios.post(
-                "https://localhost:7167/api/User/GetToken?email=" + email
-            );
-                //console.log(response1.data);
-
-            localStorage.setItem("token",response1.data)
+            localStorage.setItem("token",response.data)
 
             window.location.assign("");
 
