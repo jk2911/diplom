@@ -33,6 +33,8 @@ export function Registration(active: boolean, setActive: any) {
       console.log(message.toString());
       setError(message.toString());
     }
+    
+    setButton("Зарегестрироватсья");
   };
 
 
@@ -57,7 +59,10 @@ export function Registration(active: boolean, setActive: any) {
         value={passwordAgain}
         onChange={(e) => setPasswordAgaion(e.target.value)}
       />
-      <div style={{ height: 30, width: 120 }}>{error}</div>
+      <div style={{
+        width: "400px",
+        height: "49.48px"
+      }}>{error}</div>
       <StyledButton onClick={Registration}>{button}</StyledButton>
     </Form>
   );
@@ -115,7 +120,7 @@ const StyledInput = styled.input`
   } */
   `;
 
-  const StyledButton = styled.button`
+const StyledButton = styled.button`
   justify-content: center;
   align-items: center;
   display: flex;

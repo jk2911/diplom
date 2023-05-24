@@ -20,11 +20,13 @@ namespace API.Entities
         [JsonIgnore]
         public virtual ICollection<HistoryBankAccount> HistoryBankAccounts { get; set; }
         public virtual ICollection<Card> Cards { get; set; }
+        public virtual ICollection<Coupon> Coupons { get; set; }
         public User()
         {
             UserBets = new List<UserBet>();
             HistoryBankAccounts = new List<HistoryBankAccount>();
             Cards = new List<Card>();
+            Coupons = new List<Coupon>();
         }
     }
 }

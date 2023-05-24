@@ -19,6 +19,7 @@ namespace API.Data
         public virtual DbSet<UserBet> UserBets { get; set; }
         public virtual DbSet<HistoryBankAccount> HistoryBankAccounts { get; set; }
         public virtual DbSet<Card> Cards { get; set; }
+        public virtual DbSet<Coupon> Coupons { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
@@ -77,6 +78,15 @@ namespace API.Data
             };
 
             Cards.AddAsync(card);
+
+            SaveChangesAsync().Wait();
+
+            var coupon = new Coupon
+            {
+                Name = "Q1W2E3R4T5"
+            };
+
+            Coupons.AddAsync(coupon);
 
             SaveChangesAsync().Wait();
 
