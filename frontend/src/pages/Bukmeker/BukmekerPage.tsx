@@ -62,12 +62,14 @@ const Content = styled.div`
 `;
 
 const RowItem = styled(Row)`
+margin-top: 5px;
   padding: 5px;
   background-color: #eee;
   color: #333;
   border: 1px #ccc solid;
   cursor: pointer;
   list-style: none;
+  border-radius: 5px;
 `;
 
 const TabElement = styled.div`

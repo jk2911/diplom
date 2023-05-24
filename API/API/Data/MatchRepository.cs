@@ -37,6 +37,43 @@ namespace API.Data
 
         public void Delete(Match item)
         {
+            foreach(var bet in item.Bets)
+            {
+                foreach(var betValue in bet.Values)
+                {
+                    var userBets = _context.UserBets.Where(ub => ub.BetValueId == betValue.Id).
+                        ToList();
+
+                    foreach (var userBet in userBets)
+                    {
+                        var user = _context.User.Find(userBet.UserId);
+
+                        if (user != null && userBet.IsWin == null)
+                        {
+
+                            user.Money += userBet.Money;
+
+                            HistoryBankAccount history = new HistoryBankAccount()
+                            {
+                                Status = "Удаление матча",
+                                Money = userBet.Money,
+                                Date = DateTime.Now,
+                                User = user
+                            };
+
+                            _context.HistoryBankAccounts.Add(history);
+
+                            _context.Entry(user).State = EntityState.Modified;
+                        }
+
+                    }
+
+                    _context.BetValue.Remove(betValue);
+                }
+
+                _context.Bet.Remove(bet);
+            }
+
             _context.Match.Remove(item);
         }
 

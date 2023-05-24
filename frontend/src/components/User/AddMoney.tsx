@@ -42,7 +42,8 @@ export function AddMoney({ id, setActiveAddCard, amount, setAmount }: Props) {
   };
 
   return (
-    <div>
+    <div style={{fontSize:"18px"}}>
+      <div style={{marginBottom:"15px"}}>Пополнение счета</div>
       <select onChange={e => setCard(Number(e.target.value))}>
         <option value={0}>Добавить новую карту</option>
         {loading && <>Загрузка</>}
@@ -58,7 +59,7 @@ export function AddMoney({ id, setActiveAddCard, amount, setAmount }: Props) {
       <div style={{ height: 30, width: 120 }}>{error}</div>
 
 
-      <button onClick={Add}>{button}</button>
+      <button style={{borderRadius:"3px"}} onClick={Add}>{button}</button>
     </div>
   );
 }

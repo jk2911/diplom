@@ -10,7 +10,7 @@ export function ConfirmationBets({ bets }: Props) {
     //console.log(bets);
     return (<div style={{ margin: "10px" }}>
         {bets.map((bet) => (
-            <div key={bet.id}>
+            <div key={bet.id} style={{ display:"flex", justifyContent:"center", fontSize:"18px"}}>
                 <Bet bet={bet} />
             </div>
         ))}
@@ -43,8 +43,8 @@ function Bet({ bet }: BetProps) {
     }
     //console.log(bet.values)
     return (
-        <div>
-            <p style={{ margin: "10px" }}>{bet.name}</p>
+        <div style={{textAlign:"center", marginTop:"15px"}}>
+            <p>{bet.name}</p>
             <BetValues betValues={bet.values} editBet={editBet} />
         </div>
     )
@@ -58,9 +58,9 @@ interface BetValuesProps {
 function BetValues({ betValues, editBet }: BetValuesProps) {
 
     return (<div>
-        <select onChange={e => editBet(Number(e.target.value))}>
+        <select style={{borderRadius:"3px"}} onChange={e => editBet(Number(e.target.value))}>
             {betValues.map((bet, index) => (
-                <option key={index} value={index}>{bet.name}:{" "}{bet.value}</option>
+                <option style={{borderRadius:"3px"}} key={index} value={index}>{bet.name}:{" "}{bet.value}</option>
             ))}
         </select>
     </div>)

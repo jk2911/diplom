@@ -20,11 +20,11 @@ export function RegionsUpcomingMatches({
   return (
     <Row>
       {loading && <>Загрузка</>}
-      {regions.length != 0 && (<ButtonCon onClick={() => setChampionship(0)}>Все</ButtonCon>)}
+      {regions.length != 0 && (<Container style={{marginBottom:"5px"}}><ButtonCon onClick={() => setChampionship(0)}>Все</ButtonCon></Container>)}
       {regions.map((region) => (
         <Container key={region.id}>
           <details>
-            <summary>{region.region}</summary>
+            <summary style={{borderRadius:"3px"}}>{region.region}</summary>
             {region.championships.map((ch) => (
               <div key={ch.id} onClick={() => setChampionship(ch.id)}>{ch.name}</div>
             ))}
@@ -37,4 +37,5 @@ export function RegionsUpcomingMatches({
 
 const ButtonCon = styled.button`
   width: 100px;
+  border-radius: 3px;
 `;    

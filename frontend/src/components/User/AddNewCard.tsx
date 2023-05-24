@@ -36,7 +36,7 @@ export function AddNewCard({ id, amount }: Props) {
     };
 
     return (
-        <div>
+        <div style={{fontSize:"18px"}}>
             <input
                 style={{ marginRight: "20px", marginTop: "20px" }}
                 type="text"
@@ -62,7 +62,7 @@ export function AddNewCard({ id, amount }: Props) {
                 />
             </div>
 
-            <div style={{ height: 30, width: 120 }}>{error}</div>
+            <div style={{ height: 30, width: 450, marginTop:"10px", marginBottom:"10px" }}>{error}</div>
 
 
             <button onClick={Add}>{button}</button>

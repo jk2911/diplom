@@ -189,145 +189,145 @@ export function MatchPageAdmin() {
                   maxWidth: 70,
                 }}
               />
-              <button onClick={Save}>{buttonSave}</button>
-              <button style={{ marginRight: "20px" }} onClick={() => setActiveDelete(true)}>Удалить матч</button>
+              <button style={{ marginRight: "20px", borderRadius:"3px" }} onClick={Save}>{buttonSave}</button>
+              <button style={{ marginRight: "20px", borderRadius:"3px"  }} onClick={() => setActiveDelete(true)}>Удалить матч</button>
             </div>
 
             <div>
               <div>
-                <div>
+                <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }}>
                   <div>
-                    <>Голы</>
-                    <input
+                    <div>Голы</div>
+                    <input style={{margin:"5px"}}
                       type="number"
                       value={homeGoal}
                       onChange={(e) => setGoalHome(Number(e.target.value))}
                     />
-                    <input
+                    <input style={{margin:"5px"}}
                       type="number"
                       value={awayGoal}
                       onChange={(e) => setGoalAway(Number(e.target.value))}
                     />
                   </div>
                   <div>
-                    <>Угловые</>
-                    <input
+                    <div>Угловые</div>
+                    <input style={{margin:"5px"}}
                       type="number"
                       value={cornerHome}
                       onChange={(e) => setCornerHome(Number(e.target.value))}
                     />
-                    <input
+                    <input style={{margin:"5px"}}
                       type="number"
                       value={cornerAway}
                       onChange={(e) => setCornerAway(Number(e.target.value))}
                     />
                   </div>
                   <div>
-                    <>Удары</>
-                    <input
+                    <div>Удары</div>
+                    <input style={{margin:"5px"}}
                       type="number"
                       value={shotsHome}
                       onChange={(e) => setShotsHome(Number(e.target.value))}
                     />
-                    <input
+                    <input style={{margin:"5px"}}
                       type="number"
                       value={shotsAway}
                       onChange={(e) => setShostAway(Number(e.target.value))}
                     />
                   </div>
                   <div>
-                    <>Удары в створ</>
-                    <input
+                    <div>Удары в створ</div>
+                    <input style={{margin:"5px"}}
                       type="number"
                       value={shotsInTargetHome}
                       onChange={(e) => setShotsTarHome(Number(e.target.value))}
                     />
-                    <input
+                    <input style={{margin:"5px"}}
                       type="number"
                       value={shotsInTargetAway}
                       onChange={(e) => setShotsTarAway(Number(e.target.value))}
                     />
                   </div>
                   <div>
-                    <>Сэйвы</>
-                    <input
+                    <div>Сэйвы</div>
+                    <input style={{margin:"5px"}}
                       type="number"
                       value={saveHome}
                       onChange={(e) => setSaveHome(Number(e.target.value))}
                     />
-                    <input
+                    <input style={{margin:"5px"}}
                       type="number"
                       value={saveAway}
                       onChange={(e) => setSaveAway(Number(e.target.value))}
                     />
                   </div>
                   <div>
-                    <>Владение</>
-                    <input
+                    <div>Владение</div>
+                    <input style={{margin:"5px"}}
                       type="number"
                       value={possession}
                       onChange={(e) => setPossesion(Number(e.target.value))}
                     />
-                    <input
+                    <input style={{margin:"5px"}}
                       type="number"
                       value={possession}
                       onChange={(e) => setPossesion(Number(e.target.value))}
                     />
                   </div>
                   <div>
-                    <>Фолы</>
-                    <input
+                    <div>Фолы</div>
+                    <input style={{margin:"5px"}}
                       type="number"
                       value={foulsHome}
                       onChange={(e) => setFoulsHome(Number(e.target.value))}
                     />
-                    <input
+                    <input style={{margin:"5px"}}
                       type="number"
                       value={foulsAway}
                       onChange={(e) => setFoulsAway(Number(e.target.value))}
                     />
                   </div>
                   <div>
-                    <>Оффсайды</>
-                    <input
+                    <div>Оффсайды</div>
+                    <input style={{margin:"5px"}}
                       type="number"
                       value={offsideHome}
                       onChange={(e) => setOffsideHome(Number(e.target.value))}
                     />
-                    <input
+                    <input style={{margin:"5px"}}
                       type="number"
                       value={offsideAway}
                       onChange={(e) => setOffsideAway(Number(e.target.value))}
                     />
                   </div>
                   <div>
-                    <>Желтые карточки</>
-                    <input
+                    <div>Желтые карточки</div>
+                    <input style={{margin:"5px"}}
                       type="number"
                       value={yellowCardHome}
                       onChange={(e) => setYellowCardHome(Number(e.target.value))}
                     />
-                    <input
+                    <input style={{margin:"5px"}}
                       type="number"
                       value={yellowCardAway}
                       onChange={(e) => setYellowCardAway(Number(e.target.value))}
                     />
                   </div>
                   <div>
-                    <>Красные карточки</>
-                    <input
+                    <div>Красные карточки</div>
+                    <input style={{margin:"5px"}}
                       type="number"
                       value={redCardHome}
                       onChange={(e) => setRedCardHome(Number(e.target.value))}
                     />
-                    <input
+                    <input style={{margin:"5px"}}
                       type="number"
                       value={redCardAway}
                       onChange={(e) => setRedCardAway(Number(e.target.value))}
                     />
                   </div>
                 </div>
-                <button onClick={() => setAddBet(true)}>Добавить</button>
+                <button style={{borderRadius:"3px" }} onClick={() => setAddBet(true)}>Добавить</button>
                 <BetsValue bets={bets} removeBet={RemoveBet} setBets={() => setBets} />
               </div>
 

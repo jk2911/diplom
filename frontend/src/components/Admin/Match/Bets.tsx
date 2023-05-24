@@ -51,7 +51,7 @@ export function Bet({ bet, removeBet, index }: BetProps) {
 
   return (
     <div style={{ margin: "20px" }}>
-      <input type="text" value={name} onChange={(e) => SetName(e)} />
+      <input style={{margin:"5px"}} type="text" value={name} onChange={(e) => SetName(e)} />
       {bet.values.map((bv) => (
         <div key={bv.id}>{BetValueInput(bv)}</div>
       ))}
@@ -82,7 +82,7 @@ const BetValueInput = (bet: IBetValue) => {
 
   return (
     <>
-      <input type="text" value={name} onChange={(e) => SetName(e)} />
+      <input style={{margin:"5px"}} type="text" value={name} onChange={(e) => SetName(e)} />
       <input type="number" value={value} onChange={(e) => Set(e)} />
     </>
   );

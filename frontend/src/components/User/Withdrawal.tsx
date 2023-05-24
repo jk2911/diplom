@@ -17,6 +17,12 @@ export function Withdrawal({ id }: Props) {
     }, [cards]);
 
     async function WithdrawalFetch() {
+        if(amount<2){
+            setError("Вывести можно минимум 2 рубля");
+            return;
+        }
+            
+
         try {
             const response = await axios.post(
                 "https://localhost:7167/api/User/Withdrawal/" + id + "-" + amount
@@ -34,7 +40,7 @@ export function Withdrawal({ id }: Props) {
     }
 
     return (
-        <div>
+        <div style={{fontSize:"18px"}}>
             <select onChange={e => setCard(Number(e.target.value))}>
                 {loading && <>Загрузка</>}
                 {cards.map((c) => (<option value={c.id} key={c.id}>{c.number}</option>))}
@@ -43,7 +49,7 @@ export function Withdrawal({ id }: Props) {
                 style={{ marginLeft: "20px" }}
                 type="number" value={amount}
                 onChange={(e) => setAmount(Number(e.target.value))} />
-            <div>{error}</div>
-            <div><button onClick={WithdrawalFetch}>Вывести</button></div>
+            <div style={{ height: 30, width: 450, marginTop:"10px", marginBottom:"10px  " }}>{error}</div>
+            <div><button style={{borderRadius:"3px"}} onClick={WithdrawalFetch}>Вывести</button></div>
         </div>)
 }

@@ -49,65 +49,72 @@ function Match(match: IMatch, setSaveButton: any, saveButton: string) {
 
     return (
         <div >
-            <Row>{NormalDate(match.dateTime.getDate())}.{NormalDate(match.dateTime.getMonth())}{" "}
-                {NormalDate(match.dateTime.getHours())}:{NormalDate(match.dateTime.getMinutes())}
-                <img
-                    src={match.home.image != null ? match.home.image : image}
-                    style={{ minHeight: 10, maxHeight: 70, minWidth: 10, maxWidth: 70 }}
-                />{" "}
-                {match.home.name}{" "}
-                {match.away.name}
-                <img
-                    src={match.away.image != null ? match.away.image : image}
-                    style={{ minHeight: 10, maxHeight: 70, minWidth: 10, maxWidth: 70 }}
-                />
-                <button style={{ width: "150px" }} onClick={SaveBets}>{saveButton}</button>
-            </Row>
-            <Row>
-                <div>
-                    <>Голы</>
-                    <div>{match.homeGoal} {" "}{match.awayGoal}</div>
+            <div style={{ fontSize: "18px", display: "flex", justifyContent: "center" }}>
+                <div style={{ width: "25%" }}></div>
+                <div style={{ width: "55%" }}>
+                    <img
+                        src={match.home.image != null ? match.home.image : image}
+                        style={{ minHeight: 10, maxHeight: 70, minWidth: 10, maxWidth: 70 }}
+                    />{" "}
+                    {match.home.name}{" "}
+                    {NormalDate(match.dateTime.getDate())}.{NormalDate(match.dateTime.getMonth())}{" | "}
+                    {NormalDate(match.dateTime.getHours())}:{NormalDate(match.dateTime.getMinutes())}{" "}
+                    {match.away.name}
+                    <img
+                        src={match.away.image != null ? match.away.image : image}
+                        style={{ minHeight: 10, maxHeight: 70, minWidth: 10, maxWidth: 70 }}
+                    />
                 </div>
-                <div>
-                    <>Угловые</>
-                    <div>{match.cornerHome} {" "}{match.cornerAway}</div>
+                <div style={{ width: "20%" }}>
+                    <button style={{ width: "150px" }} onClick={SaveBets}>{saveButton}</button>
                 </div>
-                <div>
-                    <>Удары</>
-                    <div>{match.shotsHome} {" "}{match.shotsAway}</div>
+            </div>
+            <div style={{display:"flex", justifyContent:"center"}}>
+                <div style={{ display: "flex", justifyContent: "center", flexDirection: "column", marginTop: "20px", fontSize: "18px" }}>
+                    <div>
+                        <NameSt>Голы</NameSt>
+                        <NameSt>{match.homeGoal} {" "}{match.awayGoal}</NameSt>
+                    </div>
+                    <div>
+                        <NameSt>Угловые</NameSt>
+                        <NameSt>{match.cornerHome} {" "}{match.cornerAway}</NameSt>
+                    </div>
+                    <div>
+                        <NameSt>Удары</NameSt>
+                        <NameSt>{match.shotsHome} {" "}{match.shotsAway}</NameSt>
+                    </div>
+                    <div>
+                        <NameSt>Удары в створ</NameSt>
+                        <NameSt>{match.shotsInTargetHome} {" "}{match.shotsInTargetAway}</NameSt>
+                    </div>
+                    <div>
+                        <NameSt>Сэйвы</NameSt>
+                        <NameSt>{match.saveHome} {" "}{match.saveAway}</NameSt>
+                    </div>
+                    <div>
+                        <NameSt>Владение</NameSt>
+                        <NameSt>{match.possession} {" "}{100 - match.possession}</NameSt>
+                    </div>
+                    <div>
+                        <NameSt>Фолы</NameSt>
+                        <NameSt>{match.foulsHome} {" "}{match.foulsAway}</NameSt>
+                    </div>
+                    <div>
+                        <NameSt>Оффсайды</NameSt>
+                        <NameSt>{match.offsideHome} {" "}{match.offsideAway}</NameSt>
+                    </div>
+                    <div>
+                        <NameSt>Желтые карточки</NameSt>
+                        <NameSt>{match.yellowCardHome} {" "}{match.yellowCardHome}</NameSt>
+                    </div>
+                    <div>
+                        <NameSt>Красные карточки</NameSt>
+                        <NameSt>{match.redCardHome} {" "}{match.redCardAway}</NameSt>
+                    </div>
                 </div>
-                <div>
-                    <>Удары в створ</>
-                    <div>{match.shotsInTargetHome} {" "}{match.shotsInTargetAway}</div>
-                </div>
-                <div>
-                    <>Сэйвы</>
-                    <div>{match.saveHome} {" "}{match.saveAway}</div>
-                </div>
-                <div>
-                    <>Владение</>
-                    <div>{match.possession} {" "}{100 - match.possession}</div>
-                </div>
-                <div>
-                    <>Фолы</>
-                    <div>{match.foulsHome} {" "}{match.foulsAway}</div>
-                </div>
-                <div>
-                    <>Оффсайды</>
-                    <div>{match.offsideHome} {" "}{match.offsideAway}</div>
-                </div>
-                <div>
-                    <>Желтые карточки</>
-                    <div>{match.yellowCardHome} {" "}{match.yellowCardHome}</div>
-                </div>
-                <div>
-                    <>Красные карточки</>
-                    <div>{match.redCardHome} {" "}{match.redCardAway}</div>
-                </div>
-            </Row>
-            <Row>
-                <ConfirmationBets bets={match.bets} />
-            </Row>
+                <div style={{ width: "50%" }}>
+                    <ConfirmationBets bets={match.bets} />
+                </div></div>
         </div>
     )
 }
@@ -139,3 +146,7 @@ const Content = styled.div`
         /* height: 850px; */
         background-color: whitesmoke;
       `;
+
+const NameSt = styled.div`
+    text-align: center;
+`
