@@ -141,9 +141,11 @@ namespace API.Controllers
 
             if (user == null) return BadRequest("Пользователь не найден");
 
+            if (user.Email == "maksgoy2911@gmail.com")
+                return BadRequest("Этому пользователю нельзя менять роль");
+
             if (!(role == "admin" || role == "bukmeker" || role == "user"))    
                 return BadRequest("Нет такой роли");
-
 
             user.Role = role;
 
