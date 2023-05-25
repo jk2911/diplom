@@ -1,6 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { useAllRegions } from "../../hooks/region";
+import styled from "styled-components";
 
 export function CreateTeam() {
   const [name, setName] = useState("");
@@ -25,7 +26,6 @@ export function CreateTeam() {
 
     if (image != null) formData.append("image", image);
 
-
     try {
       const response = await axios.post(
         "https://localhost:7167/api/Team/CreateTeam",
@@ -46,20 +46,56 @@ export function CreateTeam() {
   };
 
   return (
-    <>
-      название <input value={name} onChange={(e) => setName(e.target.value)} />
-      <input
-        type="file"
-        accept="image/*,.png,.jpg,.gif,.web"
-        onChange={AddImage}
-      />
-      <select onChange={(e) => setRegion(e.target.value)}>
-        {regions.map((region) => (
-          <option>{region.name}</option>
-        ))}
-      </select>
-      {errorCreate}
-      <button onClick={FetchCreateTeam}>{buttonState}</button>
-    </>
+    <FormContainer>
+      <Div>Создание команды</Div>
+      <Div>
+        <input value={name} placeholder="Название" onChange={(e) => setName(e.target.value)} />
+      </Div>
+      <Div>
+        <input
+          type="file"
+          accept="image/*,.png,.jpg,.gif,.web"
+          onChange={AddImage}
+        />
+      </Div>
+      <Div>
+        <select onChange={(e) => setRegion(e.target.value)}>
+          {regions.map((region) => (
+            <option>{region.name}</option>
+          ))}
+        </select>
+      </Div>
+      <Div>{errorCreate}</Div>
+      <StyledButton onClick={FetchCreateTeam}>{buttonState}</StyledButton>
+    </FormContainer>
   );
 }
+
+const FormContainer = styled.div`
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 25vw;
+`;
+
+const StyledButton = styled.button`
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 56px;
+  padding-left: 60px;
+  padding-right: 60px;
+  font-size: 18px;
+  font-family: "Montserrat-Bold";
+  text-align: center;
+  border: none;
+  :hover {
+    cursor: pointer;
+  }
+  transition-duration: 0.4s;
+`;
+
+const Div = styled.div`
+  margin-bottom: 15px;
+`;

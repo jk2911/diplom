@@ -6,11 +6,12 @@ import { useImmer } from "use-immer";
 import { IRegion } from "../../entity/Region";
 import { Modal } from "../../modal/Modal";
 import { CreateRegion } from "../../components/Admin/CreateRegion";
-import image from "../../assets/region.jpg"
+import image from "../../assets/region.jpg";
 
 export function AllRegions() {
   const { regions, error, loading } = useAllRegions();
   const [sortRegionsList, setSortRegions] = useState(regions);
+  const [search, setSearch] = useState("");
   const [createModalActive, setCreateModalActive] = useState(false);
 
   useEffect(() => {
@@ -35,6 +36,22 @@ export function AllRegions() {
     setSortRegions(buffer);
   }
 
+  const Search = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    var text = e.target.value;
+
+    setSearch(text);
+    if (text !== "") {
+      setSortRegions(
+        sortRegionsList.filter(
+          (n) => n.name.toLowerCase().indexOf(text.toLowerCase()) !== -1
+        )
+      );
+    } else {
+      setSortRegions(regions);
+    }
+  };
+
   const toRegion = (id: number) => {
     window.location.assign("/admin/region/championships?id=" + id);
   };
@@ -44,11 +61,17 @@ export function AllRegions() {
       <Modal active={createModalActive} setActive={setCreateModalActive}>
         <CreateRegion />
       </Modal>
+      <input value={search} onChange={(e) => Search(e)} style={{ marginRight: "20px", borderRadius: "3px" }} placeholder="Поиск региона"/>
       <select onChange={(e) => sortRegions(e.target.value)}>
         <option value="2">названию</option>
         <option value="1">id</option>
       </select>
-      <button style={{ marginLeft: "20px", borderRadius:"3px" }} onClick={() => setCreateModalActive(true)}>Создать регион</button>
+      <button
+        style={{ marginLeft: "20px", borderRadius: "3px" }}
+        onClick={() => setCreateModalActive(true)}
+      >
+        Создать регион
+      </button>
       {loading && <>Загрузка</>}
       {sortRegionsList.map((region) => (
         <RowItem key={region.id} onClick={() => toRegion(region.id)}>
@@ -63,10 +86,8 @@ export function AllRegions() {
   );
 }
 
-
-
 const RowItem = styled(Row)`
-margin-top: 5px;
+  margin-top: 5px;
   padding: 5px;
   background-color: #eee;
   color: #333;

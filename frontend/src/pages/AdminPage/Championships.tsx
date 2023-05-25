@@ -12,6 +12,7 @@ export function AllChampionships() {
   const { championships, error, loading } = useAllChampionships();
   const [sortChampionshipsList, setSortChampionships] = useState(championships);
   const [createModalActive, setCreateModalActive] = useState(false);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     setSortChampionships(championships);
@@ -46,6 +47,22 @@ export function AllChampionships() {
     setSortChampionships(buffer);
   }
 
+  const Search = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    var text = e.target.value;
+
+    setSearch(text);
+    if (text !== "") {
+      setSortChampionships(
+        sortChampionshipsList.filter(
+          (n) => n.name.toLowerCase().indexOf(text.toLowerCase()) !== -1
+        )
+      );
+    } else {
+      setSortChampionships(championships);
+    }
+  };
+
   const toChampionship = (id: number) => {
     window.location.assign("/admin/championship/teams?id=" + id);
   };
@@ -54,7 +71,8 @@ export function AllChampionships() {
     <>
       <Modal active={createModalActive} setActive={setCreateModalActive}>
         <CreateChampionship />
-      </Modal>
+      </Modal> 
+      <input value={search} onChange={(e) => Search(e)} style={{ marginRight: "20px", borderRadius: "3px" }} placeholder="Поиск чемпионата"/>
       <select onChange={(e) => sortChampionships(e.target.value)}>
         <option value="1">id</option>
         <option value="2">названию</option>
