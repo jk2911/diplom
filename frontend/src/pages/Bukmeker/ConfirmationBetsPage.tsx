@@ -66,7 +66,7 @@ function Match(match: IMatch, setSaveButton: any, saveButton: string) {
                     />
                 </div>
                 <div style={{ width: "20%" }}>
-                    <button style={{ width: "150px" }} onClick={SaveBets}>{saveButton}</button>
+                    <button style={{ width: "150px", borderRadius:"3px" }} onClick={SaveBets}>{saveButton}</button>
                 </div>
             </div>
             <div style={{display:"flex", justifyContent:"center"}}>

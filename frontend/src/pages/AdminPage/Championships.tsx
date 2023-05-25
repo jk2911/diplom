@@ -54,7 +54,7 @@ export function AllChampionships() {
     setSearch(text);
     if (text !== "") {
       setSortChampionships(
-        sortChampionshipsList.filter(
+        championships.filter(
           (n) => n.name.toLowerCase().indexOf(text.toLowerCase()) !== -1
         )
       );

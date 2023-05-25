@@ -25,7 +25,7 @@ export function AllUsers() {
   return <div>
     {loading && <>Загрузка</>}
     {users.map((user) => (
-      <div>
+      <div key={user.id}>
         <RowItem key={user.id}>
           <div style={{width:"5%"}}>{user.id}</div>
            <div style={{width:"40%"}}>{user.email}</div> 

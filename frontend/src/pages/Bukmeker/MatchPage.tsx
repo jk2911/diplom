@@ -20,6 +20,7 @@ const newBetValue: IBetValue = {
 
 export function BukmekerMatchPage() {
     const [addBet, setAddBet] = useState(false);
+    const [saveButton, setSaveButton] = useState("Сохранить");
 
     const [params, setParams] = useSearchParams();
 
@@ -28,10 +29,6 @@ export function BukmekerMatchPage() {
     const id = params.get("id");
 
     const { match, error, loading } = useMatch(Number(id));
-
-    function save() {
-        console.log(match?.bets);
-    }
 
     useEffect(() => {
         if (!match) return;
@@ -51,7 +48,7 @@ export function BukmekerMatchPage() {
 
 
     async function Save() {
-        console.log(match?.bets);
+        setSaveButton("Сохранение...");
         try {
             const response = await axios.put(
                 "https://localhost:7167/api/Match/EditMatch",
@@ -67,6 +64,7 @@ export function BukmekerMatchPage() {
             console.log(message.toString());
             console.log(error.response?.data)
         }
+        setSaveButton("Сохранить");
     }
 
     return (
@@ -98,13 +96,13 @@ export function BukmekerMatchPage() {
                                     maxWidth: 70,
                                 }}
                             />
-                            <button onClick={Save}>Сохранить</button>
+                            <button style={{marginLeft:"15px", borderRadius:"3px"}} onClick={Save}>{saveButton}</button>
                         </div>
 
                         <div >
                             <div>
 
-                                <button onClick={() => setAddBet(true)}>Добавить</button>
+                                <button style={{marginTop:"15px", borderRadius:"3px"}} onClick={() => setAddBet(true)}>Добавить</button>
                                 <BetsValue bets={bets} removeBet={RemoveBet} setBets={() => setBets} />
                             </div>
 

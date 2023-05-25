@@ -19,7 +19,6 @@ export function BukmekerChampionshipPage() {
         <Content>
             {championship && (
                 <div>
-                    {championship.id} {championship.name} {championship.region.name}
                     <img
                         src={championship.image}
                         style={{
@@ -27,8 +26,10 @@ export function BukmekerChampionshipPage() {
                             maxHeight: 70,
                             minWidth: 10,
                             maxWidth: 70,
+                            marginRight:"20px"
                         }}
                     />
+                    {championship.name} {championship.region.name}
                     <NavBar>
                         <TabElement>
                             <Link to={"calendar?id=" + championship.id}>Календарь</Link>

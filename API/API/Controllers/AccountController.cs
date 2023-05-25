@@ -30,6 +30,9 @@ namespace API.Controllers
 
             User user = _mapper.Map<User>(registerDto);
 
+            if (user.Password.Length < 8)
+                return BadRequest("Длина пароля должна быть минимум 8 символов");
+
             user.Password = _hashPassword.CreateHash(user.Password);
 
             _unitOfWork.User.Create(user);

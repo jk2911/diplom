@@ -1,5 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
+import styled from "styled-components";
 
 interface Props {
     matchId: number,
@@ -39,16 +40,50 @@ export function BukmekerAddBet({ matchId }: Props) {
     };
 
     return (
-        <div>
-            название <input value={name} onChange={(e) => setName(e.target.value)} />
+        <FormContainer>
+            <Div>Добавление исхода</Div>
+            <Div>
+            <input value={name} placeholder="Название исхода" onChange={(e) => setName(e.target.value)} />
+            </Div>
+            <Div>
             <input
                 type="number"
+                placeholder="Количество исходов"
                 value={count}
                 onChange={(e) => setCount(Number(e.target.value))}
             />
-            {/* {errorCreate} */}
-            <div>{error}</div>
-            <button onClick={FetchAddBet}>{buttonState}</button>
-        </div>
+            </Div>
+            <Div>{error}</Div>
+            <StyledButton onClick={FetchAddBet}>{buttonState}</StyledButton>
+        </FormContainer>
     );
 }
+
+const FormContainer = styled.div`
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 25vw;
+`;
+
+const StyledButton = styled.button`
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 56px;
+  padding-left: 60px;
+  padding-right: 60px;
+  font-size: 18px;
+  font-family: "Montserrat-Bold";
+  text-align: center;
+  border: none;
+  :hover {
+    cursor: pointer;
+  }
+  transition-duration: 0.4s;
+`;
+
+const Div = styled.div`
+  margin-bottom: 15px;
+`;

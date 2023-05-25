@@ -12,7 +12,6 @@ export function MatchBukmeker({ m }: MatchProps) {
     const toMatch = () => {
         navigate("/bukmeker/match?id=" + m.id);
     };
-    console.log("buk", m);
 
     m.dateTime = new Date(m.dateTime);
     return (

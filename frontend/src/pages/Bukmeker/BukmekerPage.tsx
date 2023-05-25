@@ -2,35 +2,67 @@ import styled from "styled-components";
 import { useAllChampionships } from "../../hooks/championship";
 import { Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export function BukmekerPage() {
-    const { championships, error, loading } = useAllChampionships();
-    const navigate = useNavigate()
+  const { championships, error, loading } = useAllChampionships();
+  const [sortChampionhsipList, setSortChampionship] = useState(championships);
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
 
-    function toChampionship(id: number) {
-        navigate("/bukmeker/championship/calendar?id=" + id)
+  useEffect(() => {
+    setSortChampionship(championships);
+  }, [championships]);
+
+  const Search = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //e.preventDefault();
+    var text = e.target.value;
+    console.log(text);
+
+    setSearch(text);
+    console.log(text !== "");
+    if (text !== "") {
+      setSortChampionship(
+        championships.filter(
+          (n) => n.name.toLowerCase().indexOf(text.toLowerCase()) !== -1
+        )
+      );
+    } else {
+      setSortChampionship(championships);
     }
+  };
 
-    return (
-        <Container>
-            <Content>
-                {loading && <>Загрузка</>}
-                {championships.map((ch) => (
-                    <RowItem key={ch.id} onClick={() => toChampionship(ch.id)}>
-                        <img
-                            src={ch.image}
-                            style={{
-                                minHeight: 10,
-                                maxHeight: 70,
-                                minWidth: 10,
-                                maxWidth: 70,
-                            }}
-                        />
-                        {ch.name}{" "}{ch.region.name}
-                    </RowItem>
-                ))}
-            </Content>
-        </Container>)
+  function toChampionship(id: number) {
+    navigate("/bukmeker/championship/calendar?id=" + id);
+  }
+
+  return (
+    <Container>
+      <Content>
+        <input
+          value={search}
+          onChange={(e) => Search(e)}
+          style={{ marginRight: "20px", borderRadius: "3px" }}
+          placeholder="Поиск чемпионата"
+        />
+        {loading && <>Загрузка</>}
+        {sortChampionhsipList.map((ch) => (
+          <RowItem key={ch.id} onClick={() => toChampionship(ch.id)}>
+            <img
+              src={ch.image}
+              style={{
+                minHeight: 10,
+                maxHeight: 70,
+                minWidth: 10,
+                maxWidth: 70,
+              }}
+            />
+            {ch.name} {ch.region.name}
+          </RowItem>
+        ))}
+      </Content>
+    </Container>
+  );
 }
 
 const Container = styled.div`
@@ -62,7 +94,7 @@ const Content = styled.div`
 `;
 
 const RowItem = styled(Row)`
-margin-top: 5px;
+  margin-top: 5px;
   padding: 5px;
   background-color: #eee;
   color: #333;
