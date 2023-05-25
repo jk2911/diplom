@@ -7,10 +7,12 @@ import { ResultsMatch } from "./ResultsMatch";
 import { DeleteTeam } from "../../components/Admin/Team/DeleteTeam";
 import { Modal } from "../../modal/Modal";
 import { useState } from "react";
+import { UpdateTeam } from "../../components/Admin/Team/EditTeam";
 
 export function TeamPage() {
   const [params, setParams] = useSearchParams();
   const [ deleteModalTeam, setDeleteModalTeam ] = useState(false);
+  const [editModal, setEditModal] = useState(false);
 
   const id = params.get("id");
 
@@ -24,8 +26,14 @@ export function TeamPage() {
             <Modal active={deleteModalTeam} setActive={setDeleteModalTeam}>
               <DeleteTeam team={team} />
             </Modal>
-            {team.id} {team.name}
-            <button onClick={() => setDeleteModalTeam(true)}>
+            <Modal active={editModal} setActive={setEditModal}>
+              <UpdateTeam team={team}/>
+            </Modal>
+            {team.name}
+            <button style={{borderRadius:"3px", marginLeft:"15px"}} onClick={() => setEditModal(true)}>
+              Изменить команду
+            </button>
+            <button style={{borderRadius:"3px", marginLeft:"15px"}} onClick={() => setDeleteModalTeam(true)}>
               Удалить команду
             </button>
             <NavBar>

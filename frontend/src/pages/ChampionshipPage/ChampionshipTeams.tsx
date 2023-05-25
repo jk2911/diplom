@@ -33,20 +33,20 @@ export function ChampionshipTeams({ championshipId }: Props) {
   };
 
   return (
-    <>
-      <button onClick={() => setActiveAddTeam(true)}>
+    <div style={{marginTop:"15px"}}>
+      <button style={{borderRadius:"3px"}} onClick={() => setActiveAddTeam(true)}>
         Добавить команду в чемпионат
       </button>
       {error && <>{error}</>}
       {loading && <>Загрузка</>}
       {teams.map((team) => (
-        <div>
+        <div style={{marginTop:"15px"}}>
           <img
             src={team.image != null ? team.image : image}
             style={{ minHeight: 10, maxHeight: 70, minWidth: 10, maxWidth: 70 }}
           />
           {team.name}
-          <button onClick={() => DeleteTeam(team.id)}>Удалить команду</button>
+          <button style={{borderRadius:"3px", marginLeft:"5px"}} onClick={() => DeleteTeam(team.id)}>Удалить команду</button>
         </div>
       ))}
       <Modal active={activeAddTeam} setActive={setActiveAddTeam}>
@@ -55,6 +55,6 @@ export function ChampionshipTeams({ championshipId }: Props) {
           id={championshipId}
         />
       </Modal>
-    </>
+    </div>
   );
 }

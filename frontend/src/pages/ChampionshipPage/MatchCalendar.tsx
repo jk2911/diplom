@@ -26,7 +26,7 @@ export function MatchCalendar({ id }: Props) {
       <Modal active={createMatch} setActive={setCreateMatch}>
         <CreateMatch id={id} />
       </Modal>
-      <div><button onClick={() => setCreateMatch(true)}>Создать матч</button></div>
+      <div><button style={{borderRadius:"3px"}} onClick={() => setCreateMatch(true)}>Создать матч</button></div>
       <div>
         {matches.map((m) => (
           <Match m={m} key={m.id} />

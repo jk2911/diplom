@@ -16,7 +16,7 @@ export function Match({ m }: MatchProps) {
 
   m.dateTime = new Date(m.dateTime);
   return (
-    <div onClick={toMatch}>
+    <div style={{marginTop:"15px"}} onClick={toMatch}>
       <>
         {NormalDate(m.dateTime.getDate())}.{NormalDate(m.dateTime.getMonth())}{" "}
         {NormalDate(m.dateTime.getHours())}:

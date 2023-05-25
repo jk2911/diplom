@@ -111,7 +111,6 @@ namespace API.Controllers
 
             if (region.Name != name)
             {
-
                 var regionExists = await _unitOfWork.Region.GetRegionByName(name);
 
                 if (regionExists != null)

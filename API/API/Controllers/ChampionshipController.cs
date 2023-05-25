@@ -162,5 +162,54 @@ namespace API.Controllers
 
             return BadRequest("Не удалось удалить чемпионат");
         }
+
+        [HttpPut("EditChampionship")]
+        public async Task<ActionResult> EditChampionship(int id)
+        {
+            var championship = await _unitOfWork.Championship.Get(id);
+
+            if (championship == null)
+                return BadRequest("Чемпионат не найден");
+
+            var req = Request.Form;
+
+            string? name = req["name"];
+            var image = req.Files["image"];
+
+            if (name == null & image == null)
+                return BadRequest();
+
+            if (name.Length < 3)
+                return BadRequest("Длина названия должна быть минимум 3 символа");
+
+            if (championship.Name != name)
+            {
+                var region = await _unitOfWork.Region.Get(championship.RegionId);
+
+                var chExists = await _unitOfWork.Championship.
+                    GetChampionshipInRegionByName(name, region);
+
+                if (chExists != null)
+                    return BadRequest("Такой чемпионат в регионе уже существует");
+            }
+
+            if (name != null)
+                championship.Name = name;
+
+            if (image != null)
+            {
+                if (championship.Image != null)
+                    _photoService.RemovePhoto(championship.Image.Replace(Request.Scheme + "://" + Request.Host.ToUriComponent() + "/", ""));
+
+                championship.Image = _photoService.AddPhoto(Request, "images/championships/" + image.FileName, image);
+            }
+
+            _unitOfWork.Championship.Update(championship);
+
+            if (await _unitOfWork.Complete())
+                return Ok("Чемпионат изменен");
+
+            return BadRequest("Не удалось изменить чемпионат");
+        }
     }
 }

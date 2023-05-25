@@ -11,10 +11,12 @@ import { ResultsMatch } from "./ResultsMatch";
 import { useState } from "react";
 import { Modal } from "../../modal/Modal";
 import { DeleteChampionship } from "../../components/Admin/Championship/DeleteChampionship";
+import { UpdateChampionhsip } from "../../components/Admin/Championship/EditChampionship";
 
 export function ChampionshipPage() {
   const [params, setParams] = useSearchParams();
   const [deleteModalChampionship, setDeleteModalChampionship] = useState(false);
+  const [editChampionship, setEditChampionship] = useState(false);
 
   const id = params.get("id");
 
@@ -31,10 +33,10 @@ export function ChampionshipPage() {
             >
               <DeleteChampionship championship={championship} />
             </Modal>
-            {championship.id} {championship.name} {championship.region.name}
-            <button onClick={() => setDeleteModalChampionship(true)}>
-              Удалить чемпионат
-            </button>
+            <Modal active={editChampionship} setActive={setEditChampionship}>
+              <UpdateChampionhsip ch={championship} />
+            </Modal>
+            {championship.name} {championship.region.name}
             <img
               src={championship.image}
               style={{
@@ -44,6 +46,12 @@ export function ChampionshipPage() {
                 maxWidth: 70,
               }}
             />
+            <button style={{ borderRadius: "3px", marginLeft: "15px" }} onClick={() => setEditChampionship(true)}>
+              Изменить чемпионат
+            </button>
+            <button style={{ borderRadius: "3px", marginLeft: "15px" }} onClick={() => setDeleteModalChampionship(true)}>
+              Удалить чемпионат
+            </button>
             <NavBar>
               <TabElement>
                 <Link to={"teams?id=" + championship.id}>Команды</Link>
