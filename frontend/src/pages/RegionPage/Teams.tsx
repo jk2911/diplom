@@ -1,5 +1,6 @@
 import { useRegionalChampionship } from "../../hooks/championship";
 import { useRegionalTeams } from "../../hooks/team";
+import image from "../../assets/club.png";
 
 interface Props {
   regionId: number;
@@ -13,9 +14,9 @@ export function RegionalTeams({ regionId }: Props) {
       {error && <>{error}</>}
       {loading && <>Загрузка</>}
       {teams.map((team) => (
-        <div>
+        <div style={{ marginTop: "10px" }}>
           <img
-            src={team.image}
+            src={team.image != null ? team.image : image}
             style={{ minHeight: 10, maxHeight: 70, minWidth: 10, maxWidth: 70 }}
           />
           {team.name}

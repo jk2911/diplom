@@ -21,16 +21,44 @@ namespace API.Data
             var champTeams = _context.ChampTeams.Where(t => t.TeamId == item.Id);
 
             var matches = _context.Match.
-                Where(m=>m.HomeId ==item.Id || m.AwayId ==item.Id);
+                Where(m => m.HomeId == item.Id || m.AwayId == item.Id);
 
-            foreach(var i in champTeams)
+            foreach (var i in champTeams)
             {
                 _context.ChampTeams.Remove(i);
             }
 
-            foreach(var i in matches)
+            foreach (var match in matches)
             {
-                _context.Match.Remove(i);
+                foreach (var bet in match.Bets)
+                {
+                    foreach (var betValue in bet.Values)
+                    {
+                        var userBets = _context.UserBets.
+                            Where(ub => ub.BetValueId == betValue.Id);
+
+                        foreach (var userBet in userBets)
+                        {
+                            var user = userBet.User;
+
+                            user.Money += userBet.Money;
+
+                            HistoryBankAccount history = new HistoryBankAccount()
+                            {
+                                Status = "Удаление матча",
+                                Money = userBet.Money,
+                                Date = DateTime.Now,
+                                User = user
+                            };
+
+                            _context.HistoryBankAccounts.Add(history);
+
+                            _context.Entry(user).State = EntityState.Modified;
+                        }
+                    }
+
+                }
+                _context.Match.Remove(match);
             }
 
             _context.Team.Remove(item);
