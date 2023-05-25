@@ -2,6 +2,7 @@ import { useState } from "react";
 import { IRegion } from "../../../entity/Region";
 import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 interface Props {
   region: IRegion;
@@ -46,22 +47,55 @@ export function UpdateRegion({ region }: Props) {
   };
 
   return (
-    <>
-      <div>Изменение региона </div>
-      <input
-        type="text"
-        value={regionName}
-        onChange={(e) => setRegionName(e.target.value)}
-      />
-      <input
-        type="file"
-        accept="image/*,.png,.jpg,.gif,.web"
-        onChange={AddImage}
-      />
-      <div>{errorMessage}</div>
-      <div>
-        <button onClick={UpdateRegion}>{button}</button>
-      </div>
-    </>
+    <FormContainer>
+      <Div>Изменение региона </Div>
+      <Div>
+        <input
+          type="text"
+          value={regionName}
+          onChange={(e) => setRegionName(e.target.value)}
+        />
+      </Div>
+      <Div>
+        <input
+          type="file"
+          accept="image/*,.png,.jpg,.gif,.web"
+          onChange={AddImage}
+        />
+      </Div>
+      <Div>{errorMessage}</Div>
+      <Div>
+        <StyledButton onClick={UpdateRegion}>{button}</StyledButton>
+      </Div>
+    </FormContainer>
   );
 }
+
+const FormContainer = styled.div`
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 25vw;
+`;
+
+const StyledButton = styled.button`
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 56px;
+  padding-left: 60px;
+  padding-right: 60px;
+  font-size: 18px;
+  font-family: "Montserrat-Bold";
+  text-align: center;
+  border: none;
+  :hover {
+    cursor: pointer;
+  }
+  transition-duration: 0.4s;
+`;
+
+const Div = styled.div`
+  margin-bottom: 15px;
+`;

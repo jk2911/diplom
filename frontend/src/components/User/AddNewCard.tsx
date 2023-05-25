@@ -37,6 +37,7 @@ export function AddNewCard({ id, amount }: Props) {
 
     return (
         <div style={{fontSize:"18px"}}>
+            <div style={{marginBottom:"15px"}}>Добавление новой карты</div>
             <input
                 style={{ marginRight: "20px", marginTop: "20px" }}
                 type="text"

@@ -127,7 +127,7 @@ function Match({ match }: MatchProps) {
   const d = new Date(match.dateTime);
 
   return (
-    <div>
+    <div style={{marginTop:"3px"}}>
       <TeamsTd onClick={() => toMatch(match.id)}>
         {match.home.name} - {match.away.name}
       </TeamsTd>

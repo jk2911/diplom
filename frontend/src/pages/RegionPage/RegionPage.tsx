@@ -38,11 +38,16 @@ export function RegionPage() {
                 maxHeight: 70,
                 minWidth: 10,
                 maxWidth: 70,
+                marginRight:"15px"
               }}
             />
             {region.name}
-            <button onClick={() => setUpdateModalRegion(true)}>Изменить</button>
-            <button onClick={() => setDeleteModalRegion(true)}>Удалить</button>
+            <button style={{ borderRadius: "3px", marginLeft: "15px" }} onClick={() => setUpdateModalRegion(true)}>
+              Изменить регион
+            </button>
+            <button style={{ borderRadius: "3px", marginLeft: "15px" }} onClick={() => setDeleteModalRegion(true)}>
+              Удалить регион
+            </button>
             <NavBar>
               <TabElement>
                 <Link to={"championships?id=" + region.id + ""}>

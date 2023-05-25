@@ -41,6 +41,7 @@ export function Withdrawal({ id }: Props) {
 
     return (
         <div style={{fontSize:"18px"}}>
+            <div style={{marginBottom:"15px"}}>Вывод средств</div>
             <select onChange={e => setCard(Number(e.target.value))}>
                 {loading && <>Загрузка</>}
                 {cards.map((c) => (<option value={c.id} key={c.id}>{c.number}</option>))}
