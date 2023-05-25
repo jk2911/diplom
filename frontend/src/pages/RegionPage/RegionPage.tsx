@@ -8,6 +8,7 @@ import { useState } from "react";
 import { Modal } from "../../modal/Modal";
 import { DeleteRegion } from "../../components/Admin/Region/DeleteRegion";
 import { UpdateRegion } from "../../components/Admin/Region/UpdateRegion";
+import image from "../../assets/region.jpg";
 
 export function RegionPage() {
   const [params, setParams] = useSearchParams();
@@ -32,20 +33,26 @@ export function RegionPage() {
               <DeleteRegion region={region} />
             </Modal>
             <img
-              src={region.image}
+              src={region.image != null ? region.image : image}
               style={{
                 minHeight: 10,
                 maxHeight: 70,
                 minWidth: 10,
                 maxWidth: 70,
-                marginRight:"15px"
+                marginRight: "15px",
               }}
             />
             {region.name}
-            <button style={{ borderRadius: "3px", marginLeft: "15px" }} onClick={() => setUpdateModalRegion(true)}>
+            <button
+              style={{ borderRadius: "3px", marginLeft: "15px" }}
+              onClick={() => setUpdateModalRegion(true)}
+            >
               Изменить регион
             </button>
-            <button style={{ borderRadius: "3px", marginLeft: "15px" }} onClick={() => setDeleteModalRegion(true)}>
+            <button
+              style={{ borderRadius: "3px", marginLeft: "15px" }}
+              onClick={() => setDeleteModalRegion(true)}
+            >
               Удалить регион
             </button>
             <NavBar>

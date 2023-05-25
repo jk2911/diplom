@@ -6,7 +6,7 @@ import { useImmer } from "use-immer";
 import { IRegion } from "../../entity/Region";
 import { Modal } from "../../modal/Modal";
 import { CreateRegion } from "../../components/Admin/CreateRegion";
-import image from "../../assets/club.png"
+import image from "../../assets/region.jpg"
 
 export function AllRegions() {
   const { regions, error, loading } = useAllRegions();

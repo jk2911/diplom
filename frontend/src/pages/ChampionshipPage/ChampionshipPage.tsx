@@ -12,6 +12,7 @@ import { useState } from "react";
 import { Modal } from "../../modal/Modal";
 import { DeleteChampionship } from "../../components/Admin/Championship/DeleteChampionship";
 import { UpdateChampionhsip } from "../../components/Admin/Championship/EditChampionship";
+import image from "../../assets/club.png";
 
 export function ChampionshipPage() {
   const [params, setParams] = useSearchParams();
@@ -36,16 +37,17 @@ export function ChampionshipPage() {
             <Modal active={editChampionship} setActive={setEditChampionship}>
               <UpdateChampionhsip ch={championship} />
             </Modal>
-            {championship.name} {championship.region.name}
             <img
-              src={championship.image}
+              src={championship.image != null ?championship.image:image}
               style={{
                 minHeight: 10,
                 maxHeight: 70,
                 minWidth: 10,
                 maxWidth: 70,
+                marginRight:"15px"
               }}
             />
+            {championship.name} {championship.region.name}
             <button style={{ borderRadius: "3px", marginLeft: "15px" }} onClick={() => setEditChampionship(true)}>
               Изменить чемпионат
             </button>
