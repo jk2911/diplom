@@ -51,10 +51,10 @@ export function BukmekerMatchPage() {
 
 
     async function Save() {
+        console.log(match?.bets);
         try {
-            const response = await axios.post(
+            const response = await axios.put(
                 "https://localhost:7167/api/Match/EditMatch",
-                // JSON.stringify(match)
                 match
             );
             // const message = response.data as String;

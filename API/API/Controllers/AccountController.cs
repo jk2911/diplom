@@ -30,6 +30,8 @@ namespace API.Controllers
 
             User user = _mapper.Map<User>(registerDto);
 
+            user.Password = _hashPassword.CreateHash(user.Password);
+
             _unitOfWork.User.Create(user);
 
             var userDto = _mapper.Map<UserDto>(user);
@@ -49,6 +51,8 @@ namespace API.Controllers
                 GetUserByEmail(loginUser.Email);
 
             if (user is null) return BadRequest("E-mail не найден");
+
+            var hash = _hashPassword.CreateHash(loginUser.Password);
 
             if (user.Password != _hashPassword.CreateHash(loginUser.Password))
                 return BadRequest("Неверный пароль");
