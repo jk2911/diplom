@@ -140,9 +140,30 @@ namespace API.Data
 
         public async Task<UserBet?> GetUserBet(int userId, int betValueId)
         {
-            return await _context.
+            var userBets = await _context.
                 UserBets.
-                FirstOrDefaultAsync(ub => ub.BetValueId == betValueId && ub.UserId == userId);
+                Where(ub => ub.UserId == userId).
+                ToListAsync();
+
+            var betValue = _context.BetValue.Find(betValueId);
+
+            if (betValue == null)
+                return null;
+
+            if (userBets.Count == 0)
+                return null;
+
+            foreach (var userBet in userBets)
+            {
+                var id = userBet.BetValue.Bet.Match.Id;
+
+                var id1 = betValue.Bet.Match.Id;
+
+                if (userBet.BetValue.Bet.Match.Id == betValue.Bet.Match.Id)
+                    return userBet;
+
+            }
+            return null;
         }
 
         public async Task<IEnumerable<UserBet>> GetUserBets(int userId)

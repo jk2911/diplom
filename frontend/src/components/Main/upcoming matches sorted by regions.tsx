@@ -55,7 +55,7 @@ export function UpcomingMatchesSortedByRegion({
       {selectedChampionships.map((ch) => (
         <div key={ch.id} style={{marginTop:"9px"}}>
           <ChampionshipTr>
-            <img
+            {/* <img
               src={ch.championship.image}
               style={{
                 minHeight: 10,
@@ -63,7 +63,7 @@ export function UpcomingMatchesSortedByRegion({
                 maxHeight: 20,
                 maxWidth: 20,
               }}
-            />
+            /> */}
             {ch.championship.region.name}.{ch.championship.name}
           </ChampionshipTr>
           <table>

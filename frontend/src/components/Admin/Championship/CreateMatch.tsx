@@ -2,6 +2,7 @@ import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { useChampionshipTeams } from "../../../hooks/championship";
 import { Form } from "react-bootstrap";
+import styled from "styled-components";
 
 interface Props {
     id: number;
@@ -72,36 +73,71 @@ export function CreateMatch({ id }: Props) {
     };
 
     return (
-        <div>
-
-            <div><Form.Control
+        <FormContainer>
+            <Div>Создание матча</Div>
+            <Div>Дата: <Form.Control
                 className="mt-2"
                 type="date"
                 onChange={(e: any) => setDate(e.target.value)}
             />
+                <Div style={{ marginTop: "10px" }}>Время: </Div>
                 <Form.Control
                     className="mt-2"
                     type="time"
                     onChange={(e: any) => setTime(e.target.value)}
-                /></div>
-            <select onChange={(e) => setSelectedHome(e.target.value)}>
-                {l1 && <>Загрузка</>}
-                {home.map((t) => (
-                    <option value={t.id}>
-                        {t.name}({t.region.name})
-                    </option>
-                ))}
-            </select>
-            <select onChange={(e) => setSelectedAway(e.target.value)}>
-                {l1 && <>Загрузка</>}
-                {away.map((t) => (
-                    <option value={t.id}>
-                        {t.name}({t.region.name})
-                    </option>
-                ))}
-            </select>
-            <div>{error}</div>
+                /></Div>
+            <Div>
+            <Div>Домашняя команда:   </Div>
+                <select onChange={(e) => setSelectedHome(e.target.value)}>
+                    {l1 && <>Загрузка</>}
+                    {home.map((t) => (
+                        <option value={t.id}>
+                            {t.name}({t.region.name})
+                        </option>
+                    ))}
+                </select>
+            </Div>
+            <Div>
+                <Div>Гостевая команда:   </Div>
+                <select onChange={(e) => setSelectedAway(e.target.value)}>
+                    {l1 && <>Загрузка</>}
+                    {away.map((t) => (
+                        <option value={t.id}>
+                            {t.name}({t.region.name})
+                        </option>
+                    ))}
+                </select>
+            </Div>
+            <Div>{error}</Div>
             <button onClick={FetchCreateMatch}>{buttonState}</button>
-        </div>
+        </FormContainer>
     );
 }
+
+const FormContainer = styled.div`
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+`;
+
+const StyledButton = styled.button`
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 56px;
+  padding-left: 60px;
+  padding-right: 60px;
+  font-size: 18px;
+  font-family: "Montserrat-Bold";
+  text-align: center;
+  border: none;
+  :hover {
+    cursor: pointer;
+  }
+  transition-duration: 0.4s;
+`;
+
+const Div = styled.div`
+  margin-bottom: 15px;
+`;

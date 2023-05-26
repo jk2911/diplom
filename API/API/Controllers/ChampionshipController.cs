@@ -113,19 +113,27 @@ namespace API.Controllers
             if (championshipExists != null)
                 return BadRequest("Такой чемпионат уже существует в регионе");
 
-            var pathImage = image == null ? "" : 
-                _photoService.AddPhoto(Request, "images/championships/" + image.FileName, image);
-
             var championship = new Championship
             {
                 Name = name,
                 Region = region,
-                Image = pathImage
+                Image = null
             };
 
             _unitOfWork.Championship.Create(championship);
 
-            if(await  _unitOfWork.Complete())
+            if (!await _unitOfWork.Complete())
+                return BadRequest("Не удалось сохранить чемпионат");
+
+            var pathImage = image == null ? "" :
+                _photoService.AddPhoto(Request, "images/championships/" + championship.Id +".png", image);
+
+            championship.Image = pathImage;
+
+            _unitOfWork.Championship.Update(championship);
+
+
+            if (await  _unitOfWork.Complete())
                 return Ok("Чемпионат создан");
 
             return BadRequest("Не удалось создать");

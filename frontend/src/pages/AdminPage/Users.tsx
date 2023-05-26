@@ -23,7 +23,7 @@ export function AllUsers() {
   }
 
   return <div>
-    {loading && <>Загрузка</>}
+    {loading && <Div>Загрузка</Div>}
     {users.map((user) => (
       <div key={user.id}>
         <RowItem key={user.id}>
@@ -54,4 +54,8 @@ const RowItem = styled(Row)`
   cursor: pointer;
   list-style: none;
   border-radius: 3px;
+`;
+
+const Div = styled.div`
+  margin-bottom: 15px;
 `;

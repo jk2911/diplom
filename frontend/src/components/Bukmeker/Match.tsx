@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { IMatch } from "../../entity/Match";
 import { NormalDate } from "../Main/upcoming matches sorted by regions";
+import image from "../../assets/club.png";
 
 interface MatchProps {
     m: IMatch;
@@ -21,7 +22,7 @@ export function MatchBukmeker({ m }: MatchProps) {
                 {NormalDate(m.dateTime.getHours())}:
                 {NormalDate(m.dateTime.getMinutes())}
                 <img
-                    src={m.home.image}
+                    src={m.home.image!=null?m.home.image:image}
                     style={{
                         minHeight: 10,
                         maxHeight: 70,
@@ -33,7 +34,7 @@ export function MatchBukmeker({ m }: MatchProps) {
                 {/* {m.homeGoal}-{m.awayGoal} */}
                 {m.away.name}{" "}
                 <img
-                    src={m.away.image}
+                    src={m.away.image!=null?m.away.image:image}
                     style={{
                         minHeight: 10,
                         maxHeight: 70,

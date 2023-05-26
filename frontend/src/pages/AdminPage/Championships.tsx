@@ -81,14 +81,18 @@ export function AllChampionships() {
       <button style={{ marginLeft: "20px", borderRadius:"3px" }} onClick={() => setCreateModalActive(true)}>
         Создать чемпионат
       </button>
-      {loading && <>Загрузка епта</>}
+      {loading && <Div>Загрузка</Div>}
       {sortChampionshipsList.map((ch) => (
         <RowItem key={ch.id} onClick={() => toChampionship(ch.id)}>
+          <div style={{width:"10%"}}>
           <img
             src={ch.image != null ? ch.image : image}
-            style={{ minHeight: 10, maxHeight: 70, minWidth: 10, maxWidth: 70 }}
-          />
-          {ch.id} {ch.name} {ch.region.name}
+            style={{ minHeight: 10, maxHeight: 60, minWidth: 10, maxWidth: 60 }}
+          /></div>
+          <div style={{width:"7%"}}>{ch.id}</div>
+          <div style={{width:"20%"}}> {ch.name} </div>
+          <div style={{width:"20%"}}>{ch.region.name}</div>
+          <div style={{width:"18%"}}></div>
         </RowItem>
       ))}
     </>
@@ -96,6 +100,8 @@ export function AllChampionships() {
 }
 
 const RowItem = styled(Row)`
+display: flex;
+justify-content: flex-start;
 margin-top: 5px;
   padding: 5px;
   background-color: #eee;
@@ -104,4 +110,8 @@ margin-top: 5px;
   cursor: pointer;
   list-style: none;
   border-radius: 5px;
+`;
+
+const Div = styled.div`
+  margin-bottom: 15px;
 `;

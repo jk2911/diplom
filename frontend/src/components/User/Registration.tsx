@@ -20,7 +20,7 @@ export function Registration(active: boolean, setActive: any) {
 
     console.log(reg.test(email) === false);
     if (reg.test(email) === false) {
-      setError("Не верный e-mail");
+      setError("Неверный e-mail");
       setButton("Зарегестрироватсья");
       return;
     }

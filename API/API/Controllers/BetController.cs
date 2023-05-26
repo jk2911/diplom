@@ -75,7 +75,7 @@ namespace API.Controllers
 
             _unitOfWork.Bet.DoBet(betId, userId, amount);
 
-            user.Money -= amount;
+            user.Money -= (float)Math.Round(amount, 2);
 
             _unitOfWork.User.Update(user);
 

@@ -72,7 +72,7 @@ export function Header() {
             </ItemContainer>
           ) : (
             <ItemContainer>
-              <Item onClick={() => setActiveLogin(true)}>Вход</Item>
+              <Item onClick={() => setActiveLogin(true)}>Войти</Item>
               <Item onClick={() => setActiveRegistration(true)}>
                 Зарегестрироваться
               </Item>

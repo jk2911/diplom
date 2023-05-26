@@ -83,7 +83,7 @@ function Match({ match }: MProps) {
     </div>
     <MatchBets bets={match.bets} setBet={modalBet} />
     <Modal active={activeBet} setActive={setActiveBet}>
-      <DoBet bet={bet} />
+      <DoBet bet={bet} activeModal={activeBet} />
     </Modal>
   </div>)
 }

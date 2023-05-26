@@ -66,7 +66,7 @@ namespace API.Controllers
 
             if (sum > user.Money) return BadRequest("Не хватает средств");
 
-            user.Money -= sum;
+            user.Money -= (float)Math.Round(sum, 2);
 
             _unitOfWork.User.Update(user);
 

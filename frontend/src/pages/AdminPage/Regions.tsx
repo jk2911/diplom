@@ -43,7 +43,7 @@ export function AllRegions() {
     setSearch(text);
     if (text !== "") {
       setSortRegions(
-        sortRegionsList.filter(
+        regions.filter(
           (n) => n.name.toLowerCase().indexOf(text.toLowerCase()) !== -1
         )
       );
@@ -72,14 +72,13 @@ export function AllRegions() {
       >
         Создать регион
       </button>
-      {loading && <>Загрузка</>}
+      {loading && <Div>Загрузка</Div>}
       {sortRegionsList.map((region) => (
         <RowItem key={region.id} onClick={() => toRegion(region.id)}>
           <img
             src={region.image != null ? region.image : image}
             style={{ minHeight: 10, maxHeight: 70, minWidth: 10, maxWidth: 70 }}
-          />
-          {region.id} {region.name}
+          />{region.id} {region.name}
         </RowItem>
       ))}
     </>
@@ -95,4 +94,8 @@ const RowItem = styled(Row)`
   cursor: pointer;
   list-style: none;
   border-radius: 5px;
+`;
+
+const Div = styled.div`
+  margin-bottom: 15px;
 `;

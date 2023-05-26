@@ -52,16 +52,23 @@ namespace API.Controllers
             if (regionExists != null)
                 return BadRequest("Такой регион уже существует");
 
-            var pathImage = image == null ? null :
-                _photoService.AddPhoto(Request, "images/regions/" + image.FileName, image);
-
             var newRegion = new Region
             {
                 Name = name,
-                Image = pathImage
+                Image = null
             };
 
             _unitOfWork.Region.Create(newRegion);
+
+            if (!await _unitOfWork.Complete())
+                return BadRequest("Не удалось сохранить");
+
+            var pathImage = image == null ? null :
+                _photoService.AddPhoto(Request, "images/regions/" + newRegion.Id+".jpg", image);
+
+            newRegion.Image = pathImage;
+
+            _unitOfWork.Region.Update(newRegion);
 
             if (await _unitOfWork.Complete())
                 return Ok("Регион создан");

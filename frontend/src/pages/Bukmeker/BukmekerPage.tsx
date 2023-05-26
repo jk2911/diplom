@@ -3,6 +3,7 @@ import { useAllChampionships } from "../../hooks/championship";
 import { Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import image from "../../assets/club.png";
 
 export function BukmekerPage() {
   const { championships, error, loading } = useAllChampionships();
@@ -49,7 +50,7 @@ export function BukmekerPage() {
         {sortChampionhsipList.map((ch) => (
           <RowItem key={ch.id} onClick={() => toChampionship(ch.id)}>
             <img
-              src={ch.image}
+              src={ch.image != null ? ch.image : image}
               style={{
                 minHeight: 10,
                 maxHeight: 70,

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IBetValue } from "../../entity/BetValue";
 import jwtDecode from "jwt-decode";
 import axios, { AxiosError } from "axios";
@@ -6,12 +6,20 @@ import styled from "styled-components";
 
 interface Props {
   bet: IBetValue;
+  activeModal:boolean
 }
 
-export function DoBet({ bet }: Props) {
-  const [amount, setAmount] = useState(0);
+export function DoBet({ bet, activeModal }: Props) {
+  const [amount, setAmount] = useState(2);
   const [button, setButton] = useState("Сделать ставку");
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    if(activeModal==false){
+      setAmount(2);
+      setError("");
+    }
+  }, [activeModal]);
 
   const token = localStorage.getItem("token");
   var money = 0;

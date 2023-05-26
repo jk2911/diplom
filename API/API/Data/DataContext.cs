@@ -63,10 +63,17 @@ namespace API.Data
                 Password = hash.CreateHash("555"),
                 Role = "bukmeker"
             };
+            User user3 = new User
+            {
+                Email = "maksgoy2911@gmail.com",
+                Password = hash.CreateHash("12345678"),
+                Role = "admin"
+            };
 
             User.AddAsync(user);
             User.AddAsync(user1);
             User.AddAsync(user2);
+            User.AddAsync(user3);
 
             SaveChangesAsync().Wait();
 
@@ -97,7 +104,7 @@ namespace API.Data
             {
                 Name = "Испания",
                 isPopular = true,
-                Image = "https://localhost:7167/images/regions/spain.png"
+                Image = null
             };
 
             Region.Add(region);
@@ -108,7 +115,7 @@ namespace API.Data
                 Name = "Ла лига",
                 Region = region,
                 IsPopular = true, 
-                Image = "https://localhost:7167/images/championships/Laliga.jpg"
+                Image = null
             };
 
             Championship.Add(championship);

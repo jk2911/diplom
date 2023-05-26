@@ -77,18 +77,25 @@ namespace API.Controllers
             if (teamExists != null)
                 return BadRequest("Такая команда уже существует в регионе");
 
-
-            var pathImage = image == null ? null :
-                _photoService.AddPhoto(Request, "images/teams/" + image.FileName, image);
-
             var team = new Team
             {
                 Name = name,
                 Region = region,
-                Image = pathImage
+                Image = null
             };
 
             _unitOfWork.Team.Create(team);
+
+            if (!await _unitOfWork.Complete())
+                return BadRequest("Не удалось сохранить команду");
+
+            var pathImage = image == null ? null :
+                _photoService.AddPhoto(Request, "images/teams/" + team.Id+".png", image);
+
+            team.Image = pathImage;
+
+            _unitOfWork.Team.Update(team);
+
 
             if (await _unitOfWork.Complete())
                 return Ok("Команда создана");

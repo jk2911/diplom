@@ -8,6 +8,7 @@ import { DeleteTeam } from "../../components/Admin/Team/DeleteTeam";
 import { Modal } from "../../modal/Modal";
 import { useState } from "react";
 import { UpdateTeam } from "../../components/Admin/Team/EditTeam";
+import image from "../../assets/club.png";
 
 export function TeamPage() {
   const [params, setParams] = useSearchParams();
@@ -29,6 +30,16 @@ export function TeamPage() {
             <Modal active={editModal} setActive={setEditModal}>
               <UpdateTeam team={team}/>
             </Modal>
+            <img
+              src={team.image != null ? team.image:image}
+              style={{
+                minHeight: 10,
+                maxHeight: 70,
+                minWidth: 10,
+                maxWidth: 70,
+                marginRight:"15px"
+              }}
+            />
             {team.name}
             <button style={{borderRadius:"3px", marginLeft:"15px"}} onClick={() => setEditModal(true)}>
               Изменить команду

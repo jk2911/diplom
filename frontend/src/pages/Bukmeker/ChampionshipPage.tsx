@@ -7,6 +7,7 @@ import { MatchCalendar } from "../ChampionshipPage/MatchCalendar";
 import { ResultsMatch } from "../ChampionshipPage/ResultsMatch";
 import { BukmekerCalendarMatches } from "./CalendarMatches";
 import { BukmekerResultsMatch } from "./ResultsMatch";
+import image from "../../assets/club.png";
 
 export function BukmekerChampionshipPage() {
     const [params, setParams] = useSearchParams();
@@ -20,7 +21,7 @@ export function BukmekerChampionshipPage() {
             {championship && (
                 <div>
                     <img
-                        src={championship.image}
+                        src={championship.image!=null? championship.image:image}
                         style={{
                             minHeight: 10,
                             maxHeight: 70,

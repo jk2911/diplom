@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ITeam } from "../../../entity/Team";
 import axios, { AxiosError } from "axios";
+import styled from "styled-components";
 
 interface Props {
     team: ITeam;
@@ -44,22 +45,55 @@ export function UpdateTeam({ team }: Props) {
     };
 
     return (
-        <>
-            <div>Изменение команды</div>
+        <FormContainer>
+            <Div>Изменение команды</Div>
+            <Div>
             <input
                 type="text"
                 value={chName}
                 onChange={(e) => setChName(e.target.value)}
             />
+            </Div>
+            <Div>
             <input
                 type="file"
                 accept="image/*,.png,.jpg"
                 onChange={AddImage}
             />
-            <div>{errorMessage}</div>
-            <div>
-                <button onClick={UpdateRegion}>{button}</button>
-            </div>
-        </>
+            </Div>
+            <Div>{errorMessage}</Div>
+            <Div>
+                <StyledButton onClick={UpdateRegion}>{button}</StyledButton>
+            </Div>
+        </FormContainer>
     );
 }
+
+const FormContainer = styled.div`
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 25vw;
+`;
+
+const StyledButton = styled.button`
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 56px;
+  padding-left: 60px;
+  padding-right: 60px;
+  font-size: 18px;
+  font-family: "Montserrat-Bold";
+  text-align: center;
+  border: none;
+  :hover {
+    cursor: pointer;
+  }
+  transition-duration: 0.4s;
+`;
+
+const Div = styled.div`
+  margin-bottom: 15px;
+`;

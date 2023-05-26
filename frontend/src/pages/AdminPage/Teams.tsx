@@ -43,7 +43,7 @@ export function AllTeams() {
     setSearch(text);
     if (text !== "") {
       setSortTeams(
-        sortTeamsList.filter(
+        teams.filter(
           (n) => n.name.toLowerCase().indexOf(text.toLowerCase()) !== -1
         )
       );
@@ -61,7 +61,7 @@ export function AllTeams() {
       <Modal active={createModalActive} setActive={setCreateModalActive}>
         <CreateTeam />
       </Modal>
-      <input value={search} onChange={(e) => Search(e)} style={{ marginRight: "20px", borderRadius: "3px" }} placeholder="Поиск команды"/>
+      <input value={search} onChange={(e) => Search(e)} style={{ marginRight: "20px", borderRadius: "3px" }} placeholder="Поиск команды" />
       <select onChange={(e) => sortRegions(e.target.value)}>
         <option value="2">названию</option>
         <option value="1">id</option>
@@ -70,14 +70,18 @@ export function AllTeams() {
         Создать команду
       </button>
       {error && <>Ошибка</>}
-      {loading && <>Загрузка</>}
+      {loading && <Div>Загрузка</Div>}
       {sortTeamsList.map((team) => (
         <RowItem key={team.id} onClick={() => toTeam(team.id)}>
-          <img
-            src={team.image != null ? team.image : image}
-            style={{ minHeight: 10, maxHeight: 70, minWidth: 10, maxWidth: 70 }}
-          />
-          {team.id} {team.name} {team.region.name}
+          <div style={{ width: "7%" }}>
+            <img
+              src={team.image != null ? team.image : image}
+              style={{ minHeight: 10, maxHeight: 60, minWidth: 10, maxWidth: 60 }}
+            /></div>
+          <div style={{ width: "7%" }}>{team.id}</div>
+          <div style={{ width: "20%" }}> {team.name} </div>
+          <div style={{ width: "20%" }}>{team.region.name}</div>
+          <div style={{ width: "18%" }}></div>
         </RowItem>
       ))}
     </>
@@ -85,6 +89,8 @@ export function AllTeams() {
 }
 
 const RowItem = styled(Row)`
+display:flex;
+justify-content:flex-start;
 margin-top: 5px;
   padding: 5px;
   background-color: #eee;
@@ -93,4 +99,8 @@ margin-top: 5px;
   cursor: pointer;
   list-style: none;
   border-radius: 5px;
+`;
+
+const Div = styled.div`
+  margin-bottom: 15px;
 `;
