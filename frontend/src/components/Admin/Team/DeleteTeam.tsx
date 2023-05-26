@@ -2,6 +2,7 @@ import { useState } from "react";
 import { IRegion } from "../../../entity/Region";
 import axios, { AxiosError } from "axios";
 import { ITeam } from "../../../entity/Team";
+import styled from "styled-components";
 
 interface Props {
   team: ITeam;
@@ -32,12 +33,40 @@ export function DeleteTeam({ team }: Props) {
   };
 
   return (
-    <>
-      <div>Удалить команду {team.name}</div>
-      <div>{errorMessage}</div>
-      <div>
-        <button onClick={Remove}>{button}</button>
-      </div>
-    </>
+    <FormContainer>
+      <Div>Удалить команду {team.name}</Div>
+      <Div>{errorMessage}</Div>
+      <Div>
+        <StyledButton onClick={Remove}>{button}</StyledButton>
+      </Div>
+    </FormContainer>
   );
 }
+
+const FormContainer = styled.div`
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+`;
+
+const StyledButton = styled.button`
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 56px;
+  padding-left: 60px;
+  padding-right: 60px;
+  font-size: 18px;
+  font-family: "Montserrat-Bold";
+  text-align: center;
+  border: none;
+  :hover {
+    cursor: pointer;
+  }
+  transition-duration: 0.4s;
+`;
+
+const Div = styled.div`
+  margin-bottom: 15px;
+`;
