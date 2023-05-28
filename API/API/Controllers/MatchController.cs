@@ -23,10 +23,20 @@ namespace API.Controllers
         [HttpGet("GetUpcomingMatches")]
         public async Task<IEnumerable<UpcomingMatchesDTO>> GetUpcomingMatches()
         {
-            var matches = await _unitOfWork.Match.
+            var todaysMatches = await _unitOfWork.Match.
+                GetUpcomingMatches();
+
+            var championships = await _unitOfWork.Match.
                 GetUpcomingMatchesSortedByChampionships();
 
-            return _mapper.Map<IEnumerable<UpcomingMatchesDTO>>(matches);
+            var upcomingMatches = _mapper.Map<IEnumerable<UpcomingMatchesDTO>>(championships);
+
+            foreach (var i in upcomingMatches)
+            {
+                i.Matches = todaysMatches.Where(m => m.ChampionshipId == i.Championship.Id).ToList();
+            }
+
+            return upcomingMatches;
         }
 
         [HttpGet("GetCalendarOfChampionshipMatches")]

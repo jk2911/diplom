@@ -33,7 +33,18 @@ namespace API.Controllers
         {
             var regions = await _unitOfWork.Region.GetRegionsUpcomingMatches();
 
-            return _mapper.Map<IEnumerable<RegionsUpcomingMatchesDTO>>(regions);
+            var regionsUpcomings = _mapper.Map<IEnumerable<RegionsUpcomingMatchesDTO>>(regions);
+
+            var championships = await _unitOfWork.Match.
+                GetUpcomingMatchesSortedByChampionships();
+
+            foreach(var r in regionsUpcomings)
+            {
+                r.Championships = championships.Where(c=>c.RegionId==r.Id).
+                    ToList();
+            }
+            
+            return regionsUpcomings;
         }
 
         [HttpPost("CreateRegion")]

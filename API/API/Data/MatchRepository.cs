@@ -121,11 +121,14 @@ namespace API.Data
 
         public async Task<IEnumerable<Match>> GetUpcomingMatches()
         {
-            var date = new DateTime();
+            var date = DateTime.Now;
+            var tomorrow = DateTime.Now.AddDays(1);
 
-            return await _context.Match.
-                Where(x=>x.DateTime.Date==date.Date).
+            var matches = await _context.Match.
+                Where(m => (m.DateTime.Date == date.Date || m.DateTime.Date == tomorrow.Date) && m.HomeGoal == null).
                 ToListAsync();
+
+            return matches;
         }
 
         public async Task<IEnumerable<Championship>> GetUpcomingMatchesSortedByChampionships()
@@ -145,6 +148,8 @@ namespace API.Data
             foreach(int i in championshipId)
             {
                 var championship = _context.Championship.Find(i);
+
+                championship.Matches = null;
 
                 championship.Matches = matches.
                     Where(m => m.ChampionshipId == i).
