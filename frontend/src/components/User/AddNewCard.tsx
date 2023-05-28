@@ -10,6 +10,30 @@ export function AddNewCard({ id, amount }: Props) {
     const [button, setButton] = useState("Положить");
     const [error, setError] = useState("");
     const [number, setNumber] = useState("");
+    const [numberValue, setNumberValue] = useState("");
+
+
+    function setNumberCard(e: any) {
+        e.preventDefault();
+
+        const t: string = e.target.value;
+
+        if (t.length == 0) {
+            setNumber("");
+            return;
+        }
+
+        const arr = t.split("");
+
+        for (var i = 0; i < arr.length; i++) {
+            const temp = Number(arr[i])
+            if (isNaN(temp))
+                return;
+        }
+        setNumber(t);
+    }
+
+
 
     const Add = async () => {
         if (number.length != 16) {
@@ -36,14 +60,13 @@ export function AddNewCard({ id, amount }: Props) {
     };
 
     return (
-        <div style={{fontSize:"18px"}}>
-            <div style={{marginBottom:"15px"}}>Добавление новой карты</div>
+        <div style={{ fontSize: "18px" }}>
             <input
                 style={{ marginRight: "20px", marginTop: "20px" }}
                 type="text"
                 value={number}
                 placeholder="XXXX-XXXX-XXXX-XXXX"
-                onChange={(e) => setNumber(e.target.value)}
+                onChange={(e) => setNumberCard(e)}
             />
 
             <input
@@ -63,10 +86,10 @@ export function AddNewCard({ id, amount }: Props) {
                 />
             </div>
 
-            <div style={{ height: 30, width: 450, marginTop:"10px", marginBottom:"10px" }}>{error}</div>
+            <div style={{ height: 30, width: 450, marginTop: "10px", marginBottom: "10px  " }}>{error}</div>
 
 
-            <button onClick={Add}>{button}</button>
+            <button style={{ borderRadius: "3px" }} onClick={Add}>{button}</button>
         </div>
     );
 }

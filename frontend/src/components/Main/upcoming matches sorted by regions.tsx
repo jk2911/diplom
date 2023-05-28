@@ -47,13 +47,14 @@ export function UpcomingMatchesSortedByRegion({
     );
   };
 
+  const date = new Date();
+
   return (
     <Row>
-      {/* <img src={image} style={{ minHeight: 80, minWidth: 40 }} /> */}
-
+      {/* {NormalDate(date.getDate())}.{NormalDate(date.getMonth()+1)}.{NormalDate(date.getFullYear())} */}
       {loading && <>Загрузка</>}
       {selectedChampionships.map((ch) => (
-        <div key={ch.id} style={{marginTop:"9px"}}>
+        <div key={ch.id} style={{ marginTop: "9px" }}>
           <ChampionshipTr>
             {/* <img
               src={ch.championship.image}
@@ -64,37 +65,30 @@ export function UpcomingMatchesSortedByRegion({
                 maxWidth: 20,
               }}
             /> */}
-            {ch.championship.region.name}.{ch.championship.name}
+            <div>
+              {ch.championship.region.name}.{ch.championship.name}
+            </div>
           </ChampionshipTr>
-          <table>
-            <tr>
-              {ch.matches.map((match) => (
-                <Match match={match} key={match.id} />
-              ))}
-            </tr>
-          </table>
+          <MatchContainer>
+            <TeamsTd>Событие</TeamsTd>
+            <DateTd>Время</DateTd>
+            <Values>
+              <ValueTdName>П1</ValueTdName>
+              <ValueTdName>Х</ValueTdName>
+              <ValueTdName>П2</ValueTdName>
+              <ValueTdName>1X</ValueTdName>
+              <ValueTdName>12</ValueTdName>
+              <ValueTdName>Х2</ValueTdName>
+              <ValueTdName>Б</ValueTdName>
+              <ValueTdName>М</ValueTdName>
+            </Values>
+          </MatchContainer>
+          {ch.matches.map((match) => (
+            <Match match={match} key={match.id} />
+          ))}
         </div>
       ))}
     </Row>
-  );
-}
-
-function Championship(championship: IChampionship, regionName: string) {
-  return (
-    <>
-      <ChampionshipTr>
-        <img
-          src={championship.image}
-          style={{ minHeight: 10, minWidth: 10, maxHeight: 20, maxWidth: 20 }}
-        />
-        {championship.name}.{regionName}
-      </ChampionshipTr>
-      <tr>
-        {championship.matches.map((match) => (
-          <Match match={match} key={match.id} />
-        ))}
-      </tr>
-    </>
   );
 }
 
@@ -127,53 +121,66 @@ function Match({ match }: MatchProps) {
   const d = new Date(match.dateTime);
 
   return (
-    <div style={{marginTop:"3px"}}>
+    <MatchContainer>
       <TeamsTd onClick={() => toMatch(match.id)}>
         {match.home.name} - {match.away.name}
       </TeamsTd>
       <DateTd>
-        <>
-          {NormalDate(d.getDate())}.{NormalDate(d.getMonth() + 1)}{" "}
-          {NormalDate(d.getHours())}:{NormalDate(d.getMinutes())}
-        </>
+        {NormalDate(d.getDate())}.{NormalDate(d.getMonth() + 1)}{" "}
+        {NormalDate(d.getHours())}:{NormalDate(d.getMinutes())}
       </DateTd>
-      <ValueTd>{Value(P1?.value)}</ValueTd>
-      <ValueTd>{Value(P2?.value)} </ValueTd>
-      <ValueTd>{Value(X?.value)}</ValueTd>
-      <ValueTd>{Value(IX?.value)} </ValueTd>
-      <ValueTd>{Value(I2?.value)} </ValueTd>
-      <ValueTd>{Value(X2?.value)}</ValueTd>
-      <ValueTd>{Value(G25More?.value)} </ValueTd>
-      <ValueTd>{Value(G25Less?.value)}</ValueTd>
-    </div>
+      <Values>
+        <ValueTd>{Value(P1?.value)}</ValueTd>
+        <ValueTd>{Value(P2?.value)} </ValueTd>
+        <ValueTd>{Value(X?.value)}</ValueTd>
+        <ValueTd>{Value(IX?.value)} </ValueTd>
+        <ValueTd>{Value(I2?.value)} </ValueTd>
+        <ValueTd>{Value(X2?.value)}</ValueTd>
+        <ValueTd>{Value(G25More?.value)} </ValueTd>
+        <ValueTd>{Value(G25Less?.value)}</ValueTd>
+      </Values>
+    </MatchContainer >
   );
 }
 
-const TeamsTd = styled.td`
-  width: 40vb;
-  height: 20px;
-  min-height: 20px;
-  min-width: 40vb;
-  max-height: 20px;
-  max-width: 40vb;
-  margin-top: 50px;
-  text-align: left;
-  top: 0;
-  left: 0;
+const MatchContainer = styled.div`
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+`
+
+const TeamsTd = styled.div`
+  width: 30%;
 `;
-const ValueTd = styled.td`
+
+const Values = styled.div`
+  width:50%;
+  display:flex;
+  justify-content: center;
+  flex-direction: row;
+`
+
+const ValueTd = styled.div`
   text-align: center;
+  margin-right: 3px;
   width: 50px;
-  height: 20px;
-  min-height: 20px;
-  min-width: 50px;
-  max-height: 20px;
-  max-width: 50px;
+  width: 14%;
   border: 1px solid gray;
   padding-right: 0px;
 `;
 
-const ChampionshipTr = styled.td`
+const ValueTdName = styled.div`
+  text-align: center;
+  margin-right: 3px;
+  width: 50px;
+  width: 14%;
+  padding-right: 0px;
+`;
+
+const ChampionshipTr = styled.div`
+  display: flex;
+  justify-content: flex-start;
   background-color: #dcdcdc;
   width: 100%;
   height: 20px;
@@ -181,18 +188,11 @@ const ChampionshipTr = styled.td`
   min-width: 100%;
   max-height: 20px;
   max-width: 100%;
-  margin-top: 50px;
-  //padding-top: 50px;
+  margin-top: 5px;
 `;
 
-const DateTd = styled.td`
-  width: 17vb;
-  height: 20px;
-  min-height: 20px;
-  min-width: 17vb;
-  max-height: 20px;
-  max-width: 17vb;
-  margin-top: 500px;
+const DateTd = styled.div`
+  width: 20%;
 `;
 
 export function NormalDate(num: number): string {

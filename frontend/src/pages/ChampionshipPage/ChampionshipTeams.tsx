@@ -18,9 +18,9 @@ export function ChampionshipTeams({ championshipId }: Props) {
     try {
       const response = await axios.delete(
         "https://localhost:7167/api/Championship/DeleteTeam/" +
-          championshipId +
-          "-" +
-          teamId
+        championshipId +
+        "-" +
+        teamId
       );
       const message = response.data as String;
     } catch (e: unknown) {
@@ -33,20 +33,22 @@ export function ChampionshipTeams({ championshipId }: Props) {
   };
 
   return (
-    <div style={{marginTop:"15px"}}>
-      <button style={{borderRadius:"3px"}} onClick={() => setActiveAddTeam(true)}>
+    <div style={{ marginTop: "15px" }}>
+      <button style={{ borderRadius: "3px" }} onClick={() => setActiveAddTeam(true)}>
         Добавить команду в чемпионат
       </button>
       {error && <>{error}</>}
       {loading && <>Загрузка</>}
       {teams.map((team) => (
-        <div style={{marginTop:"15px"}}>
-          <img
-            src={team.image != null ? team.image : image}
-            style={{ minHeight: 10, maxHeight: 70, minWidth: 10, maxWidth: 70 }}
-          />
-          {team.name}
-          <button style={{borderRadius:"3px", marginLeft:"5px"}} onClick={() => DeleteTeam(team.id)}>Удалить команду</button>
+        <div style={{ marginTop: "15px", display: "flex", flexDirection: "row" }}>
+          <div style={{ width: "40%" }}>
+            <img
+              src={team.image != null ? team.image : image}
+              style={{ minHeight: 10, maxHeight: 70, minWidth: 10, maxWidth: 70 }}
+            />
+            {team.name}
+          </div>
+          <button style={{ borderRadius: "3px", marginLeft: "5px", height:"50px" }} onClick={() => DeleteTeam(team.id)}>Удалить команду</button>
         </div>
       ))}
       <Modal active={activeAddTeam} setActive={setActiveAddTeam}>

@@ -20,7 +20,7 @@ function Match(m: IMatch) {
   m.dateTime = new Date(m.dateTime);
 
   return (
-    <>
+    <div>
       {NormalDate(m.dateTime.getDate())}.{NormalDate(m.dateTime.getMonth())}{" "}
       {NormalDate(m.dateTime.getHours())}:{NormalDate(m.dateTime.getMinutes())}
       <img
@@ -34,6 +34,6 @@ function Match(m: IMatch) {
         src={m.away.image != null ? m.away.image : image}
         style={{ minHeight: 10, maxHeight: 70, minWidth: 10, maxWidth: 70 }}
       />
-    </>
+    </div>
   );
 }

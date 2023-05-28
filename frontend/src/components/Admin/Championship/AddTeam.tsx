@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useTeamNotInChampionship } from "../../../hooks/team";
 import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 interface Props {
   id: number;
@@ -42,17 +43,50 @@ export function AddTeamInChampionship({ id, setClose }: Props) {
   };
 
   return (
-    <div>
-      Добавить команду:{" "}
-      <select onChange={(e) => setSelectedTeam(e.target.value)}>
-        {loading && <>Загрузка</>}
-        {teams.map((t) => (
-          <option value={t.id}>
-            {t.name}({t.region.name})
-          </option>
-        ))}
-      </select>
-      <button onClick={AddTeam}>Подтвердить</button>
-    </div>
+    <FormContainer>
+      <Div>
+        Добавить команду:{" "}
+      </Div>
+      <Div>
+        <select onChange={(e) => setSelectedTeam(e.target.value)}>
+          {loading && <>Загрузка</>}
+          {teams.map((t) => (
+            <option value={t.id}>
+              {t.name}({t.region.name})
+            </option>
+          ))}
+        </select>
+      </Div>
+      <StyledButton onClick={AddTeam}>Подтвердить</StyledButton>
+    </FormContainer>
   );
 }
+
+const FormContainer = styled.div`
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 25vw;
+`;
+
+const StyledButton = styled.button`
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 56px;
+  padding-left: 60px;
+  padding-right: 60px;
+  font-size: 18px;
+  font-family: "Montserrat-Bold";
+  text-align: center;
+  border: none;
+  :hover {
+    cursor: pointer;
+  }
+  transition-duration: 0.4s;
+`;
+
+const Div = styled.div`
+  margin-bottom: 15px;
+`;

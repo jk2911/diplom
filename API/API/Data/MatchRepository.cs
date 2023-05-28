@@ -132,9 +132,10 @@ namespace API.Data
         {
             var upcomingMatches = new List<Championship>();
             var date = DateTime.Now;
+            var tomorrow = DateTime.Now.AddDays(1);
 
             var matches = await _context.Match.
-                Where(m => m.DateTime.Date == date.Date && m.HomeGoal == null).
+                Where(m => (m.DateTime.Date == date.Date || m.DateTime.Date == tomorrow.Date) && m.HomeGoal == null).
                 ToListAsync();
 
             var championshipId = matches.
@@ -144,8 +145,11 @@ namespace API.Data
             foreach(int i in championshipId)
             {
                 var championship = _context.Championship.Find(i);
+
                 championship.Matches = matches.
-                    Where(m => m.ChampionshipId == i).ToList();
+                    Where(m => m.ChampionshipId == i).
+                    ToList();
+
                 upcomingMatches.Add(championship);
             }
 

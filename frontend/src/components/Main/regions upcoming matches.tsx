@@ -19,7 +19,7 @@ export function RegionsUpcomingMatches({
 
   return (
     <Row>
-      {loading && <>Загрузка</>}
+      {/* {loading && <>Загрузка</>} */}
       {regions.length != 0 && (<Container style={{marginBottom:"5px"}}><ButtonCon onClick={() => setChampionship(0)}>Все</ButtonCon></Container>)}
       {regions.map((region) => (
         <Container key={region.id}>

@@ -15,7 +15,7 @@ export function MainPage() {
           <Col sm={2}>
             <RegionsUpcomingMatches championship={championship} setChampionship={setChampionship} />
           </Col>
-          <Col sm={7}>
+          <Col sm={9}>
             <Row>
               <UpcomingMatchesSortedByRegion championship={championship} setChampionship={setChampionship} />
             </Row>

@@ -26,6 +26,7 @@ export function ChampionshipPage() {
   return (
     <Container>
       <Content>
+        {loading && <>Загрузка</>}
         {championship && (
           <>
             <Modal

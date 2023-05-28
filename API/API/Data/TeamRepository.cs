@@ -110,10 +110,13 @@ namespace API.Data
         {
             var teams = new List<Team>();
 
-            foreach (var i in _context.ChampTeams)
+            foreach (var i in _context.Team)
             {
-                if (i.ChampionshipId != championshipId)
-                    teams.Add(i.Team);
+                var champTeam = await _context.ChampTeams.
+                    FirstOrDefaultAsync(ct => ct.ChampionshipId == championshipId && ct.TeamId == i.Id);
+
+                if(champTeam == null)
+                    teams.Add(i);
             }
 
             return teams;

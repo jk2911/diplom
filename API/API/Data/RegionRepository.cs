@@ -117,12 +117,14 @@ namespace API.Data
         public async Task<IEnumerable<Region>> GetRegionsUpcomingMatches()
         {
             var date = DateTime.Now;
+            var tomorrow = DateTime.Now.AddDays(1);
 
             var regions = new List<Region>();
             var championships = new List<Championship>();
 
             var championshipsId = await _context.Match.
-                Where(x => x.DateTime.Date == date.Date && x.HomeGoal == null).
+                Where(x => (x.DateTime.Date == date.Date || x.DateTime.Date==tomorrow.Date) 
+                && x.HomeGoal == null).
                 Select(x => x.ChampionshipId).
                 Distinct().
                 ToListAsync();

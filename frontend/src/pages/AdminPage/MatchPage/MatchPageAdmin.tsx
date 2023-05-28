@@ -327,7 +327,7 @@ export function MatchPageAdmin() {
                     />
                   </div>
                 </div>
-                <button style={{borderRadius:"3px" }} onClick={() => setAddBet(true)}>Добавить</button>
+                {/* <button style={{borderRadius:"3px" }} onClick={() => setAddBet(true)}>Добавить</button> */}
                 {/* <BetsValue bets={bets} removeBet={RemoveBet} setBets={() => setBets} /> */}
               </div>
 
