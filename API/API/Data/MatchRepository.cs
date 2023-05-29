@@ -50,7 +50,6 @@ namespace API.Data
 
                         if (user != null && userBet.IsWin == null)
                         {
-
                             user.Money += userBet.Money;
 
                             HistoryBankAccount history = new HistoryBankAccount()

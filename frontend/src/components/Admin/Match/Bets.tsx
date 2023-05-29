@@ -92,9 +92,9 @@ const BetValueInput = (bet: IBetValue, isChanged: boolean) => {
     <BetValueContainer>
       {isChanged ?
         <input style={{ margin: "5px" }} type="text" value={name} onChange={(e) => SetName(e)} /> :
-        <div style={{width:"20px"}}>{name}</div>
+        <div style={{width:"20px", textAlign:"center"}}>{name}</div>
       }
-      <input style={{ margin: "5px" }} type="number" value={value} onChange={(e) => Set(e)} />
+      <input style={{ margin: "5px", marginLeft:"100px" }} type="number" value={value} onChange={(e) => Set(e)} />
     </BetValueContainer>
   );
 };

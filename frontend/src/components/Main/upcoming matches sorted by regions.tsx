@@ -165,17 +165,19 @@ const ValueTd = styled.div`
   text-align: center;
   margin-right: 3px;
   width: 50px;
-  width: 14%;
+  height: 25px;
+  min-height: 25px;
+  max-height: 25px;
   border: 1px solid gray;
-  padding-right: 0px;
 `;
 
 const ValueTdName = styled.div`
   text-align: center;
   margin-right: 3px;
   width: 50px;
-  width: 14%;
-  padding-right: 0px;
+  height: 25px;
+  min-height: 25px;
+  max-height: 25px;
 `;
 
 const ChampionshipTr = styled.div`

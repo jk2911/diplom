@@ -46,19 +46,22 @@ namespace API.Data
                         {
                             var user = userBet.User;
 
-                            user.Money += userBet.Money;
-
-                            HistoryBankAccount history = new HistoryBankAccount()
+                            if (userBet.IsWin == null)
                             {
-                                Status = "Удаление матча",
-                                Money = userBet.Money,
-                                Date = DateTime.Now,
-                                User = user
-                            };
+                                user.Money += userBet.Money;
 
-                            _context.HistoryBankAccounts.Add(history);
+                                HistoryBankAccount history = new HistoryBankAccount()
+                                {
+                                    Status = "Удаление матча",
+                                    Money = userBet.Money,
+                                    Date = DateTime.Now,
+                                    User = user
+                                };
 
-                            _context.Entry(user).State = EntityState.Modified;
+                                _context.HistoryBankAccounts.Add(history);
+
+                                _context.Entry(user).State = EntityState.Modified;
+                            }
                         }
                     }
                 }
@@ -89,19 +92,23 @@ namespace API.Data
                         {
                             var user = userBet.User;
 
-                            user.Money += userBet.Money;
-
-                            HistoryBankAccount history = new HistoryBankAccount()
+                            if (userBet.IsWin == null)
                             {
-                                Status = "Удаление матча",
-                                Money = userBet.Money,
-                                Date = DateTime.Now,
-                                User = user
-                            };
 
-                            _context.HistoryBankAccounts.Add(history);
+                                user.Money += userBet.Money;
 
-                            _context.Entry(user).State = EntityState.Modified;
+                                HistoryBankAccount history = new HistoryBankAccount()
+                                {
+                                    Status = "Удаление матча",
+                                    Money = userBet.Money,
+                                    Date = DateTime.Now,
+                                    User = user
+                                };
+
+                                _context.HistoryBankAccounts.Add(history);
+
+                                _context.Entry(user).State = EntityState.Modified;
+                            }
                         }
                     }
                 }
