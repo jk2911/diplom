@@ -29,11 +29,18 @@ namespace API.Controllers
             var championships = await _unitOfWork.Match.
                 GetUpcomingMatchesSortedByChampionships();
 
+            championships = championships.
+                OrderBy(c => c.IsPopular).
+                OrderBy(c => c.Region.Name);
+
             var upcomingMatches = _mapper.Map<IEnumerable<UpcomingMatchesDTO>>(championships);
 
             foreach (var i in upcomingMatches)
             {
-                i.Matches = todaysMatches.Where(m => m.ChampionshipId == i.Championship.Id).ToList();
+                i.Matches = todaysMatches.
+                    Where(m => m.ChampionshipId == i.Championship.Id).
+                    OrderBy(m=>m.DateTime).
+                    ToList();
             }
 
             return upcomingMatches;

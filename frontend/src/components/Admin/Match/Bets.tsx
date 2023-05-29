@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { IBet } from "../../../entity/Bet";
 import { IBetValue } from "../../../entity/BetValue";
+import styled from "styled-components";
 
 interface Props {
   bets: IBet[];
@@ -49,18 +50,25 @@ export function Bet({ bet, removeBet, index }: BetProps) {
     bet.name = nam;
   }
 
+  var isChanged = true;
+
+  if (name == "Исход" || name == "Двойной шанс" || name == "Тотал")
+    isChanged = false;
+
   return (
     <div style={{ margin: "20px" }}>
-      <input style={{margin:"5px"}} type="text" value={name} onChange={(e) => SetName(e)} />
+      {isChanged ?
+        <input style={{ margin: "5px" }} type="text" value={name} onChange={(e) => SetName(e)} /> :
+        <div>{name}</div>
+      }
       {bet.values.map((bv) => (
-        <div key={bv.id}>{BetValueInput(bv)}</div>
+        <div key={bv.id}>{BetValueInput(bv, isChanged)}</div>
       ))}
-      {/* <button onClick={() => removeBet(index)}> Удалить исход</button> */}
     </div>
   );
 }
 
-const BetValueInput = (bet: IBetValue) => {
+const BetValueInput = (bet: IBetValue, isChanged: boolean) => {
   const [value, setValue] = useState(bet.value);
   const [name, setName] = useState(bet.name);
 
@@ -81,12 +89,21 @@ const BetValueInput = (bet: IBetValue) => {
   }
 
   return (
-    <>
-      <input style={{margin:"5px"}} type="text" value={name} onChange={(e) => SetName(e)} />
-      <input type="number" value={value} onChange={(e) => Set(e)} />
-    </>
+    <BetValueContainer>
+      {isChanged ?
+        <input style={{ margin: "5px" }} type="text" value={name} onChange={(e) => SetName(e)} /> :
+        <div style={{width:"20px"}}>{name}</div>
+      }
+      <input style={{ margin: "5px" }} type="number" value={value} onChange={(e) => Set(e)} />
+    </BetValueContainer>
   );
 };
+
+const BetValueContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 5px;
+`
 
 // function AddBet() {
 //   const RemoveValue = () => {
