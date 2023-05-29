@@ -35,6 +35,9 @@ namespace API.Controllers
 
             var regionsUpcomings = _mapper.Map<IEnumerable<RegionsUpcomingMatchesDTO>>(regions);
 
+            regionsUpcomings = regionsUpcomings.
+                OrderBy(r => r.Region);
+            
             var championships = await _unitOfWork.Match.
                 GetUpcomingMatchesSortedByChampionships();
 
