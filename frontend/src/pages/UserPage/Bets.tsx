@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useUserBets } from "../../hooks/bet"
 import { IUserBet } from "../../entity/UserBets";
 import styled from "styled-components";
@@ -9,10 +8,6 @@ interface Props {
 
 export function UserBets({ id }: Props) {
     const { bets, loading, error } = useUserBets(id);
-
-    // useEffect(()=>(
-    //     console.log(bets)
-    // ),[])
     return <div>
         <BetItem>
             <div style={{ width: "50%" }}>Матч</div>

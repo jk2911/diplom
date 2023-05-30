@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { NormalDate } from "../../components/Main/upcoming matches sorted by regions";
+import { NormalDate } from "../../components/Main/UpcomingMatchesSorted";
 import { IHistoryUser } from "../../entity/HistoryUser";
 import { useHistoryUser } from "../../hooks/user"
 

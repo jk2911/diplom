@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import { useMatch } from "../../hooks/match";
 import styled from "styled-components";
 import { ConfirmationBets } from "../../components/Bukmeker/ConfirmationBets";
-import { NormalDate } from "../../components/Main/upcoming matches sorted by regions";
+import { NormalDate } from "../../components/Main/UpcomingMatchesSorted";
 import image from "../../assets/club.png"
 import { IMatch } from "../../entity/Match";
 import { Row } from "react-bootstrap";

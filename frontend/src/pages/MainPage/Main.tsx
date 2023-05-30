@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
-import { RegionsUpcomingMatches } from "../../components/Main/regions upcoming matches";
-import { UpcomingMatchesSortedByRegion } from "../../components/Main/upcoming matches sorted by regions";
+import { RegionsUpcomingMatches } from "../../components/Main/RegionsUpcomingMatches";
+import { UpcomingMatchesSortedByRegion } from "../../components/Main/UpcomingMatchesSorted";
 import styled from "styled-components";
 import { Header } from "../../components/Header/Header";
 

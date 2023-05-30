@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { IMatch } from "../../../entity/Match";
-import { NormalDate } from "../../Main/upcoming matches sorted by regions";
+import { NormalDate } from "../../Main/UpcomingMatchesSorted";
 import image from "../../../assets/club.png";
 
 interface MatchProps {

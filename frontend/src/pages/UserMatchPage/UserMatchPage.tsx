@@ -10,7 +10,7 @@ import { useMatch } from "../../hooks/match";
 import { MatchBets } from "../../components/User/MatchBets";
 import { Modal } from "../../modal/Modal";
 import { DoBet } from "../../components/User/DoBet";
-import { NormalDate } from "../../components/Main/upcoming matches sorted by regions";
+import { NormalDate } from "../../components/Main/UpcomingMatchesSorted";
 import { IMatch } from "../../entity/Match";
 
 const newBetValue: IBetValue = {

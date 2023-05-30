@@ -1,4 +1,4 @@
-import { NormalDate } from "../../components/Main/upcoming matches sorted by regions";
+import { NormalDate } from "../../components/Main/UpcomingMatchesSorted";
 import { IMatch } from "../../entity/Match";
 import { useChampionshipMatchResults } from "../../hooks/match";
 import image from "../../assets/club.png";
