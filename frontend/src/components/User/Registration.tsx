@@ -6,7 +6,7 @@ import { fetchUser } from "../../store/action-creators/user";
 import axios, { AxiosError } from "axios";
 
 export function Registration(active: boolean, setActive: any) {
-  const [button, setButton] = useState("Зарегестрироватсья");
+  const [button, setButton] = useState("Зарегестрироваться");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordAgain, setPasswordAgaion] = useState("");
@@ -15,25 +15,37 @@ export function Registration(active: boolean, setActive: any) {
   const Registration = async () => {
     setButton("Регистрация...");
 
+    if(email.length==0){
+      setError("Введите e-mail");
+      setButton("Зарегестрироваться");
+      return;
+    }
+
+    if(password.length==0){
+      setError("Введите пароль");
+      setButton("Зарегестрироваться");
+      return;
+    }
+
     const reg =
       /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
 
     console.log(reg.test(email) === false);
     if (reg.test(email) === false) {
       setError("Неверный e-mail");
-      setButton("Зарегестрироватсья");
+      setButton("Зарегестрироваться");
       return;
     }
 
     if(password.length<8){
       setError("Длина пароля должна быть минимум 8 символов");
-      setButton("Зарегестрироватсья");
+      setButton("Зарегестрироваться");
       return;
     }
 
     if (password != passwordAgain) {
       setError("Пароли не совпадают");
-      setButton("Зарегестрироватсья");
+      setButton("Зарегестрироваться");
       return;
     }
 
@@ -53,7 +65,7 @@ export function Registration(active: boolean, setActive: any) {
       setError(message.toString());
     }
 
-    setButton("Зарегестрироватсья");
+    setButton("Зарегестрироваться");
   };
 
   return (
@@ -84,7 +96,7 @@ export function Registration(active: boolean, setActive: any) {
           paddingLeft: "25px"
         }}
       >
-        {error}
+        <div style={{color:"red"}}>{error}</div>
       </div>
       <StyledButton onClick={Registration}>{button}</StyledButton>
     </Form>

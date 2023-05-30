@@ -82,7 +82,7 @@ export function DoBet({ bet, activeModal }: Props) {
           onChange={(e) => setAmount(Number(e.target.value))}
         />
       </Div>
-      <Div>{error}</Div>
+      <Div style={{color:"red"}}>{error}</Div>
       <StyledButton onClick={DoBet}>{button}</StyledButton>
     </FormContainer>
   );

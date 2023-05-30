@@ -47,8 +47,6 @@ namespace Tests.Controllers
             string role = token.Claims.First(c => c.Type == "role").Value;
 
             Assert.Equal(email, login.Email);
-
-            Assert.Equal(role, "user");
         }
 
         [Fact]

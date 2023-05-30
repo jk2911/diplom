@@ -45,21 +45,21 @@ export function CreateRegion() {
       <div style={{ marginTop: "7px", marginBottom: "15px" }}>
         Создание региона
       </div>
-      <div style={{marginBottom:"15px"}}>
+      <div style={{ marginBottom: "15px" }}>
         <input
           value={name}
           placeholder="Название"
           onChange={(e) => setName(e.target.value)}
         />
       </div>
-      <div style={{marginBottom:"15px"}}>
-      <input
-        type="file"
-        accept="image/*,.png,.jpg,.gif,.web"
-        onChange={AddImage}
-      />
+      <div style={{ marginBottom: "15px" }}>
+        <input
+          type="file"
+          accept="image/*,.png,.jpg,.gif,.web"
+          onChange={AddImage}
+        />
       </div>
-      {errorCreate}
+      <div style={{ color: "red" }}>{errorCreate}</div>
       <StyledButton onClick={FetchCreateRegion}>{buttonState}</StyledButton>
     </FormContainer>
   );
