@@ -16,7 +16,6 @@ export function CreateTeam() {
   }, [regions]);
 
   const FetchCreateTeam = async (event: any) => {
-    //event.preventDefault();
     event.stopPropagation();
     setButton("Создание");
 
@@ -31,8 +30,6 @@ export function CreateTeam() {
         "https://localhost:7167/api/Team/CreateTeam",
         formData
       );
-      // const message = response.data as String;
-      // setErrorCreate(message.toString());
       window.location.assign("/admin/teams")
     } catch (e: unknown) {
       const error = e as AxiosError;
