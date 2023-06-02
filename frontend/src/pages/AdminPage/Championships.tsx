@@ -74,7 +74,7 @@ export function AllChampionships() {
       </Modal> 
       <input value={search} onChange={(e) => Search(e)} style={{ marginRight: "20px", borderRadius: "3px" }} placeholder="Поиск чемпионата"/>
       <select onChange={(e) => sortChampionships(e.target.value)}>
-        <option value="1">id</option>
+        {/* <option value="1">id</option> */}
         <option value="2">названию</option>
         <option value="3">региону</option>
       </select>
@@ -89,7 +89,7 @@ export function AllChampionships() {
             src={ch.image != null ? ch.image : image}
             style={{ minHeight: 10, maxHeight: 60, minWidth: 10, maxWidth: 60 }}
           /></div>
-          <div style={{width:"7%"}}>{ch.id}</div>
+          <div style={{width:"7%"}}></div>
           <div style={{width:"20%"}}> {ch.name} </div>
           <div style={{width:"20%"}}>{ch.region.name}</div>
           <div style={{width:"18%"}}></div>

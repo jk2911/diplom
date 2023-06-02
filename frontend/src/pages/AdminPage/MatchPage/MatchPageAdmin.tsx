@@ -189,7 +189,7 @@ export function MatchPageAdmin() {
                   maxWidth: 70,
                 }}
               />
-              <button style={{ marginRight: "20px", borderRadius:"3px" }} onClick={Save}>{buttonSave}</button>
+              <button style={{marginLeft:"20px", marginRight: "20px", borderRadius:"3px" }} onClick={Save}>{buttonSave}</button>
               <button style={{ marginRight: "20px", borderRadius:"3px"  }} onClick={() => setActiveDelete(true)}>Удалить матч</button>
             </div>
 

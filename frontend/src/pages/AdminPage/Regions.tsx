@@ -61,13 +61,13 @@ export function AllRegions() {
       <Modal active={createModalActive} setActive={setCreateModalActive}>
         <CreateRegion />
       </Modal>
-      <input value={search} onChange={(e) => Search(e)} style={{ marginRight: "20px", borderRadius: "3px" }} placeholder="Поиск региона"/>
-      <select onChange={(e) => sortRegions(e.target.value)}>
+      <input value={search} onChange={(e) => Search(e)} style={{ marginRight: "10px", borderRadius: "3px" }} placeholder="Поиск региона"/>
+      {/* <select onChange={(e) => sortRegions(e.target.value)}>
         <option value="2">названию</option>
         <option value="1">id</option>
-      </select>
+      </select> */}
       <button
-        style={{ marginLeft: "20px", borderRadius: "3px" }}
+        style={{ marginLeft: "10px", borderRadius: "3px" }}
         onClick={() => setCreateModalActive(true)}
       >
         Создать регион
@@ -78,7 +78,7 @@ export function AllRegions() {
           <img
             src={region.image != null ? region.image : image}
             style={{ minHeight: 10, maxHeight: 70, minWidth: 10, maxWidth: 70 }}
-          />{region.id} {region.name}
+          /> {region.name}
         </RowItem>
       ))}
     </>

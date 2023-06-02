@@ -33,7 +33,7 @@ interface Props {
   
     return (
       <>
-        <div>Удалить матч</div>
+        <div style={{marginBottom:"20px"}}>Удалить матч</div>
         <div>{errorMessage}</div>
         <div>
           <button onClick={Remove}>{button}</button>
