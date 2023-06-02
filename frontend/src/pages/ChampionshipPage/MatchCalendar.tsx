@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { useCalendarOfChampionshipMatches } from "../../hooks/match";
 import { Match } from "../../components/Admin/Championship/Match";
 import { useState } from "react";
