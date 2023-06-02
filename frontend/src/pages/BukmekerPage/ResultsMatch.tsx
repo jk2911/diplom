@@ -16,7 +16,7 @@ export function BukmekerResultsMatch({ id }: Props) {
   return (
     <>
       {matches.map((m) => (
-        <Match m={m} key={m.id}/>
+        <Match m={m} key={m.id} />
       ))}
     </>
   );
@@ -35,14 +35,15 @@ function Match({ m }: MatchProps) {
   }
 
   return (
-    <div onClick={toMatch}>
+    <div onClick={toMatch} style={{display:"flex", flexDirection:"row", marginLeft:"10px", marginTop:"10px"}}>
       {NormalDate(m.dateTime.getDate())}.{NormalDate(m.dateTime.getMonth())}{" "}
       {NormalDate(m.dateTime.getHours())}:{NormalDate(m.dateTime.getMinutes())}
       <img
         src={m.home.image != null ? m.home.image : image}
         style={{ minHeight: 10, maxHeight: 70, minWidth: 10, maxWidth: 70 }}
       />{" "}
-      {m.home.name} {m.homeGoal} - {m.awayGoal} {m.away.name}{" "}
+      <div style={{width:"15%"}}>{m.home.name}</div><div style={{width:"5%", justifyContent:"center"}}> {m.homeGoal}</div>
+      <div style={{width:"5%", justifyContent:"center"}}>{m.awayGoal}</div> <div style={{width:"15%"}}>{m.away.name}</div>{" "}
       <img
         src={m.away.image != null ? m.away.image : image}
         style={{ minHeight: 10, maxHeight: 70, minWidth: 10, maxWidth: 70 }}
