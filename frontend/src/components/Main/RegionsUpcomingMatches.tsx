@@ -5,6 +5,7 @@ import { useTypesSelector } from "../../hooks/useTypedSelector";
 import { useDispatch } from "react-redux";
 import { fetchUser } from "../../store/action-creators/user";
 import styled from "styled-components";
+import image from "../../assets/region.jpg"
 
 interface Props {
   championship: number;
@@ -20,11 +21,17 @@ export function RegionsUpcomingMatches({
   return (
     <Row>
       {/* {loading && <>Загрузка</>} */}
-      {regions.length != 0 && (<Container style={{marginBottom:"5px"}}><ButtonCon onClick={() => setChampionship(0)}>Все</ButtonCon></Container>)}
+      {regions.length != 0 && (<Container style={{ marginBottom: "5px" }}><ButtonCon onClick={() => setChampionship(0)}>Все</ButtonCon></Container>)}
       {regions.map((region) => (
         <Container key={region.id}>
           <details>
-            <summary style={{borderRadius:"3px"}}>{region.region}</summary>
+            <summary style={{ borderRadius: "3px", display:"flex", flexDirection:"row" }}>
+              <div>
+                <img
+                  src={region.image != null ? region.image : image}
+                  style={{ minHeight: 10, maxHeight: 30, minWidth: 10, maxWidth: 30, marginRight:"5px" }}
+                />
+              </div><div>{region.region}</div></summary>
             {region.championships.map((ch) => (
               <div key={ch.id} onClick={() => setChampionship(ch.id)}>{ch.name}</div>
             ))}

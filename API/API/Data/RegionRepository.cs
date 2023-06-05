@@ -82,7 +82,7 @@ namespace API.Data
                 ToListAsync();
 
             regions.ForEach(
-                x => x.Championships = x.Championships.OrderBy(x => x.IsPopular).
+                x => x.Championships = x.Championships.
                      OrderBy(x => x.Name).ToList());
 
             return regions;

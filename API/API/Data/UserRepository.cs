@@ -79,7 +79,8 @@ namespace API.Data
         public async Task<IEnumerable<HistoryBankAccount>> GetHistoryBankAccounts(int userId)
         {
             var history = await _context.HistoryBankAccounts.
-                Where(h=>h.UserId==userId).
+                Where(h => h.UserId == userId).
+                OrderByDescending(h => h.Date).
                 ToListAsync();
 
             return history;

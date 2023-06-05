@@ -30,7 +30,6 @@ namespace API.Controllers
                 GetUpcomingMatchesSortedByChampionships();
 
             championships = championships.
-                OrderBy(c => c.IsPopular).
                 OrderBy(c => c.Region.Name);
 
             var upcomingMatches = _mapper.Map<IEnumerable<UpcomingMatchesDTO>>(championships);

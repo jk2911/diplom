@@ -49,7 +49,7 @@ export function Header() {
   };
 
   const toUser = () => {
-    window.location.assign("/user");
+    window.location.assign("/user/bets");
   };
 
   const toBukmeker = () => {

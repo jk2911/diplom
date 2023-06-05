@@ -6,6 +6,7 @@ namespace API.DTOs
     {
         public int Id { get; set; }
         public string Region { get; set; }
+        public string? Image { get; set; }
         public IEnumerable<Championship> Championships { get; set; } = new List<Championship>();
     }
 }

@@ -57,12 +57,12 @@ export function RegionPage() {
             </button>
             <NavBar>
               <TabElement>
-                <Link to={"championships?id=" + region.id + ""}>
+                <Link to={"championships?id=" + region.id}>
                   Чемпионаты
                 </Link>
               </TabElement>
               <TabElement>
-                <Link to="teams">Команды</Link>
+                <Link to={"teams?id=" + region.id}>Команды</Link>
               </TabElement>
             </NavBar>
 

@@ -19,34 +19,38 @@ import { ConfirmationBetsPage } from "./pages/BukmekerPage/ConfirmationBetsPage"
 import { UserBets } from "./pages/UserPage/Bets";
 import jwtDecode from "jwt-decode";
 import axios, { AxiosError } from "axios";
+import { IToken } from "./entity/User";
 
 function App() {
-  // var token = localStorage.getItem("token");
+  var token = localStorage.getItem("token");
+  var decoded: IToken;
 
-  // if(token != null){
-  //   try {
-  //     const response = await axios.post(
-  //       "https://localhost:7167/api/User/Refill/" + id + "-" + amount
-  //     );
-  //     const user = response.data;
-  //     console.log(user);
-  //     localStorage.setItem("token", user);
-  //     window.location.assign("/user/bets");
-  //   } catch (e: unknown) {
-  //     const error = e as AxiosError;
-  //     const message = error.response?.data as String;
-  //     console.log(message.toString());
-  //     setError(message.toString());
-  //   }
-  
-  // }
+  if (token != null) {
+    GetToken();
+  }
+  async function GetToken() {
+    if (token == null)
+      return
+    decoded = jwtDecode(token);
+
+    try {
+      const response = await axios.post(
+        "https://localhost:7167/api/User/GetToken?email=" + decoded.email
+      );
+      localStorage.setItem("token", response.data);
+    } catch (e: unknown) {
+      localStorage.removeItem("token");
+      window.location.assign("/");
+    }
+
+  }
 
   return (
     <BrowserRouter>
       <Header />
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/admin" element={<Navigate to="/admin/regions" replace />}/>
+        <Route path="/admin" element={<Navigate to="/admin/regions" replace />} />
         <Route path="/admin/*" element={<AdminPage />} />
         <Route path="/admin/region/*" element={<RegionPage />} />
         <Route path="/admin/championship/*" element={<ChampionshipPage />} />

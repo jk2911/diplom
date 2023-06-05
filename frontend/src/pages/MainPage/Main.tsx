@@ -4,8 +4,19 @@ import { RegionsUpcomingMatches } from "../../components/Main/RegionsUpcomingMat
 import { UpcomingMatchesSortedByRegion } from "../../components/Main/UpcomingMatchesSorted";
 import styled from "styled-components";
 import { Header } from "../../components/Header/Header";
+import { IToken } from "../../entity/User";
+import jwtDecode from "jwt-decode";
 
 export function MainPage() {
+  var token = localStorage.getItem("token");
+  var decoded: IToken;
+
+  if (token != null) {
+    decoded = jwtDecode(token);
+    if (decoded.role == "admin")
+      window.location.assign("/admin/regions")
+  }
+
   const [championship, setChampionship] = useState(0);
 
   return (

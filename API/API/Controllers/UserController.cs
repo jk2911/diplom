@@ -91,6 +91,9 @@ namespace API.Controllers
         {
             var user = await _unitOfWork.User.GetUserByEmail(email);
 
+            if (user == null)
+                return BadRequest("Пользователь не найден");
+
             var token = await _tokenService.CreateToken(user);
 
             return Ok(token);
