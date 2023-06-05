@@ -25,7 +25,7 @@ export function RegionsUpcomingMatches({
       {regions.map((region) => (
         <Container key={region.id}>
           <details>
-            <summary style={{ borderRadius: "3px", display:"flex", flexDirection:"row" }}>
+            <summary style={{ borderRadius: "3px", display:"flex", flexDirection:"row" }} >
               <div>
                 <img
                   src={region.image != null ? region.image : image}
