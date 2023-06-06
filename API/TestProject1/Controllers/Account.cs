@@ -83,5 +83,32 @@ namespace Tests.Controllers
 
             Assert.Equal(role, "user");
         }
+
+        [Fact]
+        public async void FakeRegister()
+        {
+            IUnitOfWork unitOfWork = new UnitOfWork();
+            ITokenService tokenService = new TokenService();
+            IHashPassword hashPassword = new HashPasswordService();
+            IMapper mapper;
+
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new AutoMapperProfiles());
+            });
+            mapper = mapperConfig.CreateMapper();
+
+            var account = new AccountController(unitOfWork, tokenService, hashPassword, mapper);
+
+            RegisterDto register = new()
+            {
+                Email = "maksgoy2911@gmail.com",
+                Password = "12345678",
+            };
+
+            var result = account.Register(register).Result;
+
+            Assert.Equal("", "");
+        }
     }
 }
