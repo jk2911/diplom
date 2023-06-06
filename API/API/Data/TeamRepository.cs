@@ -75,7 +75,9 @@ namespace API.Data
 
         public async Task<IEnumerable<Team>> GetAll()
         {
-            return await _context.Team.ToListAsync();
+            return await _context.Team.
+                OrderBy(t => t.Name).
+                ToListAsync();
         }
 
         public async Task<IEnumerable<Team>> GetChampionshipTeams(int championshipId)

@@ -25,7 +25,7 @@ export function AllTeams() {
     if (value == "1")
       buffer = [].slice
         .call(teams)
-        .sort((r1: ITeam, r2: ITeam) => (r1.id > r2.id ? 1 : -1));
+        .sort((r1: ITeam, r2: ITeam) => (r1.region.name > r2.region.name ? 1 : -1));
 
     if (value == "2")
       buffer = [].slice
@@ -64,7 +64,7 @@ export function AllTeams() {
       <input value={search} onChange={(e) => Search(e)} style={{ marginRight: "20px", borderRadius: "3px" }} placeholder="Поиск команды" />
       <select onChange={(e) => sortRegions(e.target.value)}>
         <option value="2">названию</option>
-        <option value="1">id</option>
+        <option value="1">региону</option>
       </select>
       <button style={{ marginLeft: "20px", borderRadius: "3px" }} onClick={() => setCreateModalActive(true)}>
         Создать команду
@@ -78,7 +78,7 @@ export function AllTeams() {
               src={team.image != null ? team.image : image}
               style={{ minHeight: 10, maxHeight: 60, minWidth: 10, maxWidth: 60 }}
             /></div>
-          <div style={{ width: "7%" }}>{team.id}</div>
+          <div style={{ width: "7%" }}></div>
           <div style={{ width: "20%" }}> {team.name} </div>
           <div style={{ width: "20%" }}>{team.region.name}</div>
           <div style={{ width: "18%" }}></div>

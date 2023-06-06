@@ -124,7 +124,9 @@ namespace API.Data
 
         public async Task<IEnumerable<Championship>> GetAll()
         {
-            return await _context.Championship.ToListAsync();
+            return await _context.Championship.
+                OrderBy(c => c.Name).
+                ToListAsync();
         }
 
         public async Task<Championship?> GetChampionshipInRegionByName(string name, Region region)
