@@ -108,7 +108,7 @@ namespace Tests.Controllers
 
             var result = account.Register(register).Result;
 
-            Assert.Equal("", "");
+            Assert.Null(result);
         }
     }
 }
