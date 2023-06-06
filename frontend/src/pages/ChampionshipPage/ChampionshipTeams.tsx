@@ -41,14 +41,18 @@ export function ChampionshipTeams({ championshipId }: Props) {
       {loading && <>Загрузка</>}
       {teams.map((team) => (
         <div style={{ marginTop: "15px", display: "flex", flexDirection: "row" }}>
-          <div style={{ width: "40%" }}>
-            <img
-              src={team.image != null ? team.image : image}
-              style={{ minHeight: 10, maxHeight: 70, minWidth: 10, maxWidth: 70 }}
-            />
-            {team.name}
+          <div style={{ width: "40%", display:"flex", flexDirection:"row" }}>
+            <div style={{width:"20%"}}>
+              <img
+                src={team.image != null ? team.image : image}
+                style={{ minHeight: 10, maxHeight: 70, minWidth: 10, maxWidth: 70 }}
+              />
+            </div>
+            <div>
+              {team.name}
+            </div>
           </div>
-          <button style={{ borderRadius: "3px", marginLeft: "5px", height:"50px" }} onClick={() => DeleteTeam(team.id)}>Удалить команду</button>
+          <button style={{ borderRadius: "3px", marginLeft: "5px", height: "50px" }} onClick={() => DeleteTeam(team.id)}>Удалить команду</button>
         </div>
       ))}
       <Modal active={activeAddTeam} setActive={setActiveAddTeam}>

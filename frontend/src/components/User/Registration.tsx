@@ -6,7 +6,7 @@ import { fetchUser } from "../../store/action-creators/user";
 import axios, { AxiosError } from "axios";
 
 export function Registration(active: boolean, setActive: any) {
-  const [button, setButton] = useState("Зарегестрироваться");
+  const [button, setButton] = useState("Зарегистрироваться");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordAgain, setPasswordAgaion] = useState("");
@@ -17,13 +17,13 @@ export function Registration(active: boolean, setActive: any) {
 
     if(email.length==0){
       setError("Введите e-mail");
-      setButton("Зарегестрироваться");
+      setButton("Зарегистрироваться");
       return;
     }
 
     if(password.length==0){
       setError("Введите пароль");
-      setButton("Зарегестрироваться");
+      setButton("Зарегистрироваться");
       return;
     }
 
@@ -33,19 +33,19 @@ export function Registration(active: boolean, setActive: any) {
     console.log(reg.test(email) === false);
     if (reg.test(email) === false) {
       setError("Неверный e-mail");
-      setButton("Зарегестрироваться");
+      setButton("Зарегистрироваться");
       return;
     }
 
     if(password.length<8){
       setError("Длина пароля должна быть минимум 8 символов");
-      setButton("Зарегестрироваться");
+      setButton("Зарегистрироваться");
       return;
     }
 
     if (password != passwordAgain) {
       setError("Пароли не совпадают");
-      setButton("Зарегестрироваться");
+      setButton("Зарегистрироваться");
       return;
     }
 
